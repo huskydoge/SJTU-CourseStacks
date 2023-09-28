@@ -1,0 +1,28 @@
+{
+	"nodes":[
+		{"type":"text","text":"# 链路层：链路、接入网和局域网","id":"9bca65c69415066c","x":-125,"y":-30,"width":753,"height":102},
+		{"type":"text","text":"# 考试要求\n1. ARP\n2. VLAN\n3. DC\n4. Phy","id":"e4775e5843a18aee","x":-273,"y":-806,"width":1009,"height":434},
+		{"type":"file","file":"Husky/附件/网段和子网.png","id":"379e7a92cd4ad8ad","x":-215,"y":-1545,"width":710,"height":520},
+		{"type":"text","text":"## 链路层概述\n\n","id":"eeea7bf16c2fa2e3","x":360,"y":323,"width":910,"height":370},
+		{"type":"text","text":"## VLAN的划分","id":"a85ddcee29d28695","x":3675,"y":-3327,"width":272,"height":187},
+		{"type":"file","file":"Husky/附件/按端口划分.png","id":"9561c942417939ea","x":4357,"y":-4218,"width":766,"height":571},
+		{"type":"file","file":"Husky/附件/按mac地址划分.png","id":"6660eafc473c744b","x":4360,"y":-3526,"width":765,"height":566},
+		{"type":"file","file":"Husky/附件/按IP地址划分.png","id":"8233615bea9d72ed","x":4344,"y":-2854,"width":780,"height":579},
+		{"type":"text","text":"# VLAN","id":"43b26ee40242fedc","x":2999,"y":-3311,"width":263,"height":143,"color":"1"},
+		{"type":"file","file":"Husky/附件/VLAN的技术特点.png","id":"135f5e12205395d1","x":2940,"y":-2975,"width":819,"height":602},
+		{"type":"text","text":"# 无线网","id":"c343a36adfae7657","x":1691,"y":-1764,"width":183,"height":80,"color":"1"},
+		{"type":"file","file":"Husky/附件/无线网的组成.png","id":"0a0d26f583901ef9","x":2180,"y":-1932,"width":400,"height":301},
+		{"type":"text","text":"## 蜂窝网","id":"2e51667ce515d154","x":1880,"y":-1489,"width":157,"height":60},
+		{"type":"file","file":"Husky/附件/蜂窝网的标准.png","id":"6d5a81605fbb518d","x":2136,"y":-1534,"width":400,"height":225}
+	],
+	"edges":[
+		{"id":"9d8e2a8867ef1098","fromNode":"a85ddcee29d28695","fromSide":"right","toNode":"9561c942417939ea","toSide":"left"},
+		{"id":"c0fe316f2bbb6a25","fromNode":"a85ddcee29d28695","fromSide":"right","toNode":"6660eafc473c744b","toSide":"left"},
+		{"id":"840166601bacbd60","fromNode":"a85ddcee29d28695","fromSide":"right","toNode":"8233615bea9d72ed","toSide":"left"},
+		{"id":"945e15b2a90edee0","fromNode":"43b26ee40242fedc","fromSide":"right","toNode":"a85ddcee29d28695","toSide":"left"},
+		{"id":"8d03a8080b2c8c2a","fromNode":"43b26ee40242fedc","fromSide":"bottom","toNode":"135f5e12205395d1","toSide":"top"},
+		{"id":"78bec7913f275856","fromNode":"c343a36adfae7657","fromSide":"right","toNode":"0a0d26f583901ef9","toSide":"left"},
+		{"id":"2e1955f6d793b005","fromNode":"c343a36adfae7657","fromSide":"bottom","toNode":"2e51667ce515d154","toSide":"top"},
+		{"id":"70e26c375c1c80cd","fromNode":"2e51667ce515d154","fromSide":"right","toNode":"6d5a81605fbb518d","toSide":"left"}
+	]
+}

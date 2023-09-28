@@ -1,0 +1,17 @@
+{
+	"nodes":[
+		{"id":"cb41bafae173dec4","x":-180,"y":-33,"width":322,"height":74,"type":"text","text":"# 多路访问协议"},
+		{"id":"b92b79eddc653ec1","x":210,"y":-136,"width":243,"height":66,"type":"text","text":"## 信道划分协议"},
+		{"id":"340c277aa54d3b50","x":212,"y":87,"width":249,"height":53,"type":"text","text":"## 随机接入协议"},
+		{"id":"6d1c0d6ef91e2ab5","x":574,"y":45,"width":206,"height":50,"type":"text","text":"### 时隙ALOHA"},
+		{"id":"7c1f530fb383e252","x":577,"y":145,"width":178,"height":60,"type":"text","text":"### 纯ALOHA"},
+		{"id":"bfb145bf2e4b63ef","x":582,"y":255,"width":136,"height":57,"color":"1","type":"text","text":"### CSMA"}
+	],
+	"edges":[
+		{"id":"69a0193e8505eba7","fromNode":"cb41bafae173dec4","fromSide":"right","toNode":"b92b79eddc653ec1","toSide":"left"},
+		{"id":"71a34e4598752f87","fromNode":"cb41bafae173dec4","fromSide":"right","toNode":"340c277aa54d3b50","toSide":"left"},
+		{"id":"b134a104be1d7322","fromNode":"340c277aa54d3b50","fromSide":"right","toNode":"6d1c0d6ef91e2ab5","toSide":"left"},
+		{"id":"ee2390f6877f6f38","fromNode":"340c277aa54d3b50","fromSide":"right","toNode":"7c1f530fb383e252","toSide":"left"},
+		{"id":"98c273e114bf4790","fromNode":"340c277aa54d3b50","fromSide":"right","toNode":"bfb145bf2e4b63ef","toSide":"left"}
+	]
+}

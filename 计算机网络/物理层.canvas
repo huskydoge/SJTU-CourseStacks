@@ -1,0 +1,17 @@
+{
+	"nodes":[
+		{"type":"text","text":"# 物理层","id":"ffd79de21c7e6979","x":-279,"y":-267,"width":178,"height":83,"color":"1"},
+		{"type":"text","text":"## 传输介质","id":"a63b9221af128ff0","x":45,"y":-242,"width":195,"height":50},
+		{"type":"file","file":"Husky/附件/双绞线.png","id":"c9c7a220a0f9238f","x":375,"y":-593,"width":400,"height":296},
+		{"type":"file","file":"Husky/附件/同轴电缆.png","id":"a7ef813e268be7b5","x":870,"y":-431,"width":374,"height":566},
+		{"type":"file","file":"Husky/附件/光缆.png","id":"1243e4c47d625bcc","x":418,"y":-129,"width":369,"height":566},
+		{"type":"file","file":"Husky/附件/无线传输.png","id":"9b6051644106c21c","x":412,"y":507,"width":447,"height":1376}
+	],
+	"edges":[
+		{"id":"798c2149a48356a6","fromNode":"ffd79de21c7e6979","fromSide":"right","toNode":"a63b9221af128ff0","toSide":"left"},
+		{"id":"3107601fdc1384ea","fromNode":"a63b9221af128ff0","fromSide":"right","toNode":"c9c7a220a0f9238f","toSide":"left"},
+		{"id":"3b0db3a9c4887068","fromNode":"a63b9221af128ff0","fromSide":"right","toNode":"a7ef813e268be7b5","toSide":"left"},
+		{"id":"15c2334406d7713c","fromNode":"a63b9221af128ff0","fromSide":"right","toNode":"1243e4c47d625bcc","toSide":"left"},
+		{"id":"3f770864d2449b96","fromNode":"a63b9221af128ff0","fromSide":"right","toNode":"9b6051644106c21c","toSide":"left"}
+	]
+}

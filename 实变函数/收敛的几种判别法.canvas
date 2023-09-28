@@ -1,0 +1,9 @@
+{
+	"nodes":[
+		{"type":"text","text":"实变函数\n教材：Real Analysis 4th","id":"a46522593b59039e","x":-160,"y":-700,"width":250,"height":120,"color":"1"},
+		{"type":"file","file":"SJTUCourses/大二下/实变函数/第四章Lebesgue积分/4.6一致可积性：VItali收敛定理/Vitali收敛定理.md","id":"4cd89b3b9933f448","x":-1060,"y":-339,"width":1241,"height":699},
+		{"type":"file","file":"SJTUCourses/大二下/实变函数/第四章Lebesgue积分/4.4 一般的Lebesgue积分/Lebesgue控制收敛定理.md","id":"0e83a217ad161526","x":367,"y":-100,"width":400,"height":400},
+		{"id":"aa63254533fd6899","x":-1040,"y":520,"width":1287,"height":560,"type":"file","file":"SJTUCourses/大二下/实变函数/第四章Lebesgue积分/4.2有限测度集上有界可测函数的Lebesgue积分/有界收敛定理.md"}
+	],
+	"edges":[]
+}
