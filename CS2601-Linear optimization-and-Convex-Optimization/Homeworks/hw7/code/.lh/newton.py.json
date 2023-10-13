@@ -1,0 +1,94 @@
+{
+    "sourceFile": "newton.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 19,
+            "patches": [
+                {
+                    "date": 1669210831558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1669211021712,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,12 +14,15 @@\n \t\"\"\"\n \tx_traces = [np.array(x0)]\n \tx = np.array(x0)\n \t#   START OF YOUR CODE\n-\t\n+\twhile(True):\n+\t\tif(maxiter == 0 or np.linalg.norm(fp(x)) < tol):\n+\t\t\tbreak\n+\t\tx = x - np.linalg.inv(fpp(x))@fp(x)\n+\t\tx_traces.append(np.array(x))\n+\t\tmaxiter -= 1\n \n-\n-\n \t#\tEND OF YOUR CODE\n \n \treturn x_traces \n \n"
+                },
+                {
+                    "date": 1669211031549,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,8 @@\n \t\t\tbreak\n \t\tx = x - np.linalg.inv(fpp(x))@fp(x)\n \t\tx_traces.append(np.array(x))\n \t\tmaxiter -= 1\n-\n \t#\tEND OF YOUR CODE\n \n \treturn x_traces \n \n"
+                },
+                {
+                    "date": 1669211076170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,8 @@\n \t\tx = x - np.linalg.inv(fpp(x))@fp(x)\n \t\tx_traces.append(np.array(x))\n \t\tmaxiter -= 1\n \t#\tEND OF YOUR CODE\n-\n \treturn x_traces \n \n def damped_newton(f, fp, fpp, x0, alpha=0.5, beta=0.5, tol=1e-5, maxiter=100000):\n \t\"\"\"\n"
+                },
+                {
+                    "date": 1669211139923,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,10 +48,9 @@\n \n \tfor it in range(maxiter):\n \t\t#   START OF YOUR CODE\n \t\t\n-\t\tpass\n-\n+\t\t\n \t\t#\tEND OF YOUR CODE\n \n \t\tx_traces.append(np.array(x))\n \t\tstepsize_traces.append(stepsize)\n"
+                },
+                {
+                    "date": 1669211353082,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,10 +47,15 @@\n \tx = np.array(x0)\n \n \tfor it in range(maxiter):\n \t\t#   START OF YOUR CODE\n-\t\t\n-\t\t\n+\t\twhile(True):\n+\t\t\tif(tot_num_iter > maxiter or np.linalg.norm(fp(x)) < tol):\n+\t\t\t\tbreak\n+\t\t\td = -np.linalg.inv(fpp(x))@fp(x)\n+\t\t\tstepsize = 1\n+\t\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n+\n \t\t#\tEND OF YOUR CODE\n \n \t\tx_traces.append(np.array(x))\n \t\tstepsize_traces.append(stepsize)\n"
+                },
+                {
+                    "date": 1669211365734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,9 @@\n \t\t\t\tbreak\n \t\t\td = -np.linalg.inv(fpp(x))@fp(x)\n \t\t\tstepsize = 1\n \t\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n-\n+\t\t\t\tstepsize = beta * stepsize\n \t\t#\tEND OF YOUR CODE\n \n \t\tx_traces.append(np.array(x))\n \t\tstepsize_traces.append(stepsize)\n"
+                },
+                {
+                    "date": 1669211370816,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,8 +52,9 @@\n \t\t\tif(tot_num_iter > maxiter or np.linalg.norm(fp(x)) < tol):\n \t\t\t\tbreak\n \t\t\td = -np.linalg.inv(fpp(x))@fp(x)\n \t\t\tstepsize = 1\n+\t\t\t\n \t\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n \t\t\t\tstepsize = beta * stepsize\n \t\t#\tEND OF YOUR CODE\n \n"
+                },
+                {
+                    "date": 1669211471012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,18 +47,20 @@\n \tx = np.array(x0)\n \n \tfor it in range(maxiter):\n \t\t#   START OF YOUR CODE\n-\t\twhile(True):\n-\t\t\tif(tot_num_iter > maxiter or np.linalg.norm(fp(x)) < tol):\n-\t\t\t\tbreak\n-\t\t\td = -np.linalg.inv(fpp(x))@fp(x)\n-\t\t\tstepsize = 1\n-\t\t\t\n-\t\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n-\t\t\t\tstepsize = beta * stepsize\n+\t\tif(np.linalg.norm(fp(x)) < tol):\n+\t\t\tbreak\n+\t\td = -np.linalg.inv(fpp(x))@fp(x)\n+\t\tstepsize = 1\n+\t\t\n+\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n+\t\t\tstepsize = beta * stepsize\n+\n+\t\tx = x + stepsize * d\n+\t\ttot_num_iter += 1\n+\t\t\n \t\t#\tEND OF YOUR CODE\n-\n \t\tx_traces.append(np.array(x))\n \t\tstepsize_traces.append(stepsize)\n \n \n"
+                },
+                {
+                    "date": 1669211497917,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,8 +47,9 @@\n \tx = np.array(x0)\n \n \tfor it in range(maxiter):\n \t\t#   START OF YOUR CODE\n+\t\t\n \t\tif(np.linalg.norm(fp(x)) < tol):\n \t\t\tbreak\n \t\td = -np.linalg.inv(fpp(x))@fp(x)\n \t\tstepsize = 1\n@@ -57,9 +58,9 @@\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\ttot_num_iter += 1\n-\t\t\n+\n \t\t#\tEND OF YOUR CODE\n \t\tx_traces.append(np.array(x))\n \t\tstepsize_traces.append(stepsize)\n \n"
+                },
+                {
+                    "date": 1669216141179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import numpy as np\n \n-def newton(fp, fpp, x0, tol=1e-5, maxiter=100000):\n+def newton(fp, fpp, x0, tol=1e-5, maxiter=10):\n \t\"\"\"\n \tfp: function that takes an input x and returns the gradient of f at x\n \tfpp: function that takes an input x and returns the Hessian of f at x\n \tx0: initial point  \n@@ -47,9 +47,9 @@\n \tx = np.array(x0)\n \n \tfor it in range(maxiter):\n \t\t#   START OF YOUR CODE\n-\t\t\n+\n \t\tif(np.linalg.norm(fp(x)) < tol):\n \t\t\tbreak\n \t\td = -np.linalg.inv(fpp(x))@fp(x)\n \t\tstepsize = 1\n"
+                },
+                {
+                    "date": 1669216154802,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import numpy as np\n \n-def newton(fp, fpp, x0, tol=1e-5, maxiter=10):\n+def newton(fp, fpp, x0, tol=1e-5, maxiter=100000):\n \t\"\"\"\n \tfp: function that takes an input x and returns the gradient of f at x\n \tfpp: function that takes an input x and returns the Hessian of f at x\n \tx0: initial point  \n@@ -47,9 +47,9 @@\n \tx = np.array(x0)\n \n \tfor it in range(maxiter):\n \t\t#   START OF YOUR CODE\n-\n+\t\t\n \t\tif(np.linalg.norm(fp(x)) < tol):\n \t\t\tbreak\n \t\td = -np.linalg.inv(fpp(x))@fp(x)\n \t\tstepsize = 1\n"
+                },
+                {
+                    "date": 1669365522002,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import numpy as np\n \n-def newton(fp, fpp, x0, tol=1e-5, maxiter=100000):\n+def newton(fp, fpp, x0, tol=1e-5, maxiter=10):\n \t\"\"\"\n \tfp: function that takes an input x and returns the gradient of f at x\n \tfpp: function that takes an input x and returns the Hessian of f at x\n \tx0: initial point  \n@@ -55,11 +55,12 @@\n \t\tstepsize = 1\n \t\t\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n+\t\t\ttot_num_iter += 1\n \n \t\tx = x + stepsize * d\n-\t\ttot_num_iter += 1\n+\t\n \n \t\t#\tEND OF YOUR CODE\n \t\tx_traces.append(np.array(x))\n \t\tstepsize_traces.append(stepsize)\n"
+                },
+                {
+                    "date": 1669365532773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import numpy as np\n \n-def newton(fp, fpp, x0, tol=1e-5, maxiter=10):\n+def newton(fp, fpp, x0, tol=1e-5, maxiter=1):\n \t\"\"\"\n \tfp: function that takes an input x and returns the gradient of f at x\n \tfpp: function that takes an input x and returns the Hessian of f at x\n \tx0: initial point  \n"
+                },
+                {
+                    "date": 1669365567527,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import numpy as np\n \n-def newton(fp, fpp, x0, tol=1e-5, maxiter=1):\n+def newton(fp, fpp, x0, tol=1e-5, maxiter=5):\n \t\"\"\"\n \tfp: function that takes an input x and returns the gradient of f at x\n \tfpp: function that takes an input x and returns the Hessian of f at x\n \tx0: initial point  \n"
+                },
+                {
+                    "date": 1669365577700,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import numpy as np\n \n-def newton(fp, fpp, x0, tol=1e-5, maxiter=5):\n+def newton(fp, fpp, x0, tol=1e-5, maxiter=3):\n \t\"\"\"\n \tfp: function that takes an input x and returns the gradient of f at x\n \tfpp: function that takes an input x and returns the Hessian of f at x\n \tx0: initial point  \n"
+                },
+                {
+                    "date": 1669365583471,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import numpy as np\n \n-def newton(fp, fpp, x0, tol=1e-5, maxiter=3):\n+def newton(fp, fpp, x0, tol=1e-5, maxiter=2):\n \t\"\"\"\n \tfp: function that takes an input x and returns the gradient of f at x\n \tfpp: function that takes an input x and returns the Hessian of f at x\n \tx0: initial point  \n"
+                },
+                {
+                    "date": 1669365730262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import numpy as np\n \n-def newton(fp, fpp, x0, tol=1e-5, maxiter=2):\n+def newton(fp, fpp, x0, tol=1e-5, maxiter=1):\n \t\"\"\"\n \tfp: function that takes an input x and returns the gradient of f at x\n \tfpp: function that takes an input x and returns the Hessian of f at x\n \tx0: initial point  \n"
+                },
+                {
+                    "date": 1669365770213,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,7 @@\n import numpy as np\n \n-def newton(fp, fpp, x0, tol=1e-5, maxiter=1):\n+def newton(fp, fpp, x0, tol=1e-5, maxiter=2):\n \t\"\"\"\n \tfp: function that takes an input x and returns the gradient of f at x\n \tfpp: function that takes an input x and returns the Hessian of f at x\n \tx0: initial point  \n"
+                },
+                {
+                    "date": 1670766945225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n \tx = np.array(x0)\n \n \tfor it in range(maxiter):\n \t\t#   START OF YOUR CODE\n-\t\t\n+\t\tnp.block()\n \t\tif(np.linalg.norm(fp(x)) < tol):\n \t\t\tbreak\n \t\td = -np.linalg.inv(fpp(x))@fp(x)\n \t\tstepsize = 1\n"
+                }
+            ],
+            "date": 1669210831558,
+            "name": "Commit-0",
+            "content": "import numpy as np\n\ndef newton(fp, fpp, x0, tol=1e-5, maxiter=100000):\n\t\"\"\"\n\tfp: function that takes an input x and returns the gradient of f at x\n\tfpp: function that takes an input x and returns the Hessian of f at x\n\tx0: initial point  \n\ttol: toleracne parameter in the stopping criterion. Newton's method stops \n\t     when the 2-norm of the gradient is smaller than tol\n\tmaxiter: maximum number of iterations\n\n\tThis function should return a list of the sequence of approximate solutions\n\tx_k produced by each iteration\n\t\"\"\"\n\tx_traces = [np.array(x0)]\n\tx = np.array(x0)\n\t#   START OF YOUR CODE\n\t\n\n\n\n\t#\tEND OF YOUR CODE\n\n\treturn x_traces \n\ndef damped_newton(f, fp, fpp, x0, alpha=0.5, beta=0.5, tol=1e-5, maxiter=100000):\n\t\"\"\"\n\tf: function that takes an input x an returns the value of f at x\n\tfp: function that takes an input x and returns the gradient of f at x\n\tfpp: function that takes an input x and returns the Hessian of f at x\n\tx0: initial point in gradient descent\n\talpha: parameter in Armijo's rule \n\t\t\t\tf(x + t * d) > f(x) + t * alpha * <f'(x), d>\n\tbeta: constant factor used in stepsize reduction\n\ttol: toleracne parameter in the stopping crieterion. Here we stop\n\t     when the 2-norm of the gradient is smaller than tol\n\tmaxiter: maximum number of iterations in gradient descent.\n\n\tThis function should return a list of the sequence of approximate solutions\n\tx_k produced by each iteration and the total number of iterations in the inner loop\n\t\"\"\"\n\tx_traces = [np.array(x0)]\n\tstepsize_traces = []\n\ttot_num_iter = 0\n\n\tx = np.array(x0)\n\n\tfor it in range(maxiter):\n\t\t#   START OF YOUR CODE\n\t\t\n\t\tpass\n\n\t\t#\tEND OF YOUR CODE\n\n\t\tx_traces.append(np.array(x))\n\t\tstepsize_traces.append(stepsize)\n\n\n\treturn x_traces, stepsize_traces, tot_num_iter"
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+These Notes are originally used in my Obisidian App, thus there might be some strange format/context in these notes.

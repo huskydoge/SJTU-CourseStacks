@@ -1,0 +1,18 @@
+{
+    "sourceFile": "P4.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1670771764440,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1670771764440,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport newton as nt\n\n\na = np.array([2,1,1], dtype=float)\n\ndef f(x):\n\treturn np.sum(np.exp(a*x))\n\ndef fp(x):\n\treturn a*np.exp(a*x)\n\ndef fpp(x):\n\treturn np.diag(a**2 * np.exp(a*x))\n\nA = np.array([1,1,1], dtype=float).reshape([1,3])\nb = np.array([1], dtype=float)\n\nx0 = np.array([0,1,0], dtype=float)\n\nx_traces = nt.newton_eq(f, fp, fpp, x0, A, b)\n\nprint('')\nfor k,x in enumerate(x_traces):\n\tprint('iteration %d: %s' % (k, x))\nprint('optimal value:', f(x_traces[-1]))"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "sourceFile": "ista.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1669264822029,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1669265379130,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n \t    soft_th(w, th) = sgn(w) * (|w| - th)^+\n \n \t\"\"\"\n \t#   START OF YOUR CODE\n-\tres = np.sign(w) * \n+\tres = np.sign(w) * np.max(np.abs(w) - th, 0)\n \t#\tEND OF YOUR CODE\n \n def ista(X, y, lambd, w0, stepsize, tol=1e-9, maxiter=100000):\n \t\"\"\"\n"
+                },
+                {
+                    "date": 1669265665372,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,10 @@\n \t    soft_th(w, th) = sgn(w) * (|w| - th)^+\n \n \t\"\"\"\n \t#   START OF YOUR CODE\n-\tres = np.sign(w) * np.max(np.abs(w) - th, 0)\n+\tres = np.array([ np.sign(w[i]) * np.max(np.abs(w[i]) - th, 0) for i in range(len(w))])\n+\treturn res\n \t#\tEND OF YOUR CODE\n \n def ista(X, y, lambd, w0, stepsize, tol=1e-9, maxiter=100000):\n \t\"\"\"\n"
+                },
+                {
+                    "date": 1669265743755,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n \t    soft_th(w, th) = sgn(w) * (|w| - th)^+\n \n \t\"\"\"\n \t#   START OF YOUR CODE\n-\tres = np.array([ np.sign(w[i]) * np.max(np.abs(w[i]) - th, 0) for i in range(len(w))])\n+\tres = np.array([ np.sign(w[i]) * max(np.abs(w[i]) - th, 0) for i in range(len(w))])\n \treturn res\n \t#\tEND OF YOUR CODE\n \n def ista(X, y, lambd, w0, stepsize, tol=1e-9, maxiter=100000):\n"
+                },
+                {
+                    "date": 1669266038899,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n \tw = np.array(w0)\n \n \tfor k in range(maxiter):\n \t\t#   START OF YOUR CODE\n-\t\tpass\n+\t\tw_next = \n \t\t#\tEND OF YOUR CODE\n \n \t\tif np.linalg.norm(w_next - w) < tol:\n \t\t\tbreak\n"
+                },
+                {
+                    "date": 1669266314832,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,9 @@\n \tw = np.array(w0)\n \n \tfor k in range(maxiter):\n \t\t#   START OF YOUR CODE\n-\t\tw_next = \n+\t\tw_next = soft_th(w - stepsize * X.T @ (X @w - y), lambd * stepsize)\n \t\t#\tEND OF YOUR CODE\n \n \t\tif np.linalg.norm(w_next - w) < tol:\n \t\t\tbreak\n"
+                }
+            ],
+            "date": 1669264822029,
+            "name": "Commit-0",
+            "content": "import numpy as np\n\ndef soft_th(w, th):\n\t\"\"\"\n\tw: input vector\n\tth: threshold\n\n\t    soft_th(w, th) = sgn(w) * (|w| - th)^+\n\n\t\"\"\"\n\t#   START OF YOUR CODE\n\tres = np.sign(w) * \n\t#\tEND OF YOUR CODE\n\ndef ista(X, y, lambd, w0, stepsize, tol=1e-9, maxiter=100000):\n\t\"\"\"\n\tThis function implements the iterative soft-thresholding algorithm (ISTA) for \n\tsolving Lasso in penalized form\n\n\t    minimize 0.5 * ||X * w - y||_2^2 + lambd * ||w||_1\n\t\n\tw0: initial point\n\tstepsize: constant step size used in ISTA\n\ttol: toleracne parameter in the stopping criterion. Here we stop when the \n\t     norm of the difference between two succesive iterates is smaller than tol\n\tmaxiter: maximum number of iterations in ISTA.\n\t\"\"\"\n\n\tw_traces = [np.array(w0)]\n\tw = np.array(w0)\n\n\tfor k in range(maxiter):\n\t\t#   START OF YOUR CODE\n\t\tpass\n\t\t#\tEND OF YOUR CODE\n\n\t\tif np.linalg.norm(w_next - w) < tol:\n\t\t\tbreak\n\n\t\tw = w_next\n\t\tw_traces.append(np.array(w))\n\n\n\treturn w_traces "
+        }
+    ]
+}

@@ -1,0 +1,382 @@
+{
+    "sourceFile": "newton.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 91,
+            "patches": [
+                {
+                    "date": 1670767069711,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1670767114367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,12 +23,16 @@\n \tx = np.array(x0)\n \n \tfor it in range(maxiter):\n \t#   START OF YOUR CODE\n-\t\tnp.block([\n+\t\ta = np.block([\n \t\t\t[fpp(x,), A.T],\n \t\t\t[A, 0]\n \t\t])\n+\t\tb = np.block([\n+\t\t\t[-fp(x)],\n+\t\t\t0\n+\t\t])\n \t\tif(np.linalg.norm(fp(x)) < tol):\n \t\t\tbreak\n \t\td = -np.linalg.inv(fpp(x))@fp(x)\n \t\tstepsize = 1\n"
+                },
+                {
+                    "date": 1670767133772,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,9 @@\n \t\tb = np.block([\n \t\t\t[-fp(x)],\n \t\t\t0\n \t\t])\n+\t\td = np.linalg.solve(a,b)[0]\n \t\tif(np.linalg.norm(fp(x)) < tol):\n \t\t\tbreak\n \t\td = -np.linalg.inv(fpp(x))@fp(x)\n \t\tstepsize = 1\n"
+                },
+                {
+                    "date": 1670767155626,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,12 +32,8 @@\n \t\t\t[-fp(x)],\n \t\t\t0\n \t\t])\n \t\td = np.linalg.solve(a,b)[0]\n-\t\tif(np.linalg.norm(fp(x)) < tol):\n-\t\t\tbreak\n-\t\td = -np.linalg.inv(fpp(x))@fp(x)\n-\t\tstepsize = 1\n \t\t\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n \t\t\ttot_num_iter += 1\n"
+                },
+                {
+                    "date": 1670767168368,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,8 +32,9 @@\n \t\t\t[-fp(x)],\n \t\t\t0\n \t\t])\n \t\td = np.linalg.solve(a,b)[0]\n+\t\tstepsize = initial_stepsize\n \t\t\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n \t\t\ttot_num_iter += 1\n"
+                },
+                {
+                    "date": 1670767222692,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,15 +33,16 @@\n \t\t\t0\n \t\t])\n \t\td = np.linalg.solve(a,b)[0]\n \t\tstepsize = initial_stepsize\n-\t\t\n+\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n \t\t\ttot_num_iter += 1\n \n \t\tx = x + stepsize * d\n-\t\n+\t\tif(np.linalg.norm(d, ord = 2) < tol):\n+\t\t\tbreak;\n \t\t\n \t#\tEND OF YOUR CODE\n \n \treturn x_traces\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1670767265272,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,8 +23,9 @@\n \tx = np.array(x0)\n \n \tfor it in range(maxiter):\n \t#   START OF YOUR CODE\n+\t\t\n \t\ta = np.block([\n \t\t\t[fpp(x,), A.T],\n \t\t\t[A, 0]\n \t\t])\n@@ -39,8 +40,10 @@\n \t\t\tstepsize = beta * stepsize\n \t\t\ttot_num_iter += 1\n \n \t\tx = x + stepsize * d\n+\t\tx_traces.append(x)\n+\t\t\n \t\tif(np.linalg.norm(d, ord = 2) < tol):\n \t\t\tbreak;\n \t\t\n \t#\tEND OF YOUR CODE\n"
+                },
+                {
+                    "date": 1670767285435,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,11 +41,10 @@\n \t\t\ttot_num_iter += 1\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n-\t\t\n+\n \t\tif(np.linalg.norm(d, ord = 2) < tol):\n \t\t\tbreak;\n-\t\t\n \t#\tEND OF YOUR CODE\n \n \treturn x_traces\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1670767349490,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,12 +28,9 @@\n \t\ta = np.block([\n \t\t\t[fpp(x,), A.T],\n \t\t\t[A, 0]\n \t\t])\n-\t\tb = np.block([\n-\t\t\t[-fp(x)],\n-\t\t\t0\n-\t\t])\n+\t\tb = np.array([-fp(x), 0])\n \t\td = np.linalg.solve(a,b)[0]\n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n"
+                },
+                {
+                    "date": 1670767391992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \t#   START OF YOUR CODE\n \t\t\n \t\ta = np.block([\n \t\t\t[fpp(x,), A.T],\n-\t\t\t[A, 0]\n+\t\t\t[A, np.zeros]\n \t\t])\n \t\tb = np.array([-fp(x), 0])\n \t\td = np.linalg.solve(a,b)[0]\n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670767479888,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \t#   START OF YOUR CODE\n \t\t\n \t\ta = np.block([\n \t\t\t[fpp(x,), A.T],\n-\t\t\t[A, np.zeros]\n+\t\t\t[A, np.zeros(A.shape)]\n \t\t])\n \t\tb = np.array([-fp(x), 0])\n \t\td = np.linalg.solve(a,b)[0]\n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670767623177,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \t#   START OF YOUR CODE\n \t\t\n \t\ta = np.block([\n \t\t\t[fpp(x,), A.T],\n-\t\t\t[A, np.zeros(A.shape)]\n+\t\t\t[A, np.zeros((A.shape[0], A.shape[1]))]\n \t\t])\n \t\tb = np.array([-fp(x), 0])\n \t\td = np.linalg.solve(a,b)[0]\n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670767703762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \t\ta = np.block([\n \t\t\t[fpp(x,), A.T],\n \t\t\t[A, np.zeros((A.shape[0], A.shape[1]))]\n \t\t])\n-\t\tb = np.array([-fp(x), 0])\n+\t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n \t\td = np.linalg.solve(a,b)[0]\n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n"
+                },
+                {
+                    "date": 1670767736151,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,13 @@\n \t\t\t[fpp(x,), A.T],\n \t\t\t[A, np.zeros((A.shape[0], A.shape[1]))]\n \t\t])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n+\t\tprint(a)\n+\t\tprint(b)\n \t\td = np.linalg.solve(a,b)[0]\n+\n+\n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n"
+                },
+                {
+                    "date": 1670767761271,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,11 +28,11 @@\n \t\ta = np.block([\n \t\t\t[fpp(x,), A.T],\n \t\t\t[A, np.zeros((A.shape[0], A.shape[1]))]\n \t\t])\n-\t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n+\n \t\tprint(a)\n-\t\tprint(b)\n+\n \t\td = np.linalg.solve(a,b)[0]\n \n \n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670767776599,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,15 +24,15 @@\n \n \tfor it in range(maxiter):\n \t#   START OF YOUR CODE\n \t\t\n-\t\ta = np.block([\n-\t\t\t[fpp(x,), A.T],\n-\t\t\t[A, np.zeros((A.shape[0], A.shape[1]))]\n-\t\t])\n-\n+\t\t# a = np.block([\n+\t\t# \t[fpp(x,), A.T],\n+\t\t# \t[A, np.zeros((A.shape[0], A.shape[1]))]\n+\t\t# ])\n+\t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n \t\tprint(a)\n-\n+\t\tprint(b)\n \t\td = np.linalg.solve(a,b)[0]\n \n \n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670767784532,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n \t\t# \t[fpp(x,), A.T],\n \t\t# \t[A, np.zeros((A.shape[0], A.shape[1]))]\n \t\t# ])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n-\t\tprint(a)\n+\t\t# print(a)\n \t\tprint(b)\n \t\td = np.linalg.solve(a,b)[0]\n \n \n"
+                },
+                {
+                    "date": 1670767865608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,15 +24,17 @@\n \n \tfor it in range(maxiter):\n \t#   START OF YOUR CODE\n \t\t\n-\t\t# a = np.block([\n-\t\t# \t[fpp(x,), A.T],\n-\t\t# \t[A, np.zeros((A.shape[0], A.shape[1]))]\n-\t\t# ])\n+\t\tprint(A.T)\n+\t\tprint(fpp(x))\n+\t\ta = np.block([\n+\t\t\t[fpp(x), A.T],\n+\t\t\t[A, np.zeros((A.shape[0], A.shape[1]))]\n+\t\t])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n-\t\t# print(a)\n-\t\tprint(b)\n+\t\tprint(a)\n+\n \t\td = np.linalg.solve(a,b)[0]\n \n \n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670767893776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,10 +27,10 @@\n \t\t\n \t\tprint(A.T)\n \t\tprint(fpp(x))\n \t\ta = np.block([\n-\t\t\t[fpp(x), A.T],\n-\t\t\t[A, np.zeros((A.shape[0], A.shape[1]))]\n+\t\t\t[fpp(x), A],\n+\t\t\t[A.T, np.zeros((A.shape[0], A.shape[1]))]\n \t\t])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n \t\tprint(a)\n \n"
+                },
+                {
+                    "date": 1670767904728,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \t\tprint(A.T)\n \t\tprint(fpp(x))\n \t\ta = np.block([\n \t\t\t[fpp(x), A],\n-\t\t\t[A.T, np.zeros((A.shape[0], A.shape[1]))]\n+\t\t\t[A.T, np.zeros((A.shape[1], A.shape[0]))]\n \t\t])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n \t\tprint(a)\n \n"
+                },
+                {
+                    "date": 1670767921012,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,10 +24,9 @@\n \n \tfor it in range(maxiter):\n \t#   START OF YOUR CODE\n \t\t\n-\t\tprint(A.T)\n-\t\tprint(fpp(x))\n+\n \t\ta = np.block([\n \t\t\t[fpp(x), A],\n \t\t\t[A.T, np.zeros((A.shape[1], A.shape[0]))]\n \t\t])\n"
+                },
+                {
+                    "date": 1670767988723,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,12 +24,11 @@\n \n \tfor it in range(maxiter):\n \t#   START OF YOUR CODE\n \t\t\n-\n \t\ta = np.block([\n \t\t\t[fpp(x), A],\n-\t\t\t[A.T, np.zeros((A.shape[1], A.shape[0]))]\n+\t\t\t[A.T, 0)]\n \t\t])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n \t\tprint(a)\n \n"
+                },
+                {
+                    "date": 1670768007792,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \t#   START OF YOUR CODE\n \t\t\n \t\ta = np.block([\n \t\t\t[fpp(x), A],\n-\t\t\t[A.T, 0)]\n+\t\t\t[A.T, 0]\n \t\t])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n \t\tprint(a)\n \n"
+                },
+                {
+                    "date": 1670768056243,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \t#   START OF YOUR CODE\n \t\t\n \t\ta = np.block([\n \t\t\t[fpp(x), A],\n-\t\t\t[A.T, 0]\n+\t\t\t[A.T, np.zeros((A.shape[1],A.shape[1]))]\n \t\t])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n \t\tprint(a)\n \n"
+                },
+                {
+                    "date": 1670768086024,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,10 +25,10 @@\n \tfor it in range(maxiter):\n \t#   START OF YOUR CODE\n \t\t\n \t\ta = np.block([\n-\t\t\t[fpp(x), A],\n-\t\t\t[A.T, np.zeros((A.shape[1],A.shape[1]))]\n+\t\t\t[fpp(x), A.T],\n+\t\t\t[A, np.zeros((A.shape[1],A.shape[1]))]\n \t\t])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n \t\tprint(a)\n \n"
+                },
+                {
+                    "date": 1670768204417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n \n \tfor it in range(maxiter):\n \t#   START OF YOUR CODE\n \t\t\n+\t\tprint(A.shape)\n \t\ta = np.block([\n \t\t\t[fpp(x), A.T],\n \t\t\t[A, np.zeros((A.shape[1],A.shape[1]))]\n \t\t])\n"
+                },
+                {
+                    "date": 1670768234090,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,10 @@\n \tfor it in range(maxiter):\n \t#   START OF YOUR CODE\n \t\t\n \t\tprint(A.shape)\n+\n+\t\tprint(np.zeros((A.shape[1],A.shape[1])))\n \t\ta = np.block([\n \t\t\t[fpp(x), A.T],\n \t\t\t[A, np.zeros((A.shape[1],A.shape[1]))]\n \t\t])\n"
+                },
+                {
+                    "date": 1670768249173,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n \t#   START OF YOUR CODE\n \t\t\n \t\tprint(A.shape)\n \n-\t\tprint(np.zeros((A.shape[1],A.shape[1])))\n+\t\tprint(np.zeros((A.shape[0],A.shape[0])))\n \t\ta = np.block([\n \t\t\t[fpp(x), A.T],\n \t\t\t[A, np.zeros((A.shape[1],A.shape[1]))]\n \t\t])\n"
+                },
+                {
+                    "date": 1670768275175,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,12 +26,12 @@\n \t#   START OF YOUR CODE\n \t\t\n \t\tprint(A.shape)\n \n-\t\tprint(np.zeros((A.shape[0],A.shape[0])))\n+\t\tprint()\n \t\ta = np.block([\n \t\t\t[fpp(x), A.T],\n-\t\t\t[A, np.zeros((A.shape[1],A.shape[1]))]\n+\t\t\t[A, np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n \t\tprint(a)\n \n"
+                },
+                {
+                    "date": 1670768293356,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,10 +28,10 @@\n \t\tprint(A.shape)\n \n \t\tprint()\n \t\ta = np.block([\n-\t\t\t[fpp(x), A.T],\n-\t\t\t[A, np.zeros((A.shape[0],A.shape[0]))]\n+\t\t\t[fpp(x),      A.T                              ],\n+\t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n \t\tprint(a)\n \n"
+                },
+                {
+                    "date": 1670768332072,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,11 +24,8 @@\n \n \tfor it in range(maxiter):\n \t#   START OF YOUR CODE\n \t\t\n-\t\tprint(A.shape)\n-\n-\t\tprint()\n \t\ta = np.block([\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n"
+                },
+                {
+                    "date": 1670768339989,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,8 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n \t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n-\t\tprint(a)\n \n \t\td = np.linalg.solve(a,b)[0]\n \n \n"
+                },
+                {
+                    "date": 1670768360733,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \t\ta = np.block([\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n-\t\tb = np.array([[-fp(x)], [np.zeros((A.shape[0],1))]])\n+\t\tb = np.array([-fp(x), np.zeros((A.shape[0],1))])\n \n \t\td = np.linalg.solve(a,b)[0]\n \n \n"
+                },
+                {
+                    "date": 1670768380181,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,8 +30,9 @@\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n \t\tb = np.array([-fp(x), np.zeros((A.shape[0],1))])\n \n+\t\tprint(b.shape)\n \t\td = np.linalg.solve(a,b)[0]\n \n \n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670768397546,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \t\ta = np.block([\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n-\t\tb = np.array([-fp(x), np.zeros((A.shape[0],1))])\n+\t\tb = np.block([-fp(x), np.zeros((A.shape[0],1))])\n \n \t\tprint(b.shape)\n \t\td = np.linalg.solve(a,b)[0]\n \n"
+                },
+                {
+                    "date": 1670768434544,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n \t\tb = np.block([-fp(x), np.zeros((A.shape[0],1))])\n-\n+\t\tpint(a.shape)\n \t\tprint(b.shape)\n \t\td = np.linalg.solve(a,b)[0]\n \n \n"
+                },
+                {
+                    "date": 1670768442300,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n \t\tb = np.block([-fp(x), np.zeros((A.shape[0],1))])\n-\t\tpint(a.shape)\n+\t\tprint(a.shape)\n \t\tprint(b.shape)\n \t\td = np.linalg.solve(a,b)[0]\n \n \n"
+                },
+                {
+                    "date": 1670768463262,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \t\ta = np.block([\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n-\t\tb = np.block([-fp(x), np.zeros((A.shape[0],1))])\n+\t\tb = np.block([[-fp(x)], [np.zeros((A.shape[0],1))]])\n \t\tprint(a.shape)\n \t\tprint(b.shape)\n \t\td = np.linalg.solve(a,b)[0]\n \n"
+                },
+                {
+                    "date": 1670768481673,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,11 @@\n \t\ta = np.block([\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n-\t\tb = np.block([[-fp(x)], [np.zeros((A.shape[0],1))]])\n+\t\tb = np.block([\n+\t\t\t[-fp(x)], \n+\t\t\tnp.zeros((A.shape[0],1))])\n \t\tprint(a.shape)\n \t\tprint(b.shape)\n \t\td = np.linalg.solve(a,b)[0]\n \n"
+                },
+                {
+                    "date": 1670768515645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,11 +28,9 @@\n \t\ta = np.block([\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n-\t\tb = np.block([\n-\t\t\t[-fp(x)], \n-\t\t\tnp.zeros((A.shape[0],1))])\n+\t\tb = np.transpose(np.block([-fp(x), np.zeros((A.shape[0],1))]))\n \t\tprint(a.shape)\n \t\tprint(b.shape)\n \t\td = np.linalg.solve(a,b)[0]\n \n"
+                },
+                {
+                    "date": 1670768540592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,13 +29,12 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n \t\tb = np.transpose(np.block([-fp(x), np.zeros((A.shape[0],1))]))\n-\t\tprint(a.shape)\n-\t\tprint(b.shape)\n+\t\t\n \t\td = np.linalg.solve(a,b)[0]\n+\t\tprint(d)\n \n-\n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n"
+                },
+                {
+                    "date": 1670768554623,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n \t\tb = np.transpose(np.block([-fp(x), np.zeros((A.shape[0],1))]))\n \t\t\n-\t\td = np.linalg.solve(a,b)[0]\n+\t\td = np.linalg.solve(a,b)[0][0]\n \t\tprint(d)\n \n \t\tstepsize = initial_stepsize\n \n"
+                },
+                {
+                    "date": 1670768582209,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n \t\tprint(d)\n \n \t\tstepsize = initial_stepsize\n \n-\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n+\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n \t\t\ttot_num_iter += 1\n \n \t\tx = x + stepsize * d\n"
+                },
+                {
+                    "date": 1670768613376,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,14 +30,14 @@\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n \t\tb = np.transpose(np.block([-fp(x), np.zeros((A.shape[0],1))]))\n \t\t\n-\t\td = np.linalg.solve(a,b)[0][0]\n+\t\td = np.linalg.solve(a,b)\n \t\tprint(d)\n \n \t\tstepsize = initial_stepsize\n \n-\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n+\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n \t\t\ttot_num_iter += 1\n \n \t\tx = x + stepsize * d\n"
+                },
+                {
+                    "date": 1670768661343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,10 +30,10 @@\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n \t\tb = np.transpose(np.block([-fp(x), np.zeros((A.shape[0],1))]))\n \t\t\n-\t\td = np.linalg.solve(a,b)\n-\t\tprint(d)\n+\t\td = np.linalg.solve(a,b)[:A.shape[1]]\n+\t\t\n \n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n"
+                },
+                {
+                    "date": 1670768674044,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,15 +31,14 @@\n \t\t])\n \t\tb = np.transpose(np.block([-fp(x), np.zeros((A.shape[0],1))]))\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n-\t\t\n+\t\tprint(d)\n \n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n-\t\t\ttot_num_iter += 1\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n \n"
+                },
+                {
+                    "date": 1670768881031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n \t\tprint(d)\n \n \t\tstepsize = initial_stepsize\n \n-\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n+\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670768913126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,9 +31,8 @@\n \t\t])\n \t\tb = np.transpose(np.block([-fp(x), np.zeros((A.shape[0],1))]))\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n-\t\tprint(d)\n \n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n"
+                },
+                {
+                    "date": 1670769012348,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,9 @@\n \t\ta = np.block([\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n+\t\tprint(fp(x))\n \t\tb = np.transpose(np.block([-fp(x), np.zeros((A.shape[0],1))]))\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n \n"
+                },
+                {
+                    "date": 1670769032856,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \t\ta = np.block([\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n-\t\tprint(fp(x))\n+\t\tprint(fp(x).T)\n \t\tb = np.transpose(np.block([-fp(x), np.zeros((A.shape[0],1))]))\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n \n"
+                },
+                {
+                    "date": 1670769044398,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \t\ta = np.block([\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n-\t\tprint(fp(x).T)\n+\t\tprint(fp(x).T.shape)\n \t\tb = np.transpose(np.block([-fp(x), np.zeros((A.shape[0],1))]))\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n \n"
+                },
+                {
+                    "date": 1670769063661,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,10 +28,10 @@\n \t\ta = np.block([\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n \t\t])\n-\t\tprint(fp(x).T.shape)\n-\t\tb = np.transpose(np.block([-fp(x), np.zeros((A.shape[0],1))]))\n+\n+\t\tb = np.transpose(np.block([-fp(x).T, np.zeros((A.shape[0],1))]))\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670769098149,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,9 @@\n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n+\t\t\tprint(\"asdas\")\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n \n"
+                },
+                {
+                    "date": 1670769185833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,9 @@\n \n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n+\t\t\tprint(f(x + stepsize*d))\n \t\t\tstepsize = beta * stepsize\n \t\t\tprint(\"asdas\")\n \n \t\tx = x + stepsize * d\n"
+                },
+                {
+                    "date": 1670769203624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,8 @@\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n \t\t\tprint(f(x + stepsize*d))\n \t\t\tstepsize = beta * stepsize\n-\t\t\tprint(\"asdas\")\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n \n"
+                },
+                {
+                    "date": 1670769267625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,10 @@\n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n \t\t\tprint(f(x + stepsize*d))\n+\t\t\tprint(f(x) + alpha * stepsize * (fp(x)) @ d)\n+\t\t\t\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670769288170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n \t\t\tprint(f(x + stepsize*d))\n \t\t\tprint(f(x) + alpha * stepsize * (fp(x)) @ d)\n-\t\t\t\n+\t\t\tbreak\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670769317536,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n \n-\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n+\t\twhile(f(x + stepsize*d) > (f(x) + alpha * stepsize * (fp(x)) @ d)[0]):\n \t\t\tprint(f(x + stepsize*d))\n \t\t\tprint(f(x) + alpha * stepsize * (fp(x)) @ d)\n \t\t\tbreak\n \t\t\tstepsize = beta * stepsize\n"
+                },
+                {
+                    "date": 1670769368484,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,12 +35,9 @@\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n \n-\t\twhile(f(x + stepsize*d) > (f(x) + alpha * stepsize * (fp(x)) @ d)[0]):\n-\t\t\tprint(f(x + stepsize*d))\n-\t\t\tprint(f(x) + alpha * stepsize * (fp(x)) @ d)\n-\t\t\tbreak\n+\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670769380807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,8 +36,9 @@\n \n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n+\t\t\tprint((f(x) + alpha * stepsize * (fp(x)) @ d).shape)\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670769385999,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n \n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n-\t\t\tprint((f(x) + alpha * stepsize * (fp(x)) @ d).shape)\n+\t\t\tprint((f(x) + alpha * stepsize * (fp(x)) @ d).type)\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670769395324,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,9 +36,9 @@\n \n \t\tstepsize = initial_stepsize\n \n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n-\t\t\tprint((f(x) + alpha * stepsize * (fp(x)) @ d).type)\n+\t\t\tprint((f(x) + alpha * stepsize * (fp(x)) @ d).shape)\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670769418885,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,11 +34,11 @@\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n-\n+\t\tk = 1\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n-\t\t\tprint((f(x) + alpha * stepsize * (fp(x)) @ d).shape)\n+\t\t\tprint(k.shape)\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670769431601,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,11 +34,10 @@\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n-\t\tk = 1\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n-\t\t\tprint(k.shape)\n+\t\t\tprint(f(x) + alpha * stepsize * (fp(x)) @ d)\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670769472656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,12 +32,11 @@\n \n \t\tb = np.transpose(np.block([-fp(x).T, np.zeros((A.shape[0],1))]))\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n-\n+\t\tprint((fp(x)) @ d)\n \t\tstepsize = initial_stepsize\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n-\t\t\tprint(f(x) + alpha * stepsize * (fp(x)) @ d)\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670769485369,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,9 +34,9 @@\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n \t\tprint((fp(x)) @ d)\n \t\tstepsize = initial_stepsize\n-\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * (fp(x)) @ d):\n+\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)) @ d)[0]):\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670769491118,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n \n \t\tb = np.transpose(np.block([-fp(x).T, np.zeros((A.shape[0],1))]))\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n-\t\tprint((fp(x)) @ d)\n+\n \t\tstepsize = initial_stepsize\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)) @ d)[0]):\n \t\t\tstepsize = beta * stepsize\n \n"
+                },
+                {
+                    "date": 1670769510116,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,8 +35,9 @@\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)) @ d)[0]):\n+\t\t\tprint(f(x + stepsize*d))\n \t\t\tstepsize = beta * stepsize\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n"
+                },
+                {
+                    "date": 1670769549929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,9 @@\n \t\tstepsize = initial_stepsize\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)) @ d)[0]):\n \t\t\tprint(f(x + stepsize*d))\n \t\t\tstepsize = beta * stepsize\n+\t\t\tprint(stepsize)\n \n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n \n"
+                },
+                {
+                    "date": 1670769887996,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,18 +26,17 @@\n \t#   START OF YOUR CODE\n \t\t\n \t\ta = np.block([\n \t\t\t[fpp(x),      A.T                              ],\n-\t\t\t[A,           np.zeros((A.shape[0],A.shape[0]))]\n+\t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n-\t\tb = np.transpose(np.block([-fp(x).T, np.zeros((A.shape[0],1))]))\n+\t\tb = np.transpose(np.block([-fp(x).T, np.zeros((m,1))]))\n \t\t\n \t\td = np.linalg.solve(a,b)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)) @ d)[0]):\n-\t\t\tprint(f(x + stepsize*d))\n \t\t\tstepsize = beta * stepsize\n \t\t\tprint(stepsize)\n \n \t\tx = x + stepsize * d\n"
+                },
+                {
+                    "date": 1670769962069,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,14 +29,14 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n-\t\tb = np.transpose(np.block([-fp(x).T, np.zeros((m,1))]))\n-\t\t\n-\t\td = np.linalg.solve(a,b)[:A.shape[1]]\n+\t\tk = np.transpose(np.block([-fp(x).T, np.zeros((m,1))]))\n+\t\tprint(k)\n+\t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n-\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)) @ d)[0]):\n+\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)).T @ d)[0]):\n \t\t\tstepsize = beta * stepsize\n \t\t\tprint(stepsize)\n \n \t\tx = x + stepsize * d\n"
+                },
+                {
+                    "date": 1670769973965,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -36,10 +36,10 @@\n \n \t\tstepsize = initial_stepsize\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)).T @ d)[0]):\n \t\t\tstepsize = beta * stepsize\n-\t\t\tprint(stepsize)\n \n+\n \t\tx = x + stepsize * d\n \t\tx_traces.append(x)\n \n \t\tif(np.linalg.norm(d, ord = 2) < tol):\n"
+                },
+                {
+                    "date": 1670770158908,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,8 +35,10 @@\n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)).T @ d)[0]):\n+\t\t\tprint(stepsize)\n+\t\t\ttime.sleep(1000)\n \t\t\tstepsize = beta * stepsize\n \n \n \t\tx = x + stepsize * d\n"
+                },
+                {
+                    "date": 1670770177984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,6 @@\n import numpy as np\n+import time\n \n def newton_eq(f, fp, fpp, x0, A, b, initial_stepsize=1.0, alpha=0.5, beta=0.5, tol=1e-8, maxiter=100000):\n \t\"\"\"\n \tf: function that takes an input x an returns the value of f at x\n"
+                },
+                {
+                    "date": 1670770190291,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,9 @@\n \n \t\tstepsize = initial_stepsize\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)).T @ d)[0]):\n \t\t\tprint(stepsize)\n-\t\t\ttime.sleep(1000)\n+\t\t\ttime.sleep(1)\n \t\t\tstepsize = beta * stepsize\n \n \n \t\tx = x + stepsize * d\n"
+                },
+                {
+                    "date": 1670770212506,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,14 +31,15 @@\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n \t\tk = np.transpose(np.block([-fp(x).T, np.zeros((m,1))]))\n-\t\tprint(k)\n+\n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)).T @ d)[0]):\n \t\t\tprint(stepsize)\n+\t\t\tprint(f(x + stepsize*d))\n \t\t\ttime.sleep(1)\n \t\t\tstepsize = beta * stepsize\n \n \n"
+                },
+                {
+                    "date": 1670770259122,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,10 @@\n \t\tstepsize = initial_stepsize\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)).T @ d)[0]):\n \t\t\tprint(stepsize)\n \t\t\tprint(f(x + stepsize*d))\n-\t\t\ttime.sleep(1)\n+\t\t\tprint(f(x) + alpha * stepsize * ((fp(x)).T @ d)[0])\n+\t\t\ttime.sleep(2)\n \t\t\tstepsize = beta * stepsize\n \n \n \t\tx = x + stepsize * d\n"
+                },
+                {
+                    "date": 1670770305652,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,8 @@\n \t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)).T @ d)[0]):\n \t\t\tprint(stepsize)\n \t\t\tprint(f(x + stepsize*d))\n \t\t\tprint(f(x) + alpha * stepsize * ((fp(x)).T @ d)[0])\n-\t\t\ttime.sleep(2)\n \t\t\tstepsize = beta * stepsize\n \n \n \t\tx = x + stepsize * d\n"
+                },
+                {
+                    "date": 1670770376049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n-\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)).T @ d)[0]):\n+\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((f(x)).T @ d)[0]):\n \t\t\tprint(stepsize)\n \t\t\tprint(f(x + stepsize*d))\n \t\t\tprint(f(x) + alpha * stepsize * ((fp(x)).T @ d)[0])\n \t\t\tstepsize = beta * stepsize\n"
+                },
+                {
+                    "date": 1670770402258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,9 +35,9 @@\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n-\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((f(x)).T @ d)[0]):\n+\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)).T @ d)[0]):\n \t\t\tprint(stepsize)\n \t\t\tprint(f(x + stepsize*d))\n \t\t\tprint(f(x) + alpha * stepsize * ((fp(x)).T @ d)[0])\n \t\t\tstepsize = beta * stepsize\n"
+                },
+                {
+                    "date": 1670770738742,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n-\t\tk = np.transpose(np.block([-fp(x).T, np.zeros((m,1))]))\n+\t\tk = np.transpose(np.block([-fp(x), np.zeros((m,1))]))\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670770744266,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,12 +35,12 @@\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n-\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)).T @ d)[0]):\n+\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)) @ d)[0]):\n \t\t\tprint(stepsize)\n \t\t\tprint(f(x + stepsize*d))\n-\t\t\tprint(f(x) + alpha * stepsize * ((fp(x)).T @ d)[0])\n+\t\t\tprint(f(x) + alpha * stepsize * ((fp(x)) @ d)[0])\n \t\t\tstepsize = beta * stepsize\n \n \n \t\tx = x + stepsize * d\n"
+                },
+                {
+                    "date": 1670770850045,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n-\t\tk = np.transpose(np.block([-fp(x), np.zeros((m,1))]))\n+\t\tk = np.transpose(np.block([-fp(x), np.zeros((m))]))\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670770912826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,12 +35,9 @@\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n-\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * ((fp(x)) @ d)[0]):\n-\t\t\tprint(stepsize)\n-\t\t\tprint(f(x + stepsize*d))\n-\t\t\tprint(f(x) + alpha * stepsize * ((fp(x)) @ d)[0])\n+\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * fp(x).T @ d):\n \t\t\tstepsize = beta * stepsize\n \n \n \t\tx = x + stepsize * d\n"
+                },
+                {
+                    "date": 1670770947789,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n-\t\tk = np.transpose(np.block([-fp(x), np.zeros((m))]))\n+\t\tk = np.transpose(np.block([-fp(x), np.zeros((m,1))]))\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670771008132,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n-\t\tk = np.transpose(np.block([-fp(x), np.zeros((m,1))]))\n+\t\tk = np.transpose(np.block([-fp(x), np.zeros((m,m))]))\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670771078552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,8 +31,9 @@\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n \t\tk = np.transpose(np.block([-fp(x), np.zeros((m,m))]))\n+\t\tprint(k)\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670771093895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n-\t\tk = np.transpose(np.block([-fp(x), np.zeros((m,m))]))\n+\t\tk = np.transpose(np.block([-fp(x), np.zeros((m))]))\n \t\tprint(k)\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n"
+                },
+                {
+                    "date": 1670771156475,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n-\t\tk = np.transpose(np.block([-fp(x), np.zeros((m))]))\n+\t\tk = np.transpose(np.block([-fp(x), np.zeros((m,m))]))\n \t\tprint(k)\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n"
+                },
+                {
+                    "date": 1670771166683,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n-\t\tk = np.transpose(np.block([-fp(x), np.zeros((m,m))]))\n+\t\tk = np.transpose(np.block([-fp(x), np.zeros((m)]))\n \t\tprint(k)\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n"
+                },
+                {
+                    "date": 1670771230515,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,10 +30,9 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n-\t\tk = np.transpose(np.block([-fp(x), np.zeros((m)]))\n-\t\tprint(k)\n+\t\tk = np.transpose(np.block([-fp(x), np.zeros((m))]))\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n"
+                },
+                {
+                    "date": 1670771250605,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \t\t\t[fpp(x),      A.T                              ],\n \t\t\t[A,           np.zeros((m,m))]\n \t\t])\n \n-\t\tk = np.transpose(np.block([-fp(x), np.zeros((m))]))\n+\t\tk = np.transpose(np.block([-fp(x), np.zeros((m))])) #这里要小心！不要把zeros开成多维的了！\n \n \t\td = np.linalg.solve(a,k)[:A.shape[1]]\n \n \t\tstepsize = initial_stepsize\n"
+                }
+            ],
+            "date": 1670767069711,
+            "name": "Commit-0",
+            "content": "import numpy as np\n\ndef newton_eq(f, fp, fpp, x0, A, b, initial_stepsize=1.0, alpha=0.5, beta=0.5, tol=1e-8, maxiter=100000):\n\t\"\"\"\n\tf: function that takes an input x an returns the value of f at x\n\tfp: function that takes an input x and returns the gradient of f at x\n\tfpp: function that takes an input x and returns the Hessian of f at x\n\tA, b: constraint A x = b\n\tx0: initial feasible point\n\tinitial_stepsize: initial stepsize used in backtracking line search\n\talpha: parameter in Armijo's rule \n\t\t\t\tf(x + t * d) > f(x) + t * alpha * f(x) @ d\n\tbeta: constant factor used in stepsize reduction\n\ttol: toleracne parameter in the stopping crieterion. Gradient descent stops \n\t     when the 2-norm of the Newton direction is smaller than tol\n\tmaxiter: maximum number of iterations in outer loop of damped Newton's method.\n\n\tThis function should return a list of the iterates x_k\n\t\"\"\"\n\tx_traces = [np.array(x0)]\n\t\n\tm = len(b)\n\tx = np.array(x0)\n\n\tfor it in range(maxiter):\n\t#   START OF YOUR CODE\n\t\tnp.block([\n\t\t\t[fpp(x,), A.T],\n\t\t\t[A, 0]\n\t\t])\n\t\tif(np.linalg.norm(fp(x)) < tol):\n\t\t\tbreak\n\t\td = -np.linalg.inv(fpp(x))@fp(x)\n\t\tstepsize = 1\n\t\t\n\t\twhile(f(x + stepsize*d) > f(x) + alpha * stepsize * np.transpose(fp(x)) @ d):\n\t\t\tstepsize = beta * stepsize\n\t\t\ttot_num_iter += 1\n\n\t\tx = x + stepsize * d\n\t\n\t\t\n\t#\tEND OF YOUR CODE\n\n\treturn x_traces"
+        }
+    ]
+}

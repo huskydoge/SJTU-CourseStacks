@@ -1,0 +1,69 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.23"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "\u6808\u4e0e\u961f\u5217",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "linkStack::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-linkStack-Debug-132ac6879f660018f079.json",
+					"name" : "linkStack",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "seqStack::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-seqStack-Debug-3768ff313c8b493735cc.json",
+					"name" : "seqStack",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/husky/\u5927\u4e8c\u4e0a/\u6570\u636e\u7ed3\u6784/\u6808\u4e0e\u961f\u5217/cmake-build-debug",
+		"source" : "/Users/husky/\u5927\u4e8c\u4e0a/\u6570\u636e\u7ed3\u6784/\u6808\u4e0e\u961f\u5217"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

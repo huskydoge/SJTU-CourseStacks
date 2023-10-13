@@ -1,0 +1,138 @@
+{
+    "sourceFile": "p3.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 30,
+            "patches": [
+                {
+                    "date": 1668265780348,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1668266006821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n \t          [4,2], \n \t          [5.8,1.8]])\n # y: m-D vector, y[i] is the label of the i-th sample\n y = np.append(np.ones((7,)), -np.ones((8,)))\n+print(y)\n \n # append a constant 1 to each feature vector, so X is now a m x 3 matrix\n X = np.append(X, np.ones((15,1)), axis=1)\n \n"
+                },
+                {
+                    "date": 1668266016620,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n \t          [4,2], \n \t          [5.8,1.8]])\n # y: m-D vector, y[i] is the label of the i-th sample\n y = np.append(np.ones((7,)), -np.ones((8,)))\n-print(y)\n+)\n \n # append a constant 1 to each feature vector, so X is now a m x 3 matrix\n X = np.append(X, np.ones((15,1)), axis=1)\n \n"
+                },
+                {
+                    "date": 1668266023722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n # Xy[i,:] = X[i,:] * y[i]\n Xy = X * y.reshape((-1,1))\n \n # X.shape = (15,3), Xy.shape = (15, 3), y.shape = (15,)\n-print (X.shape, Xy.shape, y.shape)\n+# print (X.shape, Xy.shape, y.shape)\n \n # sigmoid function\n def sigmoid(z):\n \treturn 1 / (1 + np.exp(-z))\n"
+                },
+                {
+                    "date": 1668266303278,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,11 +37,9 @@\n def sigmoid(z):\n \treturn 1 / (1 + np.exp(-z))\n \n def fp(w):\n-\t#   START OF YOUR CODE\n-\tpass\n-\t#   END OF YOUR CODE\n+\t\n \n # minimize f by gradient descent\n #   START OF YOUR CODE\n pass\n"
+                },
+                {
+                    "date": 1668266330909,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,9 +37,10 @@\n def sigmoid(z):\n \treturn 1 / (1 + np.exp(-z))\n \n def fp(w):\n-\t\n+\tres = 0\n+\tfor \n \n # minimize f by gradient descent\n #   START OF YOUR CODE\n pass\n"
+                },
+                {
+                    "date": 1668266394056,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,10 @@\n \treturn 1 / (1 + np.exp(-z))\n \n def fp(w):\n \tres = 0\n-\tfor \n+\tfor i in range(15):\n+\t\tres += (1-sigmoid(y[i]*(X[i].transpose()))\n \n # minimize f by gradient descent\n #   START OF YOUR CODE\n pass\n"
+                },
+                {
+                    "date": 1668266416566,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n \n def fp(w):\n \tres = 0\n \tfor i in range(15):\n-\t\tres += (1-sigmoid(y[i]*(X[i].transpose()))\n+\t\tres += (1-sigmoid(y[i]*(X[i].transpose())@w))\n \n # minimize f by gradient descent\n #   START OF YOUR CODE\n pass\n"
+                },
+                {
+                    "date": 1668266436011,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -39,9 +39,9 @@\n \n def fp(w):\n \tres = 0\n \tfor i in range(15):\n-\t\tres += (1-sigmoid(y[i]*(X[i].transpose())@w))\n+\t\tres += (1-sigmoid(y[i]*(X[i].transpose())@w))*y[i]*X[i]\n \n # minimize f by gradient descent\n #   START OF YOUR CODE\n pass\n"
+                },
+                {
+                    "date": 1668266443270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -40,8 +40,9 @@\n def fp(w):\n \tres = 0\n \tfor i in range(15):\n \t\tres += (1-sigmoid(y[i]*(X[i].transpose())@w))*y[i]*X[i]\n+\treturn -res\n \n # minimize f by gradient descent\n #   START OF YOUR CODE\n pass\n"
+                },
+                {
+                    "date": 1668266558241,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,11 +43,10 @@\n \t\tres += (1-sigmoid(y[i]*(X[i].transpose())@w))*y[i]*X[i]\n \treturn -res\n \n # minimize f by gradient descent\n-#   START OF YOUR CODE\n-pass\n-#   END OF YOUR CODE\n+w0=[]\n+w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000000)\n \n # compute the accuracy on the training set\n w = w_traces[-1]\n y_hat = 2*(X@w > 0)-1\n"
+                },
+                {
+                    "date": 1668266575649,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n \t\tres += (1-sigmoid(y[i]*(X[i].transpose())@w))*y[i]*X[i]\n \treturn -res\n \n # minimize f by gradient descent\n-w0=[]\n+w0=np.array([1,1,1])\n w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000000)\n \n # compute the accuracy on the training set\n w = w_traces[-1]\n"
+                },
+                {
+                    "date": 1668266587513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,8 +44,9 @@\n \treturn -res\n \n # minimize f by gradient descent\n w0=np.array([1,1,1])\n+stepsize = 0.1\n w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000000)\n \n # compute the accuracy on the training set\n w = w_traces[-1]\n"
+                },
+                {
+                    "date": 1668266604358,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,8 @@\n \t          [4,2], \n \t          [5.8,1.8]])\n # y: m-D vector, y[i] is the label of the i-th sample\n y = np.append(np.ones((7,)), -np.ones((8,)))\n-)\n \n # append a constant 1 to each feature vector, so X is now a m x 3 matrix\n X = np.append(X, np.ones((15,1)), axis=1)\n \n"
+                },
+                {
+                    "date": 1668266623102,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -38,9 +38,9 @@\n \n def fp(w):\n \tres = 0\n \tfor i in range(15):\n-\t\tres += (1-sigmoid(y[i]*(X[i].transpose())@w))*y[i]*X[i]\n+\t\tres += (1-sigmoid(y[i]*(np.array(X[i]).transpose())@w))*y[i]*X[i]\n \treturn -res\n \n # minimize f by gradient descent\n w0=np.array([1,1,1])\n"
+                },
+                {
+                    "date": 1668266634270,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n \n # minimize f by gradient descent\n w0=np.array([1,1,1])\n stepsize = 0.1\n-w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000000)\n+w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 1000000)\n \n # compute the accuracy on the training set\n w = w_traces[-1]\n y_hat = 2*(X@w > 0)-1\n"
+                },
+                {
+                    "date": 1668266718634,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -68,5 +68,5 @@\n plt.xlabel('x1')\n plt.ylabel('x2')\n \n plt.tight_layout()\n-plt.savefig('../figures/p3.pdf')\n+plt.savefig('./figures/p3.pdf')\n"
+                },
+                {
+                    "date": 1668266782924,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,8 +25,10 @@\n \n # append a constant 1 to each feature vector, so X is now a m x 3 matrix\n X = np.append(X, np.ones((15,1)), axis=1)\n \n+w0=np.array([1,1,1])\n+stepsize = 0.1\n # Xy[i,:] = X[i,:] * y[i]\n Xy = X * y.reshape((-1,1))\n \n # X.shape = (15,3), Xy.shape = (15, 3), y.shape = (15,)\n@@ -42,10 +44,8 @@\n \t\tres += (1-sigmoid(y[i]*(np.array(X[i]).transpose())@w))*y[i]*X[i]\n \treturn -res\n \n # minimize f by gradient descent\n-w0=np.array([1,1,1])\n-stepsize = 0.1\n w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 1000000)\n \n # compute the accuracy on the training set\n w = w_traces[-1]\n"
+                },
+                {
+                    "date": 1668266815093,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -27,9 +27,12 @@\n X = np.append(X, np.ones((15,1)), axis=1)\n \n w0=np.array([1,1,1])\n stepsize = 0.1\n+\n # Xy[i,:] = X[i,:] * y[i]\n+print(y)\n+print(y.reshape(-1,1))\n Xy = X * y.reshape((-1,1))\n \n # X.shape = (15,3), Xy.shape = (15, 3), y.shape = (15,)\n # print (X.shape, Xy.shape, y.shape)\n"
+                },
+                {
+                    "date": 1668266826070,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n stepsize = 0.1\n \n # Xy[i,:] = X[i,:] * y[i]\n print(y)\n-print(y.reshape(-1,1))\n+print(y.reshape((-1,1)))\n Xy = X * y.reshape((-1,1))\n \n # X.shape = (15,3), Xy.shape = (15, 3), y.shape = (15,)\n # print (X.shape, Xy.shape, y.shape)\n"
+                },
+                {
+                    "date": 1668266878982,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,10 +29,8 @@\n w0=np.array([1,1,1])\n stepsize = 0.1\n \n # Xy[i,:] = X[i,:] * y[i]\n-print(y)\n-print(y.reshape((-1,1)))\n Xy = X * y.reshape((-1,1))\n \n # X.shape = (15,3), Xy.shape = (15, 3), y.shape = (15,)\n # print (X.shape, Xy.shape, y.shape)\n"
+                },
+                {
+                    "date": 1668266916359,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n # append a constant 1 to each feature vector, so X is now a m x 3 matrix\n X = np.append(X, np.ones((15,1)), axis=1)\n \n w0=np.array([1,1,1])\n-stepsize = 0.1\n+stepsize = 0.001\n \n # Xy[i,:] = X[i,:] * y[i]\n Xy = X * y.reshape((-1,1))\n \n@@ -46,8 +46,9 @@\n \treturn -res\n \n # minimize f by gradient descent\n w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 1000000)\n+print()\n \n # compute the accuracy on the training set\n w = w_traces[-1]\n y_hat = 2*(X@w > 0)-1\n"
+                },
+                {
+                    "date": 1668266924185,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -46,9 +46,9 @@\n \treturn -res\n \n # minimize f by gradient descent\n w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 1000000)\n-print()\n+print(f'stepsize={stepsize}, number of iterations={len(w_traces)-1}'))\n \n # compute the accuracy on the training set\n w = w_traces[-1]\n y_hat = 2*(X@w > 0)-1\n"
+                },
+                {
+                    "date": 1668266935760,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n # append a constant 1 to each feature vector, so X is now a m x 3 matrix\n X = np.append(X, np.ones((15,1)), axis=1)\n \n w0=np.array([1,1,1])\n-stepsize = 0.001\n+stepsize = 0.01\n \n # Xy[i,:] = X[i,:] * y[i]\n Xy = X * y.reshape((-1,1))\n \n@@ -46,9 +46,9 @@\n \treturn -res\n \n # minimize f by gradient descent\n w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 1000000)\n-print(f'stepsize={stepsize}, number of iterations={len(w_traces)-1}'))\n+print(f'stepsize={stepsize}, number of iterations={len(w_traces)-1}')\n \n # compute the accuracy on the training set\n w = w_traces[-1]\n y_hat = 2*(X@w > 0)-1\n"
+                },
+                {
+                    "date": 1668266954805,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n \t\tres += (1-sigmoid(y[i]*(np.array(X[i]).transpose())@w))*y[i]*X[i]\n \treturn -res\n \n # minimize f by gradient descent\n-w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 1000000)\n+w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 100)\n print(f'stepsize={stepsize}, number of iterations={len(w_traces)-1}')\n \n # compute the accuracy on the training set\n w = w_traces[-1]\n"
+                },
+                {
+                    "date": 1668266966357,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n \t\tres += (1-sigmoid(y[i]*(np.array(X[i]).transpose())@w))*y[i]*X[i]\n \treturn -res\n \n # minimize f by gradient descent\n-w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 100)\n+w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 1000)\n print(f'stepsize={stepsize}, number of iterations={len(w_traces)-1}')\n \n # compute the accuracy on the training set\n w = w_traces[-1]\n"
+                },
+                {
+                    "date": 1668266976825,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,9 +26,9 @@\n # append a constant 1 to each feature vector, so X is now a m x 3 matrix\n X = np.append(X, np.ones((15,1)), axis=1)\n \n w0=np.array([1,1,1])\n-stepsize = 0.01\n+stepsize = 0.1\n \n # Xy[i,:] = X[i,:] * y[i]\n Xy = X * y.reshape((-1,1))\n \n"
+                },
+                {
+                    "date": 1668266994409,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,9 +45,9 @@\n \t\tres += (1-sigmoid(y[i]*(np.array(X[i]).transpose())@w))*y[i]*X[i]\n \treturn -res\n \n # minimize f by gradient descent\n-w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 1000)\n+w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 10000)\n print(f'stepsize={stepsize}, number of iterations={len(w_traces)-1}')\n \n # compute the accuracy on the training set\n w = w_traces[-1]\n"
+                },
+                {
+                    "date": 1668267066655,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -70,5 +70,5 @@\n plt.xlabel('x1')\n plt.ylabel('x2')\n \n plt.tight_layout()\n-plt.savefig('./figures/p3.pdf')\n+plt.savefig('./figures/p3.png')\n"
+                },
+                {
+                    "date": 1668267257612,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n \n # minimize f by gradient descent\n w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 10000)\n print(f'stepsize={stepsize}, number of iterations={len(w_traces)-1}')\n-\n+print('the w found:{}'.format(w[-1]))\n # compute the accuracy on the training set\n w = w_traces[-1]\n y_hat = 2*(X@w > 0)-1\n \n"
+                },
+                {
+                    "date": 1668267272056,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -47,9 +47,9 @@\n \n # minimize f by gradient descent\n w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize, maxiter = 10000)\n print(f'stepsize={stepsize}, number of iterations={len(w_traces)-1}')\n-print('the w found:{}'.format(w[-1]))\n+print('the w found:{}'.format(w_traces[-1]))\n # compute the accuracy on the training set\n w = w_traces[-1]\n y_hat = 2*(X@w > 0)-1\n \n"
+                }
+            ],
+            "date": 1668265780348,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport gd\nimport utils\nimport matplotlib.pyplot as plt\n\n\n# X: m x 2 matrix, X[i,:] is the 2D feature vector of the i-th sample\nX = np.array([[3,1.5], \n\t\t\t  [3.2, 2.5], \n\t\t\t  [3,3.5], \n\t\t\t  [2,2.25], \n\t\t\t  [3.8, 3], \n\t\t\t  [1.5,4], \n\t\t\t  [1,1.9], \n\t          [4.5, .5], \n\t          [3.5, .8], \n\t          [3.8, .3], \n\t          [4.2, .3], \n\t          [1, .8], \n\t          [3.8, 1], \n\t          [4,2], \n\t          [5.8,1.8]])\n# y: m-D vector, y[i] is the label of the i-th sample\ny = np.append(np.ones((7,)), -np.ones((8,)))\n\n# append a constant 1 to each feature vector, so X is now a m x 3 matrix\nX = np.append(X, np.ones((15,1)), axis=1)\n\n# Xy[i,:] = X[i,:] * y[i]\nXy = X * y.reshape((-1,1))\n\n# X.shape = (15,3), Xy.shape = (15, 3), y.shape = (15,)\nprint (X.shape, Xy.shape, y.shape)\n\n# sigmoid function\ndef sigmoid(z):\n\treturn 1 / (1 + np.exp(-z))\n\ndef fp(w):\n\t#   START OF YOUR CODE\n\tpass\n\t#   END OF YOUR CODE\n\n# minimize f by gradient descent\n#   START OF YOUR CODE\npass\n#   END OF YOUR CODE\n\n# compute the accuracy on the training set\nw = w_traces[-1]\ny_hat = 2*(X@w > 0)-1\n\naccuracy = sum(y_hat == y) / float(len(y))\nprint(f\"accuracy = {accuracy}\")\n\n# visualization\nplt.figure(figsize=(4, 4))\n\nplt.scatter(*zip(*X[y>0, 0:2]), c='r', marker='x')\nplt.scatter(*zip(*X[y<0, 0:2]), c='g', marker='o')\n\n# plot the decision boundary w[0] * x1 + w[1] * x2 + w[0] = 0\nx1 = np.array([min(X[:, 0]), max(X[:, 0])])\nx2 = -(w[0] * x1 + w[2]) / w[1]\nplt.plot(x1, x2, 'b-')\n\nplt.xlabel('x1')\nplt.ylabel('x2')\n\nplt.tight_layout()\nplt.savefig('../figures/p3.pdf')\n"
+        }
+    ]
+}

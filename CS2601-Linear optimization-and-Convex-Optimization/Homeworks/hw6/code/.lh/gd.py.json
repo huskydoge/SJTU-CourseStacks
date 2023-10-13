@@ -1,0 +1,82 @@
+{
+    "sourceFile": "gd.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 16,
+            "patches": [
+                {
+                    "date": 1668259037450,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1668259049576,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \t\n \tx_traces = [np.array(x0)]\n \tx = np.array(x0)\n \t#   START OF YOUR CODE\n-\t\n+\twhile\n \tpass\n \t#\tEND OF YOUR CODE\n \n \treturn x_traces \n"
+                },
+                {
+                    "date": 1668259075126,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \t\n \tx_traces = [np.array(x0)]\n \tx = np.array(x0)\n \t#   START OF YOUR CODE\n-\twhile\n+\twhile(flag):\n \tpass\n \t#\tEND OF YOUR CODE\n \n \treturn x_traces \n"
+                },
+                {
+                    "date": 1668259084675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,8 +15,9 @@\n \t\n \tx_traces = [np.array(x0)]\n \tx = np.array(x0)\n \t#   START OF YOUR CODE\n+\tflag = True\n \twhile(flag):\n \tpass\n \t#\tEND OF YOUR CODE\n \n"
+                },
+                {
+                    "date": 1668259188917,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,11 @@\n \tx = np.array(x0)\n \t#   START OF YOUR CODE\n \tflag = True\n \twhile(flag):\n-\tpass\n+\t\tif(fp(x) < tol):\n+\t\t\tbreak;\n+\t\tx = x - fp(x) * stepsize\n+\t\tx_traces.append(np.array(x))\n \t#\tEND OF YOUR CODE\n \n \treturn x_traces \n"
+                },
+                {
+                    "date": 1668259224542,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,10 @@\n \tx = np.array(x0)\n \t#   START OF YOUR CODE\n \tflag = True\n \twhile(flag):\n-\t\tif(fp(x) < tol):\n-\t\t\tbreak;\n+\t\tif(maxiter == 0 or fp(x) < tol):\n+\t\t\tbreak\n \t\tx = x - fp(x) * stepsize\n \t\tx_traces.append(np.array(x))\n \t#\tEND OF YOUR CODE\n \n"
+                },
+                {
+                    "date": 1668259229840,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,7 +21,8 @@\n \t\tif(maxiter == 0 or fp(x) < tol):\n \t\t\tbreak\n \t\tx = x - fp(x) * stepsize\n \t\tx_traces.append(np.array(x))\n+\t\tmaxiter -= 1\n \t#\tEND OF YOUR CODE\n \n \treturn x_traces \n"
+                },
+                {
+                    "date": 1668259241651,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,14 +15,12 @@\n \t\n \tx_traces = [np.array(x0)]\n \tx = np.array(x0)\n \t#   START OF YOUR CODE\n-\tflag = True\n-\twhile(flag):\n+\twhile(True):\n \t\tif(maxiter == 0 or fp(x) < tol):\n \t\t\tbreak\n \t\tx = x - fp(x) * stepsize\n \t\tx_traces.append(np.array(x))\n \t\tmaxiter -= 1\n \t#\tEND OF YOUR CODE\n-\n \treturn x_traces \n"
+                },
+                {
+                    "date": 1668259327230,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,7 @@\n import numpy as np\n \n+\n def gd_const_ss(fp, x0, stepsize, tol=1e-5, maxiter=100000):\n \t\"\"\"\n \tfp: function that takes an input x and returns the derivative of f at x\n \tx0: initial point in gradient descent\n@@ -23,4 +24,11 @@\n \t\tx_traces.append(np.array(x))\n \t\tmaxiter -= 1\n \t#\tEND OF YOUR CODE\n \treturn x_traces \n+\n+def norm2(x):\n+\tsum = 0;\n+\tfor i in x:\n+\t\tsum += x**2\n+\n+\treturn sum*(0.5)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668259343589,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,5 +30,10 @@\n \tsum = 0;\n \tfor i in x:\n \t\tsum += x**2\n \n-\treturn sum*(0.5)\n\\ No newline at end of file\n+\treturn sum*(0.5)\n+\n+\n+x = np.array(1,1)\n+\n+print(norm2(x))\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668259355665,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,7 +33,7 @@\n \n \treturn sum*(0.5)\n \n \n-x = np.array(1,1)\n+x = np.array([1,1])\n \n print(norm2(x))\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668259367520,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,9 +28,9 @@\n \n def norm2(x):\n \tsum = 0;\n \tfor i in x:\n-\t\tsum += x**2\n+\t\tsum += i**2\n \n \treturn sum*(0.5)\n \n \n"
+                },
+                {
+                    "date": 1668259380013,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -30,9 +30,9 @@\n \tsum = 0;\n \tfor i in x:\n \t\tsum += i**2\n \n-\treturn sum*(0.5)\n+\treturn sum**(0.5)\n \n \n x = np.array([1,1])\n \n"
+                },
+                {
+                    "date": 1668259388193,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,8 +32,4 @@\n \t\tsum += i**2\n \n \treturn sum**(0.5)\n \n-\n-x = np.array([1,1])\n-\n-print(norm2(x))\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668259403323,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \tx_traces = [np.array(x0)]\n \tx = np.array(x0)\n \t#   START OF YOUR CODE\n \twhile(True):\n-\t\tif(maxiter == 0 or fp(x) < tol):\n+\t\tif(maxiter == 0 or norm2(fp(x)) < tol):\n \t\t\tbreak\n \t\tx = x - fp(x) * stepsize\n \t\tx_traces.append(np.array(x))\n \t\tmaxiter -= 1\n"
+                },
+                {
+                    "date": 1668264148441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,19 +17,13 @@\n \tx_traces = [np.array(x0)]\n \tx = np.array(x0)\n \t#   START OF YOUR CODE\n \twhile(True):\n-\t\tif(maxiter == 0 or norm2(fp(x)) < tol):\n+\t\tif(maxiter == 0 or np.norm(fp(x)) < tol):\n \t\t\tbreak\n \t\tx = x - fp(x) * stepsize\n \t\tx_traces.append(np.array(x))\n \t\tmaxiter -= 1\n \t#\tEND OF YOUR CODE\n \treturn x_traces \n \n-def norm2(x):\n-\tsum = 0;\n-\tfor i in x:\n-\t\tsum += i**2\n \n-\treturn sum**(0.5)\n-\n"
+                },
+                {
+                    "date": 1668264157570,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \tx_traces = [np.array(x0)]\n \tx = np.array(x0)\n \t#   START OF YOUR CODE\n \twhile(True):\n-\t\tif(maxiter == 0 or np.norm(fp(x)) < tol):\n+\t\tif(maxiter == 0 or np.linalg.norm(fp(x)) < tol):\n \t\t\tbreak\n \t\tx = x - fp(x) * stepsize\n \t\tx_traces.append(np.array(x))\n \t\tmaxiter -= 1\n"
+                }
+            ],
+            "date": 1668259037450,
+            "name": "Commit-0",
+            "content": "import numpy as np\n\ndef gd_const_ss(fp, x0, stepsize, tol=1e-5, maxiter=100000):\n\t\"\"\"\n\tfp: function that takes an input x and returns the derivative of f at x\n\tx0: initial point in gradient descent\n\tstepsize: constant step size used in gradient descent\n\ttol: toleracne parameter in the stopping crieterion. Gradient descent stops \n\t     when the 2-norm of the gradient is smaller than tol\n\tmaxiter: maximum number of iterations in gradient descent.\n\n\tThis function should return a list of the sequence of approximate solutions\n\tx_k produced by each iteration\n\t\"\"\"\n\t\n\tx_traces = [np.array(x0)]\n\tx = np.array(x0)\n\t#   START OF YOUR CODE\n\t\n\tpass\n\t#\tEND OF YOUR CODE\n\n\treturn x_traces \n"
+        }
+    ]
+}

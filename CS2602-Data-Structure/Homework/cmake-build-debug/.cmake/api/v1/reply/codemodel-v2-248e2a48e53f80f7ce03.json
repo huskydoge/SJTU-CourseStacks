@@ -1,0 +1,249 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.23"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Homework",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Homework::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Homework-Debug-96c45fc71f7ebfebed1f.json",
+					"name" : "Homework",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "HuffmanTree::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-HuffmanTree-Debug-6fa2eb7038e45dcc5beb.json",
+					"name" : "HuffmanTree",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "NOSTDLibrary::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-NOSTDLibrary-Debug-5f63ec9bf5d2b0a597d8.json",
+					"name" : "NOSTDLibrary",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Ruko::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Ruko-Debug-61674173c97134d37ad3.json",
+					"name" : "Ruko",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "det::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-det-Debug-e35e61ee440b01c49f6d.json",
+					"name" : "det",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "huffman::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-huffman-Debug-4f168189ba8e1691909c.json",
+					"name" : "huffman",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "linklist::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-linklist-Debug-cb9cd3088f401675a099.json",
+					"name" : "linklist",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "loopQueue::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-loopQueue-Debug-922632ed7720bce076d2.json",
+					"name" : "loopQueue",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "main::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-main-Debug-0e29ac988807110f62d5.json",
+					"name" : "main",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "maxFraction::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-maxFraction-Debug-83e6f84ec8b3e7890f01.json",
+					"name" : "maxFraction",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "maxFraction_FareySequences::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-maxFraction_FareySequences-Debug-f7d9a143190876de8c34.json",
+					"name" : "maxFraction_FareySequences",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "mcdonalds::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-mcdonalds-Debug-0499566eb8d992d608a6.json",
+					"name" : "mcdonalds",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "pre::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-pre-Debug-471e68eca5987b1fa1eb.json",
+					"name" : "pre",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "rear::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-rear-Debug-b921e6d893272e4b0826.json",
+					"name" : "rear",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "ring::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-ring-Debug-acf953c914a3d975eeb6.json",
+					"name" : "ring",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "sort::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-sort-Debug-a525e71dff15bc85f85e.json",
+					"name" : "sort",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "stack::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-stack-Debug-e3c212267fb69d687f24.json",
+					"name" : "stack",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "stackwb::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-stackwb-Debug-88d85d1587060951d8f3.json",
+					"name" : "stackwb",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "staticSearchList::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-staticSearchList-Debug-f68cabafbbed30234741.json",
+					"name" : "staticSearchList",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "stones::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-stones-Debug-827381853b13f6b34f85.json",
+					"name" : "stones",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "string::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-string-Debug-d5ce5d4abe5f1621c58c.json",
+					"name" : "string",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "stringHash::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-stringHash-Debug-05d0787fa2f2a2838e5b.json",
+					"name" : "stringHash",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/husky/\u5927\u4e8c\u4e0a/\u6570\u636e\u7ed3\u6784/Homework/cmake-build-debug",
+		"source" : "/Users/husky/\u5927\u4e8c\u4e0a/\u6570\u636e\u7ed3\u6784/Homework"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

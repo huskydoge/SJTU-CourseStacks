@@ -1,0 +1,90 @@
+{
+    "sourceFile": "P3.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 18,
+            "patches": [
+                {
+                    "date": 1670762139101,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1670762275081,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,10 @@\n \treturn X.T@(X@w - y)\r\n \r\n # Implement the projection operator proj onto the l1 ball ||x||_1 <= t\r\n #   START OF YOUR CODE\r\n-def proj(x):\r\n-\t\r\n+def proj(y):\r\n+\r\n #   END OF YOUR CODE\r\n \r\n \r\n w0 = np.array([-1,0.5])\r\n"
+                },
+                {
+                    "date": 1670762396947,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,8 +17,9 @@\n \r\n # Implement the projection operator proj onto the l1 ball ||x||_1 <= t\r\n #   START OF YOUR CODE\r\n def proj(y):\r\n+\t\r\n \r\n #   END OF YOUR CODE\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1670762403913,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \r\n # Implement the projection operator proj onto the l1 ball ||x||_1 <= t\r\n #   START OF YOUR CODE\r\n def proj(y):\r\n-\t\r\n+\tif(np.form)\r\n \r\n #   END OF YOUR CODE\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1670762689830,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,12 @@\n \r\n # Implement the projection operator proj onto the l1 ball ||x||_1 <= t\r\n #   START OF YOUR CODE\r\n def proj(y):\r\n-\tif(np.form)\r\n+\tif( np.norm(y, ord = 1) <= t):\r\n+\t\treturn y\r\n+\telse:\r\n+\t\ty = sorted(y)\r\n \r\n #   END OF YOUR CODE\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1670762749340,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n def proj(y):\r\n \tif( np.norm(y, ord = 1) <= t):\r\n \t\treturn y\r\n \telse:\r\n-\t\ty = sorted(y)\r\n+\t\ty = sorted(y)[::-1]\r\n \r\n #   END OF YOUR CODE\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1670762788149,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,10 @@\n \tif( np.norm(y, ord = 1) <= t):\r\n \t\treturn y\r\n \telse:\r\n \t\ty = sorted(y)[::-1]\r\n+\t\tfor i in range(1, len(y) + 1):\r\n+\t\t\t\r\n \r\n #   END OF YOUR CODE\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1670762855089,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,11 @@\n \t\treturn y\r\n \telse:\r\n \t\ty = sorted(y)[::-1]\r\n \t\tfor i in range(1, len(y) + 1):\r\n-\t\t\t\r\n+\t\t\tsum = 0\r\n+\t\t\tfor j in range(1, i + 1):\r\n+\t\t\t\tsum += y[j]\r\n \r\n #   END OF YOUR CODE\r\n \r\n \r\n"
+                },
+                {
+                    "date": 1670762873417,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n \telse:\r\n \t\ty = sorted(y)[::-1]\r\n \t\tfor i in range(1, len(y) + 1):\r\n \t\t\tsum = 0\r\n-\t\t\tfor j in range(1, i + 1):\r\n+\t\t\tfor j in range(0, i):\r\n \t\t\t\tsum += y[j]\r\n \r\n #   END OF YOUR CODE\r\n \r\n"
+                },
+                {
+                    "date": 1670762878916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n \tif( np.norm(y, ord = 1) <= t):\r\n \t\treturn y\r\n \telse:\r\n \t\ty = sorted(y)[::-1]\r\n-\t\tfor i in range(1, len(y) + 1):\r\n+\t\tfor i in range(0, len(y)):\r\n \t\t\tsum = 0\r\n \t\t\tfor j in range(0, i):\r\n \t\t\t\tsum += y[j]\r\n \r\n"
+                },
+                {
+                    "date": 1670762910649,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,9 +25,9 @@\n \t\tfor i in range(0, len(y)):\r\n \t\t\tsum = 0\r\n \t\t\tfor j in range(0, i):\r\n \t\t\t\tsum += y[j]\r\n-\r\n+\t\t\tc = (sum - t) / (i + 1)\r\n #   END OF YOUR CODE\r\n \r\n \r\n w0 = np.array([-1,0.5])\r\n"
+                },
+                {
+                    "date": 1670763001312,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,8 +26,10 @@\n \t\t\tsum = 0\r\n \t\t\tfor j in range(0, i):\r\n \t\t\t\tsum += y[j]\r\n \t\t\tc = (sum - t) / (i + 1)\r\n+\t\t\tif(c > y[i]):\r\n+\t\t\t\tbreak\r\n #   END OF YOUR CODE\r\n \r\n \r\n w0 = np.array([-1,0.5])\r\n"
+                },
+                {
+                    "date": 1670763021854,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,8 +28,10 @@\n \t\t\t\tsum += y[j]\r\n \t\t\tc = (sum - t) / (i + 1)\r\n \t\t\tif(c > y[i]):\r\n \t\t\t\tbreak\r\n+\r\n+\t\tu_0 = c\t\r\n #   END OF YOUR CODE\r\n \r\n \r\n w0 = np.array([-1,0.5])\r\n"
+                },
+                {
+                    "date": 1670763130757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,22 +16,30 @@\n \treturn X.T@(X@w - y)\r\n \r\n # Implement the projection operator proj onto the l1 ball ||x||_1 <= t\r\n #   START OF YOUR CODE\r\n+def pos_sign(x):\r\n+\tif(x > 0):\r\n+\t\treturn x\r\n+\telse:\r\n+\t\treturn 0\r\n+\r\n+\t\t\r\n def proj(y):\r\n \tif( np.norm(y, ord = 1) <= t):\r\n \t\treturn y\r\n \telse:\r\n-\t\ty = sorted(y)[::-1]\r\n-\t\tfor i in range(0, len(y)):\r\n+\t\ttmp = sorted(y)[::-1]\r\n+\t\tfor i in range(0, len(tmp)):\r\n \t\t\tsum = 0\r\n \t\t\tfor j in range(0, i):\r\n-\t\t\t\tsum += y[j]\r\n+\t\t\t\tsum += tmp[j]\r\n \t\t\tc = (sum - t) / (i + 1)\r\n-\t\t\tif(c > y[i]):\r\n+\t\t\tif(c > tmp[i]):\r\n \t\t\t\tbreak\r\n \r\n \t\tu_0 = c\t\r\n+\t\tx = [(y[i] - u_0)]\r\n #   END OF YOUR CODE\r\n \r\n \r\n w0 = np.array([-1,0.5])\r\n"
+                },
+                {
+                    "date": 1670763167487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,9 +22,8 @@\n \t\treturn x\r\n \telse:\r\n \t\treturn 0\r\n \r\n-\t\t\r\n def proj(y):\r\n \tif( np.norm(y, ord = 1) <= t):\r\n \t\treturn y\r\n \telse:\r\n@@ -37,9 +36,9 @@\n \t\t\tif(c > tmp[i]):\r\n \t\t\t\tbreak\r\n \r\n \t\tu_0 = c\t\r\n-\t\tx = [(y[i] - u_0)]\r\n+\t\tx = [pos_sign(y[i] - u_0) for i in range(0, len(y))]\r\n #   END OF YOUR CODE\r\n \r\n \r\n w0 = np.array([-1,0.5])\r\n"
+                },
+                {
+                    "date": 1670763184226,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,8 +37,9 @@\n \t\t\t\tbreak\r\n \r\n \t\tu_0 = c\t\r\n \t\tx = [pos_sign(y[i] - u_0) for i in range(0, len(y))]\r\n+\t\treturn np.array(x)\r\n #   END OF YOUR CODE\r\n \r\n \r\n w0 = np.array([-1,0.5])\r\n"
+                },
+                {
+                    "date": 1670763265084,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,9 @@\n \telse:\r\n \t\treturn 0\r\n \r\n def proj(y):\r\n-\tif( np.norm(y, ord = 1) <= t):\r\n+\tif(np.linalg.norm(y, ord = 1) <= t):\r\n \t\treturn y\r\n \telse:\r\n \t\ttmp = sorted(y)[::-1]\r\n \t\tfor i in range(0, len(tmp)):\r\n"
+                },
+                {
+                    "date": 1670763657899,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,8 +66,8 @@\n \r\n def gap(w):\r\n \treturn f(w) - f_value\r\n \r\n-path = '../figures/'\r\n+path = './figures/'\r\n feasible_set = mp.Polygon([(-t,0), (0,t), (t,0), (0,-t)], alpha=0.5, color='y')\r\n utils.plot_traces_2d(f_2d, w_traces, y_traces, feasible_set, path+f'lasso_traces_t{t}.png')\r\n utils.plot(gap, w_traces, path+f'lasso_gap_t{t}.png')\r\n"
+                },
+                {
+                    "date": 1670764091236,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,9 +29,9 @@\n \telse:\r\n \t\ttmp = sorted(y)[::-1]\r\n \t\tfor i in range(0, len(tmp)):\r\n \t\t\tsum = 0\r\n-\t\t\tfor j in range(0, i):\r\n+\t\t\tfor j in range(0, i + 1):\r\n \t\t\t\tsum += tmp[j]\r\n \t\t\tc = (sum - t) / (i + 1)\r\n \t\t\tif(c > tmp[i]):\r\n \t\t\t\tbreak\r\n"
+                }
+            ],
+            "date": 1670762139101,
+            "name": "Commit-0",
+            "content": "import numpy as np\r\nimport proj_gd as gd\r\nimport utils\r\nimport matplotlib.pyplot as plt\r\nimport matplotlib.patches as mp\r\n\r\n\r\nX = np.array([[2,0,1], [0,2,1]]).T\r\ny = np.array([3,1,2])\r\nt = 1\r\n\r\ndef f(w):\r\n\treturn 0.5*np.sum((X@w - y)**2)\r\n\r\ndef fp(w):\r\n\treturn X.T@(X@w - y)\r\n\r\n# Implement the projection operator proj onto the l1 ball ||x||_1 <= t\r\n#   START OF YOUR CODE\r\ndef proj(x):\r\n\t\r\n#   END OF YOUR CODE\r\n\r\n\r\nw0 = np.array([-1,0.5])\r\nstepsize = 0.1\r\n\r\nw_traces, y_traces = gd.proj_gd(fp, proj, w0, stepsize=stepsize, tol=1e-8)\r\n\r\nf_value = f(w_traces[-1])\r\n\r\nprint()\r\nprint('t = ', t)\r\nprint('number of iterations:', len(w_traces)-1)\r\nprint('solution:', w_traces[-1])\r\nprint('value:', f_value)\r\n\r\n### visualization\r\nQ = X.T@X\r\nb = X.T@y\r\nc = y@y\r\n\r\ndef f_2d(w1, w2):\r\n\treturn 0.5 * Q[0,0] * w1**2 + 0.5 * Q[1,1] * w2**2 + Q[0,1] * w1 * w2 \\\r\n\t       - b[0] * w1 - b[1] * w2 - 0.5 * c\r\n\r\ndef gap(w):\r\n\treturn f(w) - f_value\r\n\r\npath = '../figures/'\r\nfeasible_set = mp.Polygon([(-t,0), (0,t), (t,0), (0,-t)], alpha=0.5, color='y')\r\nutils.plot_traces_2d(f_2d, w_traces, y_traces, feasible_set, path+f'lasso_traces_t{t}.png')\r\nutils.plot(gap, w_traces, path+f'lasso_gap_t{t}.png')\r\n"
+        }
+    ]
+}

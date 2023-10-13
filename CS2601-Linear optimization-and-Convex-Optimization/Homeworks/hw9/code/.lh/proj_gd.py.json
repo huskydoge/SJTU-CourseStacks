@@ -1,0 +1,54 @@
+{
+    "sourceFile": "proj_gd.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1670761255165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1670761682416,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n \tx = np.array(x0)\n \n \tfor k in range(maxiter):\n \t#   START OF YOUR CODE\n-\t\tp\n+\t\ty = proj(x - stepsize * np.transpose(fp(x)))\n \t#\tEND OF YOUR CODE\n \n \t\ty_traces.append(y) # y is output of gradient step before projection\n \t\tx_traces.append(np.array(x)) # x is output of projected gradient step\n"
+                },
+                {
+                    "date": 1670761701690,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,10 @@\n \tx = np.array(x0)\n \n \tfor k in range(maxiter):\n \t#   START OF YOUR CODE\n-\t\ty = proj(x - stepsize * np.transpose(fp(x)))\n+\t\ty = x - stepsize * np.transpose(fp(x))\n+\t\tx = proj(y)\n \t#\tEND OF YOUR CODE\n \n \t\ty_traces.append(y) # y is output of gradient step before projection\n \t\tx_traces.append(np.array(x)) # x is output of projected gradient step\n"
+                },
+                {
+                    "date": 1670761739706,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,9 +23,8 @@\n \t#   START OF YOUR CODE\n \t\ty = x - stepsize * np.transpose(fp(x))\n \t\tx = proj(y)\n \t#\tEND OF YOUR CODE\n-\n \t\ty_traces.append(y) # y is output of gradient step before projection\n \t\tx_traces.append(np.array(x)) # x is output of projected gradient step\n \n \treturn x_traces, y_traces\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1670762100477,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n \tx = np.array(x0)\n \n \tfor k in range(maxiter):\n \t#   START OF YOUR CODE\n-\t\ty = x - stepsize * np.transpose(fp(x))\n+\t\ty = x - stepsize * (fp(x))\n \t\tx = proj(y)\n \t#\tEND OF YOUR CODE\n \t\ty_traces.append(y) # y is output of gradient step before projection\n \t\tx_traces.append(np.array(x)) # x is output of projected gradient step\n"
+                },
+                {
+                    "date": 1670762106518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n def proj_gd(fp, proj, x0, stepsize, tol=1e-5, maxiter=100000):\n \t\"\"\"\n \tprojected gradient descent for minimizing f(x) over X\n \n-\tfp: function that takes an input x and returns the derivative of f at x\n+\tfp: function that takes an input x and returns the derivative of f at x ?\n \tproj: projection operator takes x as input and outputs its projection onto X \n \tx0: initial point\n \tstepsize: constant step size used in gradient descent\n \ttol: toleracne parameter in the stopping crieterion. \n@@ -20,9 +20,9 @@\n \tx = np.array(x0)\n \n \tfor k in range(maxiter):\n \t#   START OF YOUR CODE\n-\t\ty = x - stepsize * (fp(x))\n+\t\ty = x - stepsize * (fp(x)) \n \t\tx = proj(y)\n \t#\tEND OF YOUR CODE\n \t\ty_traces.append(y) # y is output of gradient step before projection\n \t\tx_traces.append(np.array(x)) # x is output of projected gradient step\n"
+                },
+                {
+                    "date": 1670763631221,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,11 +20,13 @@\n \tx = np.array(x0)\n \n \tfor k in range(maxiter):\n \t#   START OF YOUR CODE\n+\t\tstore = x\n \t\ty = x - stepsize * (fp(x)) \n \t\tx = proj(y)\n \t#\tEND OF YOUR CODE\n \t\ty_traces.append(y) # y is output of gradient step before projection\n \t\tx_traces.append(np.array(x)) # x is output of projected gradient step\n-\n+\t\tif(np.linalg.norm(x - store, order = 2) < stepsize * tol):\n+\t\t\tbreak;\n \treturn x_traces, y_traces\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1670763681319,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,7 +26,7 @@\n \t\tx = proj(y)\n \t#\tEND OF YOUR CODE\n \t\ty_traces.append(y) # y is output of gradient step before projection\n \t\tx_traces.append(np.array(x)) # x is output of projected gradient step\n-\t\tif(np.linalg.norm(x - store, order = 2) < stepsize * tol):\n+\t\tif(np.linalg.norm(x - store, ord = 2) < stepsize * tol):\n \t\t\tbreak;\n \treturn x_traces, y_traces\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1670763745451,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n \n \tfor k in range(maxiter):\n \t#   START OF YOUR CODE\n \t\tstore = x\n-\t\ty = x - stepsize * (fp(x)) \n+\t\ty = x - stepsize * (np.transpose(fp(x)))\n \t\tx = proj(y)\n \t#\tEND OF YOUR CODE\n \t\ty_traces.append(y) # y is output of gradient step before projection\n \t\tx_traces.append(np.array(x)) # x is output of projected gradient step\n"
+                },
+                {
+                    "date": 1670763769326,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n \n \tfor k in range(maxiter):\n \t#   START OF YOUR CODE\n \t\tstore = x\n-\t\ty = x - stepsize * (np.transpose(fp(x)))\n+\t\ty = x - stepsize * (fp(x)) \n \t\tx = proj(y)\n \t#\tEND OF YOUR CODE\n \t\ty_traces.append(y) # y is output of gradient step before projection\n \t\tx_traces.append(np.array(x)) # x is output of projected gradient step\n"
+                }
+            ],
+            "date": 1670761255165,
+            "name": "Commit-0",
+            "content": "import numpy as np\n\ndef proj_gd(fp, proj, x0, stepsize, tol=1e-5, maxiter=100000):\n\t\"\"\"\n\tprojected gradient descent for minimizing f(x) over X\n\n\tfp: function that takes an input x and returns the derivative of f at x\n\tproj: projection operator takes x as input and outputs its projection onto X \n\tx0: initial point\n\tstepsize: constant step size used in gradient descent\n\ttol: toleracne parameter in the stopping crieterion. \n\t     Projected gradient descent stops when ||x_{k+1} - x_k|| < t * tol\n\tmaxiter: maximum number of iterations in gradient descent.\n\n\tThis function should return the sequence of approximate solutions x_k \n\tproduced by each iteration, and also the sequence y_k before projection\n\t\"\"\"\n\tx_traces = [np.array(x0)]\n\ty_traces = []\n\tx = np.array(x0)\n\n\tfor k in range(maxiter):\n\t#   START OF YOUR CODE\n\t\tp\n\t#\tEND OF YOUR CODE\n\n\t\ty_traces.append(y) # y is output of gradient step before projection\n\t\tx_traces.append(np.array(x)) # x is output of projected gradient step\n\n\treturn x_traces, y_traces"
+        }
+    ]
+}

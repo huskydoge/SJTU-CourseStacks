@@ -1,0 +1,218 @@
+{
+    "sourceFile": "p1.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 50,
+            "patches": [
+                {
+                    "date": 1669211595552,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1669211934064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,10 +41,12 @@\n \treturn -np.sum(np.log(sigmoid(Xy@w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n+\tres = np.array()\n+\tfor i in range(len(X)):\n+\t\t\n \t\n-\t\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n"
+                },
+                {
+                    "date": 1669212011892,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -37,15 +37,15 @@\n \ts = sigmoid(z)\n \treturn s * (1 - s)\n \n def f(w):\n-\treturn -np.sum(np.log(sigmoid(Xy@w)))\n+\treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n \tres = np.array()\n \tfor i in range(len(X)):\n-\t\t\n+\t\tres += (1 - sigmoid(y[i] * np.transpose(x[i]) @ w))\n \t\n \t#   END OF YOUR CODE\n \n def fpp(w):\n"
+                },
+                {
+                    "date": 1669212311513,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -43,9 +43,9 @@\n def fp(w):\n \t#   START OF YOUR CODE\n \tres = np.array()\n \tfor i in range(len(X)):\n-\t\tres += (1 - sigmoid(y[i] * np.transpose(x[i]) @ w))\n+\t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \t#   END OF YOUR CODE\n \n def fpp(w):\n"
+                },
+                {
+                    "date": 1669212316616,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,8 +45,9 @@\n \tres = np.array()\n \tfor i in range(len(X)):\n \t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n+\treturn res\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n"
+                },
+                {
+                    "date": 1669212325286,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,10 @@\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tpass\n+\t\n+\n \t#   END OF YOUR CODE\n \n def f_2d(w1,w2):\n \tres = 0\n"
+                },
+                {
+                    "date": 1669212397344,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -45,15 +45,17 @@\n \tres = np.array()\n \tfor i in range(len(X)):\n \t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n-\treturn res\n+\treturn - res\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\t\n-\n+\tres = np.array()\n+\tfor i in range(len(X)):\n+\t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) @ X[i] @ np.transpose(X[i])\n+\treturn res\n \t#   END OF YOUR CODE\n \n def f_2d(w1,w2):\n \tres = 0\n"
+                },
+                {
+                    "date": 1669213837441,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,18 +41,18 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tres = np.array()\n+\tres = 0\n \tfor i in range(len(X)):\n \t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tres = np.array()\n+\tres = 0\n \tfor i in range(len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) @ X[i] @ np.transpose(X[i])\n \treturn res\n \t#   END OF YOUR CODE\n"
+                },
+                {
+                    "date": 1669213891233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,18 +41,18 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tres = 0\n+\tres = np.zeros(1,2)\n \tfor i in range(len(X)):\n \t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tres = 0\n+\tres = np.zeros(1,2)\n \tfor i in range(len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) @ X[i] @ np.transpose(X[i])\n \treturn res\n \t#   END OF YOUR CODE\n"
+                },
+                {
+                    "date": 1669213903205,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,18 +41,18 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tres = np.zeros(1,2)\n+\tres = np.zeros(2)\n \tfor i in range(len(X)):\n \t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tres = np.zeros(1,2)\n+\tres = np.zeros(2)\n \tfor i in range(len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) @ X[i] @ np.transpose(X[i])\n \treturn res\n \t#   END OF YOUR CODE\n"
+                },
+                {
+                    "date": 1669213921400,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,18 +41,18 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tres = np.zeros(2)\n+\tres = np.zeros((1,2))\n \tfor i in range(len(X)):\n \t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tres = np.zeros(2)\n+\tres = np.zeros((1,2))\n \tfor i in range(len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) @ X[i] @ np.transpose(X[i])\n \treturn res\n \t#   END OF YOUR CODE\n"
+                },
+                {
+                    "date": 1669213951487,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,18 +41,18 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tres = np.zeros((1,2))\n+\tres = np.zeros((2,1))\n \tfor i in range(len(X)):\n \t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tres = np.zeros((1,2))\n+\tres = np.zeros((2,1))\n \tfor i in range(len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) @ X[i] @ np.transpose(X[i])\n \treturn res\n \t#   END OF YOUR CODE\n"
+                },
+                {
+                    "date": 1669214005497,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,10 +50,10 @@\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tres = np.zeros((2,1))\n-\tfor i in range(len(X)):\n+\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) @ X[0] @ np.transpose(X[0])\n+\tfor i in range(1, len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) @ X[i] @ np.transpose(X[i])\n \treturn res\n \t#   END OF YOUR CODE\n \n"
+                },
+                {
+                    "date": 1669214046031,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,10 +41,10 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tres = np.zeros((2,1))\n-\tfor i in range(len(X)):\n+\tres = (1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]\n+\tfor i in range(1, len(X)):\n \t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n \t#   END OF YOUR CODE\n"
+                },
+                {
+                    "date": 1669214146001,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,8 +21,9 @@\n \t          [4,2], \n \t          [1.8,1.8]])\n # y: m-D vector, y[i] is the label of the i-th sample\n y = np.append(np.ones((7,)), -np.ones((8,)))\n+print(y)\n \n # Xy[i,:] = X[i,:] * y[i]\n Xy = X * y.reshape((-1,1))\n \n"
+                },
+                {
+                    "date": 1669214176028,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,8 @@\n \t          [4,2], \n \t          [1.8,1.8]])\n # y: m-D vector, y[i] is the label of the i-th sample\n y = np.append(np.ones((7,)), -np.ones((8,)))\n-print(y)\n \n # Xy[i,:] = X[i,:] * y[i]\n Xy = X * y.reshape((-1,1))\n \n@@ -44,9 +43,9 @@\n def fp(w):\n \t#   START OF YOUR CODE\n \tres = (1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]\n \tfor i in range(1, len(X)):\n-\t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n+\t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n \t#   END OF YOUR CODE\n \n"
+                },
+                {
+                    "date": 1669214251153,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tres = (1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]\n+\tprint(1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]\n \tfor i in range(1, len(X)):\n \t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n"
+                },
+                {
+                    "date": 1669214264049,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tprint(1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]\n+\tprint((1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n \tfor i in range(1, len(X)):\n \t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n"
+                },
+                {
+                    "date": 1669214301781,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tprint((1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n+\tprint(((1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n \tfor i in range(1, len(X)):\n \t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n"
+                },
+                {
+                    "date": 1669214345557,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tprint(((1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n+\tprint(((1 - sigmoid(y[0] @ np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n \tfor i in range(1, len(X)):\n \t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n"
+                },
+                {
+                    "date": 1669214384305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,8 +41,9 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n+\tprint(y[0] @ np.transpose(X[0]) @ w)\n \tprint(((1 - sigmoid(y[0] @ np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n \tfor i in range(1, len(X)):\n \t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n"
+                },
+                {
+                    "date": 1669214403677,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tprint(y[0] @ np.transpose(X[0]) @ w)\n+\tprint(y[0] @ np.transpose(X[0]))\n \tprint(((1 - sigmoid(y[0] @ np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n \tfor i in range(1, len(X)):\n \t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n"
+                },
+                {
+                    "date": 1669214413821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tprint(y[0] @ np.transpose(X[0]))\n+\tprint(y[0] * np.transpose(X[0]))\n \tprint(((1 - sigmoid(y[0] @ np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n \tfor i in range(1, len(X)):\n \t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n"
+                },
+                {
+                    "date": 1669214428558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tprint(y[0] * np.transpose(X[0]))\n+\tprint(y[0] @ np.transpose(X[0]))\n \tprint(((1 - sigmoid(y[0] @ np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n \tfor i in range(1, len(X)):\n \t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n"
+                },
+                {
+                    "date": 1669214433788,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tprint(y[0] @ np.transpose(X[0]))\n+\tprint(y[0]@np.transpose(X[0]))\n \tprint(((1 - sigmoid(y[0] @ np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n \tfor i in range(1, len(X)):\n \t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n"
+                },
+                {
+                    "date": 1669214474219,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,9 +41,9 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tprint(y[0]@np.transpose(X[0]))\n+\tprint(y[0] * np.transpose(X[0]))\n \tprint(((1 - sigmoid(y[0] @ np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n \tfor i in range(1, len(X)):\n \t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n"
+                },
+                {
+                    "date": 1669214479596,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -42,9 +42,9 @@\n \n def fp(w):\n \t#   START OF YOUR CODE\n \tprint(y[0] * np.transpose(X[0]))\n-\tprint(((1 - sigmoid(y[0] @ np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n+\tprint(((1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n \tfor i in range(1, len(X)):\n \t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n"
+                },
+                {
+                    "date": 1669214655943,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,12 +41,11 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tprint(y[0] * np.transpose(X[0]))\n-\tprint(((1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]).shape)\n+\tres = (1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]\n \tfor i in range(1, len(X)):\n-\t\tres =  res + (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n+\t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n \t\n \treturn - res\n \t#   END OF YOUR CODE\n \n"
+                },
+                {
+                    "date": 1669214670128,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -41,11 +41,11 @@\n \treturn -np.sum(np.log(sigmoid(Xy @ w)))\n \n def fp(w):\n \t#   START OF YOUR CODE\n-\tres = (1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] @ X[0]\n+\tres = (1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] * X[0]\n \tfor i in range(1, len(X)):\n-\t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] @ X[i]\n+\t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] * X[i]\n \t\n \treturn - res\n \t#   END OF YOUR CODE\n \n"
+                },
+                {
+                    "date": 1669214700833,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,9 @@\n \t#   START OF YOUR CODE\n \tres = (1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] * X[0]\n \tfor i in range(1, len(X)):\n \t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] * X[i]\n-\t\n+\tprint(res)\n \treturn - res\n \t#   END OF YOUR CODE\n \n def fpp(w):\n"
+                },
+                {
+                    "date": 1669214707092,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -44,9 +44,8 @@\n \t#   START OF YOUR CODE\n \tres = (1 - sigmoid(y[0] * np.transpose(X[0]) @ w)) * y[0] * X[0]\n \tfor i in range(1, len(X)):\n \t\tres += (1 - sigmoid(y[i] * np.transpose(X[i]) @ w)) * y[i] * X[i]\n-\tprint(res)\n \treturn - res\n \t#   END OF YOUR CODE\n \n def fpp(w):\n"
+                },
+                {
+                    "date": 1669214718416,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,11 +49,11 @@\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) @ X[0] @ np.transpose(X[0])\n+\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * X[0] @ np.transpose(X[0])\n \tfor i in range(1, len(X)):\n-\t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) @ X[i] @ np.transpose(X[i])\n+\t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * X[i] @ np.transpose(X[i])\n \treturn res\n \t#   END OF YOUR CODE\n \n def f_2d(w1,w2):\n"
+                },
+                {
+                    "date": 1669214902555,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,8 +52,9 @@\n \t#   START OF YOUR CODE\n \tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * X[0] @ np.transpose(X[0])\n \tfor i in range(1, len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * X[i] @ np.transpose(X[i])\n+\tprint(res)\n \treturn res\n \t#   END OF YOUR CODE\n \n def f_2d(w1,w2):\n"
+                },
+                {
+                    "date": 1669214949531,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,11 +49,11 @@\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * X[0] @ np.transpose(X[0])\n+\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * np.transpose(X[0]) @ X[0] \n \tfor i in range(1, len(X)):\n-\t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * X[i] @ np.transpose(X[i])\n+\t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * np.transpose(X[0]) @ X[0] \n \tprint(res)\n \treturn res\n \t#   END OF YOUR CODE\n \n"
+                },
+                {
+                    "date": 1669214984245,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,8 +49,9 @@\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n+\tprint(X[0].shape())\n \tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * np.transpose(X[0]) @ X[0] \n \tfor i in range(1, len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * np.transpose(X[0]) @ X[0] \n \tprint(res)\n"
+                },
+                {
+                    "date": 1669215017853,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,9 @@\n \n def fpp(w):\n \t#   START OF YOUR CODE\n \tprint(X[0].shape())\n-\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * np.transpose(X[0]) @ X[0] \n+\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * np.transpose(np.array(X[0])) @ np.array(X[0])\n \tfor i in range(1, len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * np.transpose(X[0]) @ X[0] \n \tprint(res)\n \treturn res\n"
+                },
+                {
+                    "date": 1669215030389,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,9 +49,9 @@\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tprint(X[0].shape())\n+\tprint(type(X[0]))\n \tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * np.transpose(np.array(X[0])) @ np.array(X[0])\n \tfor i in range(1, len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * np.transpose(X[0]) @ X[0] \n \tprint(res)\n"
+                },
+                {
+                    "date": 1669215055762,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,10 +49,10 @@\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tprint(type(X[0]))\n-\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * np.transpose(np.array(X[0])) @ np.array(X[0])\n+\tprint(X[0].shape)\n+\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * np.transpose(X[0]) @ X[0] \n \tfor i in range(1, len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * np.transpose(X[0]) @ X[0] \n \tprint(res)\n \treturn res\n"
+                },
+                {
+                    "date": 1669215088730,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,12 +49,12 @@\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tprint(X[0].shape)\n-\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * np.transpose(X[0]) @ X[0] \n+\tprint(X[0] @ np.transpose(X[0]))\n+\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * X[0] @ np.transpose(X[0])\n \tfor i in range(1, len(X)):\n-\t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * np.transpose(X[0]) @ X[0] \n+\t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * X[i] @ np.transpose(X[i])\n \tprint(res)\n \treturn res\n \t#   END OF YOUR CODE\n \n"
+                },
+                {
+                    "date": 1669215281602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,11 +50,11 @@\n \n def fpp(w):\n \t#   START OF YOUR CODE\n \tprint(X[0] @ np.transpose(X[0]))\n-\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * X[0] @ np.transpose(X[0])\n+\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * X[0].reshape(-1,1) @ X[0]\n \tfor i in range(1, len(X)):\n-\t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * X[i] @ np.transpose(X[i])\n+\t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * X[i].reshape(-1,1) @ X[i]\n \tprint(res)\n \treturn res\n \t#   END OF YOUR CODE\n \n"
+                },
+                {
+                    "date": 1669215323000,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,10 +49,10 @@\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tprint(X[0] @ np.transpose(X[0]))\n \tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * X[0].reshape(-1,1) @ X[0]\n+\tprint(res)\n \tfor i in range(1, len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * X[i].reshape(-1,1) @ X[i]\n \tprint(res)\n \treturn res\n"
+                },
+                {
+                    "date": 1669215499112,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -49,12 +49,12 @@\n \t#   END OF YOUR CODE\n \n def fpp(w):\n \t#   START OF YOUR CODE\n-\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * X[0].reshape(-1,1) @ X[0]\n+\tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * np.array([X[0]]).T @ np.array([X[0]])\n \tprint(res)\n \tfor i in range(1, len(X)):\n-\t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * X[i].reshape(-1,1) @ X[i]\n+\t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * np.array([X[i]]).T  @ np.array([X[i]])\n \tprint(res)\n \treturn res\n \t#   END OF YOUR CODE\n \n"
+                },
+                {
+                    "date": 1669215513633,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -53,9 +53,8 @@\n \tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * np.array([X[0]]).T @ np.array([X[0]])\n \tprint(res)\n \tfor i in range(1, len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * np.array([X[i]]).T  @ np.array([X[i]])\n-\tprint(res)\n \treturn res\n \t#   END OF YOUR CODE\n \n def f_2d(w1,w2):\n"
+                },
+                {
+                    "date": 1669215525754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -50,9 +50,8 @@\n \n def fpp(w):\n \t#   START OF YOUR CODE\n \tres = sigmoid_p(y[0] * np.transpose(X[0]) @ w) * np.array([X[0]]).T @ np.array([X[0]])\n-\tprint(res)\n \tfor i in range(1, len(X)):\n \t\tres += sigmoid_p(y[i] * np.transpose(X[i]) @ w) * np.array([X[i]]).T  @ np.array([X[i]])\n \treturn res\n \t#   END OF YOUR CODE\n"
+                },
+                {
+                    "date": 1669215600614,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -62,9 +62,9 @@\n \t\tres -= np.log(sigmoid(Xy[i,0]*w1+Xy[i,1]*w2))\n \treturn res\n \n w0 = np.array([-1.5,1.0])\n-path = '../figures/1b/'\n+path = './figures/1b/'\n \n ## Pure\n w_traces = newton.newton(fp, fpp, w0)\n ws = w_traces[-1]\n"
+                },
+                {
+                    "date": 1669216050444,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,9 +61,9 @@\n \tfor i in range(Xy.shape[0]):\n \t\tres -= np.log(sigmoid(Xy[i,0]*w1+Xy[i,1]*w2))\n \treturn res\n \n-w0 = np.array([-1.5,1.0])\n+w0 = np.array([1.0,1.0])\n path = './figures/1b/'\n \n ## Pure\n w_traces = newton.newton(fp, fpp, w0)\n"
+                },
+                {
+                    "date": 1669216171237,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,9 +61,9 @@\n \tfor i in range(Xy.shape[0]):\n \t\tres -= np.log(sigmoid(Xy[i,0]*w1+Xy[i,1]*w2))\n \treturn res\n \n-w0 = np.array([1.0,1.0])\n+w0 = np.array([-1.5,1.0])\n path = './figures/1b/'\n \n ## Pure\n w_traces = newton.newton(fp, fpp, w0)\n"
+                },
+                {
+                    "date": 1669216179559,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,9 +61,9 @@\n \tfor i in range(Xy.shape[0]):\n \t\tres -= np.log(sigmoid(Xy[i,0]*w1+Xy[i,1]*w2))\n \treturn res\n \n-w0 = np.array([-1.5,1.0])\n+w0 = np.array([1.0,1.0])\n path = './figures/1b/'\n \n ## Pure\n w_traces = newton.newton(fp, fpp, w0)\n"
+                },
+                {
+                    "date": 1669216426675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,41 +61,42 @@\n \tfor i in range(Xy.shape[0]):\n \t\tres -= np.log(sigmoid(Xy[i,0]*w1+Xy[i,1]*w2))\n \treturn res\n \n-w0 = np.array([1.0,1.0])\n+w0 = np.array([-1.5,1.0])\n+# w0 = np.array([1.0,1.0])\n path = './figures/1b/'\n \n ## Pure\n-w_traces = newton.newton(fp, fpp, w0)\n+# w_traces = newton.newton(fp, fpp, w0)\n+# ws = w_traces[-1]\n+# fs = f(ws)\n+# def gap(w):\n+# \treturn f(w) - fs\n+# print()\n+# print(\"Newton's method\")\n+# print('  number of iterations in outer loop:', len(w_traces)-1)\n+# print('  solution:', ws)\n+# print('  value:', fs)\n+# utils.plot_traces_2d(f_2d, w_traces, path+'nt_traces.png')\n+# utils.plot(gap, w_traces, path+'nt_gap.png')\n+\n+## Damped\n+w_traces, stepsize_traces, num_iter_inner = newton.damped_newton(f, fp, fpp, w0, alpha=0.1, beta=0.7)\n ws = w_traces[-1]\n fs = f(ws)\n def gap(w):\n \treturn f(w) - fs\n print()\n-print(\"Newton's method\")\n+print(\"Damped Newton's method\")\n print('  number of iterations in outer loop:', len(w_traces)-1)\n+print('  total number of iterations in inner loop:', num_iter_inner)\n print('  solution:', ws)\n print('  value:', fs)\n-utils.plot_traces_2d(f_2d, w_traces, path+'nt_traces.png')\n-utils.plot(gap, w_traces, path+'nt_gap.png')\n-\n-## Damped\n-# w_traces, stepsize_traces, num_iter_inner = newton.damped_newton(f, fp, fpp, w0, alpha=0.1, beta=0.7)\n-# ws = w_traces[-1]\n-# fs = f(ws)\n-# def gap(w):\n-# \treturn f(w) - fs\n-# print()\n-# print(\"Damped Newton's method\")\n-# print('  number of iterations in outer loop:', len(w_traces)-1)\n-# print('  total number of iterations in inner loop:', num_iter_inner)\n-# print('  solution:', ws)\n-# print('  value:', fs)\n-# utils.plot_traces_2d(f_2d, w_traces, path+'dnt_traces.png')\n-# utils.plot(gap, w_traces, path+'dnt_gap.png')\n-# fig = plt.figure(figsize=(3.5,2.5))\n-# plt.plot(stepsize_traces, '-o', color='blue')\n-# plt.xlabel('iteration (k)')\n-# plt.ylabel('stepsize')\n-# plt.tight_layout(pad=0.1)\n-# fig.savefig(path+'dnt_ss.png')\n+utils.plot_traces_2d(f_2d, w_traces, path+'dnt_traces.png')\n+utils.plot(gap, w_traces, path+'dnt_gap.png')\n+fig = plt.figure(figsize=(3.5,2.5))\n+plt.plot(stepsize_traces, '-o', color='blue')\n+plt.xlabel('iteration (k)')\n+plt.ylabel('stepsize')\n+plt.tight_layout(pad=0.1)\n+fig.savefig(path+'dnt_ss.png')\n"
+                },
+                {
+                    "date": 1669216631807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,10 +61,10 @@\n \tfor i in range(Xy.shape[0]):\n \t\tres -= np.log(sigmoid(Xy[i,0]*w1+Xy[i,1]*w2))\n \treturn res\n \n-w0 = np.array([-1.5,1.0])\n-# w0 = np.array([1.0,1.0])\n+# w0 = np.array([-1.5,1.0])\n+w0 = np.array([1.0,1.0])\n path = './figures/1b/'\n \n ## Pure\n # w_traces = newton.newton(fp, fpp, w0)\n"
+                },
+                {
+                    "date": 1669365502457,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -66,37 +66,37 @@\n w0 = np.array([1.0,1.0])\n path = './figures/1b/'\n \n ## Pure\n-# w_traces = newton.newton(fp, fpp, w0)\n+w_traces = newton.newton(fp, fpp, w0)\n+ws = w_traces[-1]\n+fs = f(ws)\n+def gap(w):\n+\treturn f(w) - fs\n+print()\n+print(\"Newton's method\")\n+print('  number of iterations in outer loop:', len(w_traces)-1)\n+print('  solution:', ws)\n+print('  value:', fs)\n+utils.plot_traces_2d(f_2d, w_traces, path+'nt_traces.png')\n+utils.plot(gap, w_traces, path+'nt_gap.png')\n+\n+## Damped\n+# w_traces, stepsize_traces, num_iter_inner = newton.damped_newton(f, fp, fpp, w0, alpha=0.1, beta=0.7)\n # ws = w_traces[-1]\n # fs = f(ws)\n # def gap(w):\n # \treturn f(w) - fs\n # print()\n-# print(\"Newton's method\")\n+# print(\"Damped Newton's method\")\n # print('  number of iterations in outer loop:', len(w_traces)-1)\n+# print('  total number of iterations in inner loop:', num_iter_inner)\n # print('  solution:', ws)\n # print('  value:', fs)\n-# utils.plot_traces_2d(f_2d, w_traces, path+'nt_traces.png')\n-# utils.plot(gap, w_traces, path+'nt_gap.png')\n-\n-## Damped\n-w_traces, stepsize_traces, num_iter_inner = newton.damped_newton(f, fp, fpp, w0, alpha=0.1, beta=0.7)\n-ws = w_traces[-1]\n-fs = f(ws)\n-def gap(w):\n-\treturn f(w) - fs\n-print()\n-print(\"Damped Newton's method\")\n-print('  number of iterations in outer loop:', len(w_traces)-1)\n-print('  total number of iterations in inner loop:', num_iter_inner)\n-print('  solution:', ws)\n-print('  value:', fs)\n-utils.plot_traces_2d(f_2d, w_traces, path+'dnt_traces.png')\n-utils.plot(gap, w_traces, path+'dnt_gap.png')\n-fig = plt.figure(figsize=(3.5,2.5))\n-plt.plot(stepsize_traces, '-o', color='blue')\n-plt.xlabel('iteration (k)')\n-plt.ylabel('stepsize')\n-plt.tight_layout(pad=0.1)\n-fig.savefig(path+'dnt_ss.png')\n+# utils.plot_traces_2d(f_2d, w_traces, path+'dnt_traces.png')\n+# utils.plot(gap, w_traces, path+'dnt_gap.png')\n+# fig = plt.figure(figsize=(3.5,2.5))\n+# plt.plot(stepsize_traces, '-o', color='blue')\n+# plt.xlabel('iteration (k)')\n+# plt.ylabel('stepsize')\n+# plt.tight_layout(pad=0.1)\n+# fig.savefig(path+'dnt_ss.png')\n"
+                }
+            ],
+            "date": 1669211595552,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport newton\nimport utils\nimport matplotlib.pyplot as plt\n\n\n# X: m x 2 matrix, X[i,:] is the 2D feature vector of the i-th sample\nX = np.array([[1,1.5], \n\t\t\t  [1.2, 2.5], \n\t\t\t  [1,3.5], \n\t\t\t  [2,2.25], \n\t\t\t  [1.8, 3], \n\t\t\t  [2.5,4], \n\t\t\t  [3,1.9], \n\t          [1.5, .5], \n\t          [2.5, .8], \n\t          [2.8, .3], \n\t          [3.2, .3], \n\t          [3, .8], \n\t          [3.8, 1], \n\t          [4,2], \n\t          [1.8,1.8]])\n# y: m-D vector, y[i] is the label of the i-th sample\ny = np.append(np.ones((7,)), -np.ones((8,)))\n\n# Xy[i,:] = X[i,:] * y[i]\nXy = X * y.reshape((-1,1))\n\n# X.shape = (15,3), Xy.shape = (15, 3), y.shape = (15,)\nprint (X.shape, Xy.shape, y.shape)\n\n# sigmoid function\ndef sigmoid(z):\n\treturn 1.0 / (1 + np.exp(-z))\n\ndef sigmoid_p(z):\n\ts = sigmoid(z)\n\treturn s * (1 - s)\n\ndef f(w):\n\treturn -np.sum(np.log(sigmoid(Xy@w)))\n\ndef fp(w):\n\t#   START OF YOUR CODE\n\t\n\t\n\t#   END OF YOUR CODE\n\ndef fpp(w):\n\t#   START OF YOUR CODE\n\tpass\n\t#   END OF YOUR CODE\n\ndef f_2d(w1,w2):\n\tres = 0\n\tfor i in range(Xy.shape[0]):\n\t\tres -= np.log(sigmoid(Xy[i,0]*w1+Xy[i,1]*w2))\n\treturn res\n\nw0 = np.array([-1.5,1.0])\npath = '../figures/1b/'\n\n## Pure\nw_traces = newton.newton(fp, fpp, w0)\nws = w_traces[-1]\nfs = f(ws)\ndef gap(w):\n\treturn f(w) - fs\nprint()\nprint(\"Newton's method\")\nprint('  number of iterations in outer loop:', len(w_traces)-1)\nprint('  solution:', ws)\nprint('  value:', fs)\nutils.plot_traces_2d(f_2d, w_traces, path+'nt_traces.png')\nutils.plot(gap, w_traces, path+'nt_gap.png')\n\n## Damped\n# w_traces, stepsize_traces, num_iter_inner = newton.damped_newton(f, fp, fpp, w0, alpha=0.1, beta=0.7)\n# ws = w_traces[-1]\n# fs = f(ws)\n# def gap(w):\n# \treturn f(w) - fs\n# print()\n# print(\"Damped Newton's method\")\n# print('  number of iterations in outer loop:', len(w_traces)-1)\n# print('  total number of iterations in inner loop:', num_iter_inner)\n# print('  solution:', ws)\n# print('  value:', fs)\n# utils.plot_traces_2d(f_2d, w_traces, path+'dnt_traces.png')\n# utils.plot(gap, w_traces, path+'dnt_gap.png')\n# fig = plt.figure(figsize=(3.5,2.5))\n# plt.plot(stepsize_traces, '-o', color='blue')\n# plt.xlabel('iteration (k)')\n# plt.ylabel('stepsize')\n# plt.tight_layout(pad=0.1)\n# fig.savefig(path+'dnt_ss.png')\n"
+        }
+    ]
+}

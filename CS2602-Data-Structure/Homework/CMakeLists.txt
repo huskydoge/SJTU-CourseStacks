@@ -1,0 +1,31 @@
+cmake_minimum_required(VERSION 3.23)
+project(Homework)
+
+set(CMAKE_CXX_STANDARD 14)
+
+add_executable(Homework main.cpp)
+
+# HW1
+add_executable(det hw1/行列式求值.cpp)
+#add_executable(array hw1/数列操作.cpp)
+
+add_executable(main main.cpp)
+add_executable(string hw2/字符串相加.cpp)
+add_executable(linklist hw2/小恶魔的循环链表.cpp)
+add_executable(ring hw2/二哥的约瑟夫.cpp)
+add_executable(rear hw3/后缀表达式.cpp)
+add_executable(loopQueue hw3/循环队列.cpp)
+add_executable(stack hw3/出栈序列.cpp)
+add_executable(stackwb hw3/出栈序列网上.cpp)
+add_executable(NOSTDLibrary hw3/出栈序列NOSTDLibrary.cpp)
+add_executable(stones hw4/stones.cpp)
+add_executable(huffman hw4/Stones_huffman.cpp)
+add_executable(pre hw4/二叉树还原.cpp)
+add_executable(maxFraction hw4/maxFraction.cpp)
+add_executable(maxFraction_FareySequences hw4/maxFraction_FareySequences.cpp)
+add_executable(HuffmanTree hw5/HuffmanTree.cpp)
+add_executable(staticSearchList hw5/staticSearchList.cpp)
+add_executable(stringHash hw5/stringHash.cpp)
+add_executable(sort hw6/排序不等式.cpp)
+add_executable(Ruko Sort "hw6/Ruko Sort.cpp")
+add_executable(mcdonalds hw6/mcdonalds.cpp)

@@ -1,0 +1,38 @@
+{
+    "sourceFile": "p3.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1669266364747,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1669266543063,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,6 +34,6 @@\n def gap(w):\n \treturn f(w) - f_value\n \n path = './figures/4/'\n-utils.plot_traces_2d(f_2d, w_traces, path+f'ista_traces_lambda{lambd}.pdf')\n-utils.plot(gap, w_traces, path+f'ista_gap_lambda{lambd}.pdf')\n+utils.plot_traces_2d(f_2d, w_traces, path+f'ista_traces_lambda{lambd}.png')\n+utils.plot(gap, w_traces, path+f'ista_gap_lambda{lambd}.png')\n"
+                },
+                {
+                    "date": 1669266563074,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,6 +34,6 @@\n def gap(w):\n \treturn f(w) - f_value\n \n path = './figures/4/'\n-utils.plot_traces_2d(f_2d, w_traces, path+f'ista_traces_lambda{lambd}.png')\n-utils.plot(gap, w_traces, path+f'ista_gap_lambda{lambd}.png')\n+utils.plot_traces_2d(f_2d, w_traces, path+f'ista_traces_lambda{lambd}.pdf')\n+utils.plot(gap, w_traces, path+f'ista_gap_lambda{lambd}.pdf')\n"
+                },
+                {
+                    "date": 1669266576904,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,6 +34,6 @@\n def gap(w):\n \treturn f(w) - f_value\n \n path = './figures/4/'\n-utils.plot_traces_2d(f_2d, w_traces, path+f'ista_traces_lambda{lambd}.pdf')\n-utils.plot(gap, w_traces, path+f'ista_gap_lambda{lambd}.pdf')\n+utils.plot_traces_2d(f_2d, w_traces, path+f'ista_traces_lambda{lambd}.png')\n+utils.plot(gap, w_traces, path+f'ista_gap_lambda{lambd}.png')\n"
+                },
+                {
+                    "date": 1669266666098,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import utils\n \n X = np.array([[1,2,0], [0,1,0]]).T\n y = np.array([2,3,2])\n-lambd = 2\n+lambd = 0.1\n \n def f(w):\n \treturn 0.5*np.sum((X@w - y)**2) + lambd * np.linalg.norm(w,ord=1)\n \n"
+                },
+                {
+                    "date": 1669266807598,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,9 +3,9 @@\n import utils\n \n X = np.array([[1,2,0], [0,1,0]]).T\n y = np.array([2,3,2])\n-lambd = 0.1\n+lambd = 8\n \n def f(w):\n \treturn 0.5*np.sum((X@w - y)**2) + lambd * np.linalg.norm(w,ord=1)\n \n"
+                }
+            ],
+            "date": 1669266364747,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport ista\nimport utils\n\nX = np.array([[1,2,0], [0,1,0]]).T\ny = np.array([2,3,2])\nlambd = 2\n\ndef f(w):\n\treturn 0.5*np.sum((X@w - y)**2) + lambd * np.linalg.norm(w,ord=1)\n\nw0 = 0.5 * np.ones(2)\nstepsize = 0.1\n\nw_traces = ista.ista(X, y, lambd, w0, stepsize=stepsize, tol=1e-9)\n\nf_value = f(w_traces[-1])\n\nprint()\nprint('lambda = ', lambd)\nprint('number of iterations:', len(w_traces)-1)\nprint('solution:', w_traces[-1])\nprint('value:', f_value)\n\n### visualization\nQ = X.T@X\nb = X.T@y\nc = y@y\n\ndef f_2d(w1, w2):\n\treturn 0.5 * Q[0,0] * w1**2 + 0.5 * Q[1,1] * w2**2 + Q[0,1] * w1 * w2 \\\n\t       - b[0] * w1 - b[1] * w2 - 0.5 * c + lambd * (np.abs(w1) + np.abs(w2))\n\ndef gap(w):\n\treturn f(w) - f_value\n\npath = './figures/4/'\nutils.plot_traces_2d(f_2d, w_traces, path+f'ista_traces_lambda{lambd}.pdf')\nutils.plot(gap, w_traces, path+f'ista_gap_lambda{lambd}.pdf')\n"
+        }
+    ]
+}

@@ -1,0 +1,54 @@
+{
+    "sourceFile": "utils.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 9,
+            "patches": [
+                {
+                    "date": 1668259739866,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1668259780807,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,10 +8,10 @@\n \n \tplt.plot(*zip(*x_traces), '-o', color='red')\n \n \tx1, x2 = zip(*x_traces)\n-\t# x1 = np.arange(min(x1)-.2, max(x1)+.2, 0.01)\n-\t# x2 = np.arange(min(x2)-.2, max(x2)+.2, 0.01)\n+\tx1 = np.arange(min(x1)-.2, max(x1)+.2, 0.01)\n+\tx2 = np.arange(min(x2)-.2, max(x2)+.2, 0.01)\n \tx1, x2 = np.meshgrid(x1,x2)\n \tplt.contour(x1, x2, f_2d(x1, x2), 20, colors='blue')\n \tplt.xlabel('x1')\n \tplt.ylabel('x2')\n"
+                },
+                {
+                    "date": 1668261308602,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,10 @@\n import matplotlib.patches as mp\n \n \n def plot_traces_2d(f_2d, x_traces, filename):\n-\tfig = plt.figure(figsize=(5,4))\n \n+\n \tplt.plot(*zip(*x_traces), '-o', color='red')\n \n \tx1, x2 = zip(*x_traces)\n \tx1 = np.arange(min(x1)-.2, max(x1)+.2, 0.01)\n@@ -15,14 +15,14 @@\n \tplt.contour(x1, x2, f_2d(x1, x2), 20, colors='blue')\n \tplt.xlabel('x1')\n \tplt.ylabel('x2')\n \tplt.tight_layout()\n-\n+\tplt.title(r\"2D trajectory of the sequence  ${x_k}$\")\n \tfig.savefig(filename)\n \n \n def plot(f, x_traces, filename, logscale=True):\n-\tfig = plt.figure(figsize=(5,4))\n+\n \tf_traces = [f(x) for x in x_traces]\n \t\n \tif logscale:\n \t\tplt.semilogy(f_traces)\n@@ -32,6 +32,6 @@\n \tplt.rc('text', usetex=True)\n \tplt.rc('font', family='serif')\n \tplt.ylabel('gap $f(x_k) - f(x^*)$')\n \tplt.tight_layout()\n-\n+\tplt.title(r\"function value $f({x_k})$\")\n \tfig.savefig(filename)\n"
+                },
+                {
+                    "date": 1668261335016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,8 +5,9 @@\n \n def plot_traces_2d(f_2d, x_traces, filename):\n \n \n+\tplt.figure()\n \tplt.plot(*zip(*x_traces), '-o', color='red')\n \n \tx1, x2 = zip(*x_traces)\n \tx1 = np.arange(min(x1)-.2, max(x1)+.2, 0.01)\n"
+                },
+                {
+                    "date": 1668261341781,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n \n def plot_traces_2d(f_2d, x_traces, filename):\n \n \n-\tplt.figure()\n+\tfig = plt.figure()\n \tplt.plot(*zip(*x_traces), '-o', color='red')\n \n \tx1, x2 = zip(*x_traces)\n \tx1 = np.arange(min(x1)-.2, max(x1)+.2, 0.01)\n@@ -21,9 +21,9 @@\n \tfig.savefig(filename)\n \n \n def plot(f, x_traces, filename, logscale=True):\n-\n+\tfig = plt.figure()\n \tf_traces = [f(x) for x in x_traces]\n \t\n \tif logscale:\n \t\tplt.semilogy(f_traces)\n"
+                },
+                {
+                    "date": 1668261378929,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \tx1, x2 = np.meshgrid(x1,x2)\n \tplt.contour(x1, x2, f_2d(x1, x2), 20, colors='blue')\n \tplt.xlabel('x1')\n \tplt.ylabel('x2')\n-\tplt.tight_layout()\n+\t# plt.tight_layout()\n \tplt.title(r\"2D trajectory of the sequence  ${x_k}$\")\n \tfig.savefig(filename)\n \n \n@@ -32,7 +32,7 @@\n \tplt.xlabel('iteration (k)')\n \tplt.rc('text', usetex=True)\n \tplt.rc('font', family='serif')\n \tplt.ylabel('gap $f(x_k) - f(x^*)$')\n-\tplt.tight_layout()\n+\t# plt.tight_layout()\n \tplt.title(r\"function value $f({x_k})$\")\n \tfig.savefig(filename)\n"
+                },
+                {
+                    "date": 1668261478431,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \tplt.contour(x1, x2, f_2d(x1, x2), 20, colors='blue')\n \tplt.xlabel('x1')\n \tplt.ylabel('x2')\n \t# plt.tight_layout()\n-\tplt.title(r\"2D trajectory of the sequence  ${x_k}$\")\n+\tplt.title(r\"2D trajectory of the sequence $\\boldsymbol{x_k}$\")\n \tfig.savefig(filename)\n \n \n def plot(f, x_traces, filename, logscale=True):\n"
+                },
+                {
+                    "date": 1668261500900,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \tplt.contour(x1, x2, f_2d(x1, x2), 20, colors='blue')\n \tplt.xlabel('x1')\n \tplt.ylabel('x2')\n \t# plt.tight_layout()\n-\tplt.title(r\"2D trajectory of the sequence $\\boldsymbol{x_k}$\")\n+\tplt.title(r\"2D trajectory of the sequence $\\\\boldsymbol{x_k}$\")\n \tfig.savefig(filename)\n \n \n def plot(f, x_traces, filename, logscale=True):\n"
+                },
+                {
+                    "date": 1668261511413,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \tplt.contour(x1, x2, f_2d(x1, x2), 20, colors='blue')\n \tplt.xlabel('x1')\n \tplt.ylabel('x2')\n \t# plt.tight_layout()\n-\tplt.title(r\"2D trajectory of the sequence $\\\\boldsymbol{x_k}$\")\n+\tplt.title(r\"2D trajectory of the sequence $/boldsymbol{x_k}$\")\n \tfig.savefig(filename)\n \n \n def plot(f, x_traces, filename, logscale=True):\n"
+                },
+                {
+                    "date": 1668261539776,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \tplt.contour(x1, x2, f_2d(x1, x2), 20, colors='blue')\n \tplt.xlabel('x1')\n \tplt.ylabel('x2')\n \t# plt.tight_layout()\n-\tplt.title(r\"2D trajectory of the sequence $/boldsymbol{x_k}$\")\n+\tplt.title(r\"2D trajectory of the sequence $x_k$\")\n \tfig.savefig(filename)\n \n \n def plot(f, x_traces, filename, logscale=True):\n"
+                }
+            ],
+            "date": 1668259739866,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport matplotlib.pyplot as plt\nimport matplotlib.patches as mp\n\n\ndef plot_traces_2d(f_2d, x_traces, filename):\n\tfig = plt.figure(figsize=(5,4))\n\n\tplt.plot(*zip(*x_traces), '-o', color='red')\n\n\tx1, x2 = zip(*x_traces)\n\t# x1 = np.arange(min(x1)-.2, max(x1)+.2, 0.01)\n\t# x2 = np.arange(min(x2)-.2, max(x2)+.2, 0.01)\n\tx1, x2 = np.meshgrid(x1,x2)\n\tplt.contour(x1, x2, f_2d(x1, x2), 20, colors='blue')\n\tplt.xlabel('x1')\n\tplt.ylabel('x2')\n\tplt.tight_layout()\n\n\tfig.savefig(filename)\n\n\ndef plot(f, x_traces, filename, logscale=True):\n\tfig = plt.figure(figsize=(5,4))\n\tf_traces = [f(x) for x in x_traces]\n\t\n\tif logscale:\n\t\tplt.semilogy(f_traces)\n\telse:\n\t\tplt.plot(f_traces)\n\tplt.xlabel('iteration (k)')\n\tplt.rc('text', usetex=True)\n\tplt.rc('font', family='serif')\n\tplt.ylabel('gap $f(x_k) - f(x^*)$')\n\tplt.tight_layout()\n\n\tfig.savefig(filename)\n"
+        }
+    ]
+}

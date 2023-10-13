@@ -1,0 +1,42 @@
+{
+    "sourceFile": "code/p2.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 6,
+            "patches": [
+                {
+                    "date": 1671676065310,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1671676084135,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,5 +12,5 @@\n \n print('')\n for k,mu in enumerate(mu_traces):\n \tprint('iteration %d: %s' % (k, mu))\n-print('dual optimal value:', c@mu_traces[-1])\n+print('dual optimal value:', c.T@mu_traces[-1])\n"
+                },
+                {
+                    "date": 1671676109640,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n c = np.array([8,3, 0, 0]).reshape(-1, 1)\n A = np.array([[1, 1, -1, 0], [2, -1, 0, -1]])\n b = np.array([3, 1]).reshape(-1, 1)\n \n-mu0 = np.array([4,1,2,6], dtype=float)\n+mu0 = np.array([4,1,2,6], dtype=float).reshape(-1, 1)\n \n mu_traces = LP.barrier(-c, A, b, mu0)\n \n print('')\n"
+                },
+                {
+                    "date": 1671676239529,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n c = np.array([8,3, 0, 0]).reshape(-1, 1)\n A = np.array([[1, 1, -1, 0], [2, -1, 0, -1]])\n b = np.array([3, 1]).reshape(-1, 1)\n \n-mu0 = np.array([4,1,2,6], dtype=float).reshape(-1, 1)\n+mu0 = np.array([4,1,1,1], dtype=float).reshape(-1, 1)\n \n mu_traces = LP.barrier(-c, A, b, mu0)\n \n print('')\n"
+                },
+                {
+                    "date": 1671676248456,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n c = np.array([8,3, 0, 0]).reshape(-1, 1)\n A = np.array([[1, 1, -1, 0], [2, -1, 0, -1]])\n b = np.array([3, 1]).reshape(-1, 1)\n \n-mu0 = np.array([4,1,1,1], dtype=float).reshape(-1, 1)\n+mu0 = np.array([4,1,0,6], dtype=float).reshape(-1, 1)\n \n mu_traces = LP.barrier(-c, A, b, mu0)\n \n print('')\n"
+                },
+                {
+                    "date": 1671676257306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n import numpy as np\n import LP\n \n ## parameters of the standard form dual LP \n-c = np.array([8,3, 0, 0]).reshape(-1, 1)\n+c = np.array([-8,-3, 0, 0]).reshape(-1, 1)\n A = np.array([[1, 1, -1, 0], [2, -1, 0, -1]])\n b = np.array([3, 1]).reshape(-1, 1)\n \n mu0 = np.array([4,1,0,6], dtype=float).reshape(-1, 1)\n"
+                },
+                {
+                    "date": 1671676266430,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,9 +5,9 @@\n c = np.array([-8,-3, 0, 0]).reshape(-1, 1)\n A = np.array([[1, 1, -1, 0], [2, -1, 0, -1]])\n b = np.array([3, 1]).reshape(-1, 1)\n \n-mu0 = np.array([4,1,0,6], dtype=float).reshape(-1, 1)\n+mu0 = np.array([4,1,2,6], dtype=float).reshape(-1, 1)\n \n mu_traces = LP.barrier(-c, A, b, mu0)\n \n print('')\n"
+                }
+            ],
+            "date": 1671676065310,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport LP\n\n## parameters of the standard form dual LP \nc = np.array([8,3, 0, 0]).reshape(-1, 1)\nA = np.array([[1, 1, -1, 0], [2, -1, 0, -1]])\nb = np.array([3, 1]).reshape(-1, 1)\n\nmu0 = np.array([4,1,2,6], dtype=float)\n\nmu_traces = LP.barrier(-c, A, b, mu0)\n\nprint('')\nfor k,mu in enumerate(mu_traces):\n\tprint('iteration %d: %s' % (k, mu))\nprint('dual optimal value:', c@mu_traces[-1])\n"
+        }
+    ]
+}

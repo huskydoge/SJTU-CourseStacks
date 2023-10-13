@@ -1,0 +1,178 @@
+{
+    "sourceFile": "p2.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 40,
+            "patches": [
+                {
+                    "date": 1668263728825,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1668263758881,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,19 @@\n import numpy as np\n+\n import gd\n import utils\n \n+X: np.ndarray = np.array([[4, 1, 0, 4, 2, 0],\n+                       [2, 4, 1, 1, 0, 2],\n+                       [4, 4, 0, 4, 1, 4],\n+                       [1, 0, 2, 3, 1, 2],\n+                       [4, 4, 2, 2, 0, 1],\n+                       [2, 2, 0, 1, 2, 4],\n+                       [0, 1, 2, 1, 4, 2],\n+                       [0, 0, 1, 0, 1, 3]])\n+\n+y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n gamma = 10\n Q = np.diag([gamma, 1])\n x0 = np.array([1.0, 1.0])\n \n"
+                },
+                {
+                    "date": 1668263823930,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,15 +12,13 @@\n                        [0, 1, 2, 1, 4, 2],\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n+\n gamma = 10\n Q = np.diag([gamma, 1])\n x0 = np.array([1.0, 1.0])\n \n-def f(x):\n-\treturn 0.5 * x.T@Q@x\n-\n def fp(x):\n \treturn Q@x \n \n def f_2d(x1, x2):\n"
+                },
+                {
+                    "date": 1668263836645,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,10 +17,10 @@\n gamma = 10\n Q = np.diag([gamma, 1])\n x0 = np.array([1.0, 1.0])\n \n-def fp(x):\n-\treturn Q@x \n+def fp(w):\n+\treturn  \n \n def f_2d(x1, x2):\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n"
+                },
+                {
+                    "date": 1668263868590,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n Q = np.diag([gamma, 1])\n x0 = np.array([1.0, 1.0])\n \n def fp(w):\n-\treturn  \n+\treturn X.transpose()@(y-X@w) \n \n def f_2d(x1, x2):\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n"
+                },
+                {
+                    "date": 1668263876703,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,10 +20,8 @@\n \n def fp(w):\n \treturn X.transpose()@(y-X@w) \n \n-def f_2d(x1, x2):\n-\treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n def solve(stepsize = 0.1, maxiter = 100000):\n \tx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n \tprint(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n"
+                },
+                {
+                    "date": 1668263891880,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,15 +21,11 @@\n def fp(w):\n \treturn X.transpose()@(y-X@w) \n \n \n-def solve(stepsize = 0.1, maxiter = 100000):\n-\tx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n-\tprint(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n-\tutils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n-\tutils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n+x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n+print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n \n-\n gamma_list = [1,0.1,0.01,0.001]\n for gamma in gamma_list:\n \tQ = np.diag([gamma, 1])\n \tx_traces = gd.gd_const_ss(fp, x0, stepsize=1)\n"
+                },
+                {
+                    "date": 1668263900478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,9 +21,9 @@\n def fp(w):\n \treturn X.transpose()@(y-X@w) \n \n \n-x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n+x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 100)\n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n \n gamma_list = [1,0.1,0.01,0.001]\n for gamma in gamma_list:\n"
+                },
+                {
+                    "date": 1668263930367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,12 +21,6 @@\n def fp(w):\n \treturn X.transpose()@(y-X@w) \n \n \n-x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 100)\n+x_traces = gd.gd_const_ss(fp, w0, stepsize= 1,maxiter = 100)\n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n-\n-gamma_list = [1,0.1,0.01,0.001]\n-for gamma in gamma_list:\n-\tQ = np.diag([gamma, 1])\n-\tx_traces = gd.gd_const_ss(fp, x0, stepsize=1)\n\\ No newline at end of file\n-\tprint(f'gamma={gamma}, stepsize={1}, number of iterations={len(x_traces)-1}')\n"
+                },
+                {
+                    "date": 1668263979491,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n gamma = 10\n Q = np.diag([gamma, 1])\n-x0 = np.array([1.0, 1.0])\n+w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0])\n \n def fp(w):\n \treturn X.transpose()@(y-X@w) \n \n"
+                },
+                {
+                    "date": 1668263998064,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,14 +13,15 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n+stepsize = 1\n gamma = 10\n Q = np.diag([gamma, 1])\n-w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0])\n+w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])\n \n def fp(w):\n \treturn X.transpose()@(y-X@w) \n \n \n-x_traces = gd.gd_const_ss(fp, w0, stepsize= 1,maxiter = 100)\n+x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100)\n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n"
+                },
+                {
+                    "date": 1668264006170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,4 +24,5 @@\n \n \n x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100)\n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n+print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264014478,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,10 +14,8 @@\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n stepsize = 1\n-gamma = 10\n-Q = np.diag([gamma, 1])\n w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])\n \n def fp(w):\n \treturn X.transpose()@(y-X@w) \n"
+                },
+                {
+                    "date": 1668264040681,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,6 +21,6 @@\n \treturn X.transpose()@(y-X@w) \n \n \n x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100)\n-print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n+print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264181447,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n-stepsize = 1\n+stepsize =10\n w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])\n \n def fp(w):\n \treturn X.transpose()@(y-X@w) \n"
+                },
+                {
+                    "date": 1668264235828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,7 +20,8 @@\n def fp(w):\n \treturn X.transpose()@(y-X@w) \n \n \n-x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100)\n-print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n-print(x_traces[-1])\n+print(fp(w0))\n+# x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100)\n+# print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n+# print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264274110,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n stepsize =10\n w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])\n \n def fp(w):\n-\treturn X.transpose()@(y-X@w) \n+\treturn (X.transpose())@(y-X@w) \n \n \n print(fp(w0))\n # x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100)\n"
+                },
+                {
+                    "date": 1668264290680,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,8 @@\n def fp(w):\n \treturn (X.transpose())@(y-X@w) \n \n \n-print(fp(w0))\n+\n # x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100)\n # print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n # print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264349773,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,7 +21,7 @@\n \treturn (X.transpose())@(y-X@w) \n \n \n \n-# x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100)\n+x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 10)\n # print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n # print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264495715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,15 +13,15 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n-stepsize =10\n+stepsize =0.1\n w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])\n \n def fp(w):\n \treturn (X.transpose())@(y-X@w) \n \n \n \n x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 10)\n-# print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n-# print(x_traces[-1])\n+print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n+print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264503233,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n-stepsize =0.1\n+stepsize = 0.1\n w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])\n \n def fp(w):\n \treturn (X.transpose())@(y-X@w) \n"
+                },
+                {
+                    "date": 1668264514375,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n-stepsize = 0.1\n+stepsize = 0.0001\n w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])\n \n def fp(w):\n \treturn (X.transpose())@(y-X@w) \n"
+                },
+                {
+                    "date": 1668264526220,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,7 +21,7 @@\n \treturn (X.transpose())@(y-X@w) \n \n \n \n-x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 10)\n+x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100)\n print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264532718,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,7 +21,7 @@\n \treturn (X.transpose())@(y-X@w) \n \n \n \n-x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100)\n+x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000)\n print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264540144,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n-stepsize = 0.0001\n+stepsize = 0.0000001\n w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])\n \n def fp(w):\n \treturn (X.transpose())@(y-X@w) \n"
+                },
+                {
+                    "date": 1668264546883,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,7 +21,7 @@\n \treturn (X.transpose())@(y-X@w) \n \n \n \n-x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000)\n+x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 10000000)\n print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264587305,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,7 +21,7 @@\n \treturn (X.transpose())@(y-X@w) \n \n \n \n-x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 10000000)\n+x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000)\n print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264593757,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,7 +21,7 @@\n \treturn (X.transpose())@(y-X@w) \n \n \n \n-x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000)\n+x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 10000)\n print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264599985,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n-stepsize = 0.0000001\n+stepsize = 0.00001\n w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])\n \n def fp(w):\n \treturn (X.transpose())@(y-X@w) \n"
+                },
+                {
+                    "date": 1668264666734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n stepsize = 0.00001\n-w0 = np.array([1.0, 1.0, 1.0, 1.0, 1.0, 1.0])\n+w0 = np.array([0, 0, 0, 0, 0,0])\n \n def fp(w):\n \treturn (X.transpose())@(y-X@w) \n \n"
+                },
+                {
+                    "date": 1668264679160,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,8 +20,7 @@\n def fp(w):\n \treturn (X.transpose())@(y-X@w) \n \n \n-\n x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 10000)\n print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668264740556,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n stepsize = 0.00001\n w0 = np.array([0, 0, 0, 0, 0,0])\n \n def fp(w):\n-\treturn (X.transpose())@(y-X@w) \n+\treturn 2*(X.transpose())@(y-X@w) \n \n \n x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 10000)\n print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n"
+                },
+                {
+                    "date": 1668264756577,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n-stepsize = 0.00001\n+stepsize = 0.1\n w0 = np.array([0, 0, 0, 0, 0,0])\n \n def fp(w):\n \treturn 2*(X.transpose())@(y-X@w) \n"
+                },
+                {
+                    "date": 1668264890138,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n stepsize = 0.1\n w0 = np.array([0, 0, 0, 0, 0,0])\n \n def fp(w):\n-\treturn 2*(X.transpose())@(y-X@w) \n+\treturn 2*(X.transpose())@(X@w-y) \n \n \n x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 10000)\n print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n"
+                },
+                {
+                    "date": 1668264900826,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n-stepsize = 0.1\n+stepsize = 0.00001\n w0 = np.array([0, 0, 0, 0, 0,0])\n \n def fp(w):\n \treturn 2*(X.transpose())@(X@w-y) \n"
+                },
+                {
+                    "date": 1668264910518,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n-stepsize = 0.00001\n+stepsize = 0.001\n w0 = np.array([0, 0, 0, 0, 0,0])\n \n def fp(w):\n \treturn 2*(X.transpose())@(X@w-y) \n"
+                },
+                {
+                    "date": 1668264925980,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,9 +13,9 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n-stepsize = 0.001\n+stepsize = 0.01\n w0 = np.array([0, 0, 0, 0, 0,0])\n \n def fp(w):\n \treturn 2*(X.transpose())@(X@w-y) \n"
+                },
+                {
+                    "date": 1668264933675,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,14 +13,14 @@\n                        [0, 0, 1, 0, 1, 3]])\n \n y = np.array([5, 0, 5, 0, 4, 2, 5, 3])\n \n-stepsize = 0.01\n+stepsize = 0.001\n w0 = np.array([0, 0, 0, 0, 0,0])\n \n def fp(w):\n \treturn 2*(X.transpose())@(X@w-y) \n \n \n-x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 10000)\n+x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100000)\n print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668265219984,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,7 +20,7 @@\n def fp(w):\n \treturn 2*(X.transpose())@(X@w-y) \n \n \n-x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 100000)\n+x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000000)\n print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n print(x_traces[-1])\n"
+                },
+                {
+                    "date": 1668266514722,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,7 +20,7 @@\n def fp(w):\n \treturn 2*(X.transpose())@(X@w-y) \n \n \n-x_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000000)\n+w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000000)\n print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n-print(x_traces[-1])\n+print(w_traces[-1])\n"
+                },
+                {
+                    "date": 1668266522367,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -21,6 +21,6 @@\n \treturn 2*(X.transpose())@(X@w-y) \n \n \n w_traces = gd.gd_const_ss(fp, w0, stepsize= stepsize,maxiter = 1000000)\n-print(f'stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n+print(f'stepsize={stepsize}, number of iterations={len(w_traces)-1}')\n print(w_traces[-1])\n"
+                }
+            ],
+            "date": 1668263728825,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport gd\nimport utils\n\ngamma = 10\nQ = np.diag([gamma, 1])\nx0 = np.array([1.0, 1.0])\n\ndef f(x):\n\treturn 0.5 * x.T@Q@x\n\ndef fp(x):\n\treturn Q@x \n\ndef f_2d(x1, x2):\n\treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n\ndef solve(stepsize = 0.1, maxiter = 100000):\n\tx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n\tprint(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n\tutils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n\tutils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n\n\ngamma_list = [1,0.1,0.01,0.001]\nfor gamma in gamma_list:\n\tQ = np.diag([gamma, 1])\n\tx_traces = gd.gd_const_ss(fp, x0, stepsize=1)\n\tprint(f'gamma={gamma}, stepsize={1}, number of iterations={len(x_traces)-1}')"
+        }
+    ]
+}

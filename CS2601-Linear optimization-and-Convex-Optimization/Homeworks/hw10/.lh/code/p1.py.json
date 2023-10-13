@@ -1,0 +1,90 @@
+{
+    "sourceFile": "code/p1.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 18,
+            "patches": [
+                {
+                    "date": 1671641663765,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1671641789481,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,12 +2,14 @@\n import LP\n import matplotlib.pyplot as plt\n \n ## parameters of the standard form LP \n-c = np.array([-3,-1,0,0])\n+c = np.array([-3,-1,0,0]).reshape(1,-1)\n A = np.array([[1, 2, 1, 0], [1, -1, 0, 1]])\n b = np.array([8, 3])\n \n+print()\n+\n x0 = np.array([2, 1, 2, 2])\n x_traces = LP.barrier(c, A, b, x0)\n \n print('')\n"
+                },
+                {
+                    "date": 1671642463682,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,13 +2,13 @@\n import LP\n import matplotlib.pyplot as plt\n \n ## parameters of the standard form LP \n-c = np.array([-3,-1,0,0]).reshape(1,-1)\n+c = np.array([-3,-1,0,0]).reshape(-1, 1)\n A = np.array([[1, 2, 1, 0], [1, -1, 0, 1]])\n-b = np.array([8, 3])\n+b = np.array([8, 3]).reshape(-1, 1)\n \n-print()\n+print(c)\n \n x0 = np.array([2, 1, 2, 2])\n x_traces = LP.barrier(c, A, b, x0)\n \n"
+                },
+                {
+                    "date": 1671642507628,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n b = np.array([8, 3]).reshape(-1, 1)\n \n print(c)\n \n-x0 = np.array([2, 1, 2, 2])\n+x0 = np.array([2, 1, 2, 2]).reshape(-1, 1)\n x_traces = LP.barrier(c, A, b, x0)\n \n print('')\n for k,x in enumerate(x_traces):\n"
+                },
+                {
+                    "date": 1671642833895,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -6,10 +6,10 @@\n c = np.array([-3,-1,0,0]).reshape(-1, 1)\n A = np.array([[1, 2, 1, 0], [1, -1, 0, 1]])\n b = np.array([8, 3]).reshape(-1, 1)\n \n-print(c)\n \n+\n x0 = np.array([2, 1, 2, 2]).reshape(-1, 1)\n x_traces = LP.barrier(c, A, b, x0)\n \n print('')\n"
+                },
+                {
+                    "date": 1671644406398,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,15 +2,15 @@\n import LP\n import matplotlib.pyplot as plt\n \n ## parameters of the standard form LP \n-c = np.array([-3,-1,0,0]).reshape(-1, 1)\n+c = np.array([-3,-1,0,0])\n A = np.array([[1, 2, 1, 0], [1, -1, 0, 1]])\n-b = np.array([8, 3]).reshape(-1, 1)\n+b = np.array([8, 3])\n \n \n \n-x0 = np.array([2, 1, 2, 2]).reshape(-1, 1)\n+x0 = np.array([2, 1, 2, 2])\n x_traces = LP.barrier(c, A, b, x0)\n \n print('')\n for k,x in enumerate(x_traces):\n"
+                },
+                {
+                    "date": 1671644420863,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,15 +2,15 @@\n import LP\n import matplotlib.pyplot as plt\n \n ## parameters of the standard form LP \n-c = np.array([-3,-1,0,0])\n+c = np.array([-3,-1,0,0]).reshape(-1, 1)\n A = np.array([[1, 2, 1, 0], [1, -1, 0, 1]])\n-b = np.array([8, 3])\n+b = np.array([8, 3]).reshape(-1, 1)\n \n \n \n-x0 = np.array([2, 1, 2, 2])\n+x0 = np.array([2, 1, 2, 2]).reshape(-1, 1)\n x_traces = LP.barrier(c, A, b, x0)\n \n print('')\n for k,x in enumerate(x_traces):\n"
+                },
+                {
+                    "date": 1671644853263,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,8 +14,11 @@\n \n print('')\n for k,x in enumerate(x_traces):\n \tprint('iteration %d: %s' % (k, x))\n+\n+print(c)\n+print(x)\n print('optimal value:', c@x_traces[-1])\n \n ### visualization\n x12 = [x[0:2] for x in x_traces]\n"
+                },
+                {
+                    "date": 1671644858293,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n for k,x in enumerate(x_traces):\n \tprint('iteration %d: %s' % (k, x))\n \n print(c)\n-print(x)\n+print(x_traces)\n print('optimal value:', c@x_traces[-1])\n \n ### visualization\n x12 = [x[0:2] for x in x_traces]\n"
+                },
+                {
+                    "date": 1671644877821,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n for k,x in enumerate(x_traces):\n \tprint('iteration %d: %s' % (k, x))\n \n print(c)\n-print(x_traces)\n+print(x_traces[-1])\n print('optimal value:', c@x_traces[-1])\n \n ### visualization\n x12 = [x[0:2] for x in x_traces]\n"
+                },
+                {
+                    "date": 1671644889230,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,11 +11,11 @@\n \n x0 = np.array([2, 1, 2, 2]).reshape(-1, 1)\n x_traces = LP.barrier(c, A, b, x0)\n \n-print('')\n-for k,x in enumerate(x_traces):\n-\tprint('iteration %d: %s' % (k, x))\n+# print('')\n+# for k,x in enumerate(x_traces):\n+# \tprint('iteration %d: %s' % (k, x))\n \n print(c)\n print(x_traces[-1])\n print('optimal value:', c@x_traces[-1])\n"
+                },
+                {
+                    "date": 1671644905894,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n # \tprint('iteration %d: %s' % (k, x))\n \n print(c)\n print(x_traces[-1])\n-print('optimal value:', c@x_traces[-1])\n+print('optimal value:', c.T@x_traces[-1])\n \n ### visualization\n x12 = [x[0:2] for x in x_traces]\n fig = plt.figure()\n"
+                },
+                {
+                    "date": 1671644957360,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -29,7 +29,7 @@\n plt.xlabel('x1')\n plt.ylabel('x2')\n plt.legend(handles=[line], fontsize=20)\n plt.tight_layout()\n-fig.savefig('../figures/p2.pdf')\n+fig.savefig('./figures/p2.pdf')\n \n \n"
+                },
+                {
+                    "date": 1671645115608,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,24 +2,24 @@\n import LP\n import matplotlib.pyplot as plt\n \n ## parameters of the standard form LP \n-c = np.array([-3,-1,0,0]).reshape(-1, 1)\n+c = np.array([-3,-1,0,0])\n A = np.array([[1, 2, 1, 0], [1, -1, 0, 1]])\n-b = np.array([8, 3]).reshape(-1, 1)\n+b = np.array([8, 3])\n \n \n \n-x0 = np.array([2, 1, 2, 2]).reshape(-1, 1)\n+x0 = np.array([2, 1, 2, 2])\n x_traces = LP.barrier(c, A, b, x0)\n \n-# print('')\n-# for k,x in enumerate(x_traces):\n-# \tprint('iteration %d: %s' % (k, x))\n+print('')\n+for k,x in enumerate(x_traces):\n+\tprint('iteration %d: %s' % (k, x))\n \n print(c)\n print(x_traces[-1])\n-print('optimal value:', c.T@x_traces[-1])\n+print('optimal value:', c.T@x_traces)\n \n ### visualization\n x12 = [x[0:2] for x in x_traces]\n fig = plt.figure()\n"
+                },
+                {
+                    "date": 1671645181558,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,24 +2,24 @@\n import LP\n import matplotlib.pyplot as plt\n \n ## parameters of the standard form LP \n-c = np.array([-3,-1,0,0])\n+c = np.array([-3,-1,0,0]).reshape(-1, 1)\n A = np.array([[1, 2, 1, 0], [1, -1, 0, 1]])\n-b = np.array([8, 3])\n+b = np.array([8, 3]).reshape(-1, 1)\n \n \n \n-x0 = np.array([2, 1, 2, 2])\n+x0 = np.array([2, 1, 2, 2]).reshape(-1, 1)\n x_traces = LP.barrier(c, A, b, x0)\n \n-print('')\n-for k,x in enumerate(x_traces):\n-\tprint('iteration %d: %s' % (k, x))\n+# print('')\n+# for k,x in enumerate(x_traces):\n+# \tprint('iteration %d: %s' % (k, x))\n \n print(c)\n print(x_traces[-1])\n-print('optimal value:', c.T@x_traces)\n+print('optimal value:', c.T@x_traces[-1])\n \n ### visualization\n x12 = [x[0:2] for x in x_traces]\n fig = plt.figure()\n"
+                },
+                {
+                    "date": 1671645187625,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n b = np.array([8, 3]).reshape(-1, 1)\n \n \n \n-x0 = np.array([2, 1, 2, 2]).reshape(-1, 1)\n+x0 = np.array([2, 1, 0, 0]).reshape(-1, 1)\n x_traces = LP.barrier(c, A, b, x0)\n \n # print('')\n # for k,x in enumerate(x_traces):\n"
+                },
+                {
+                    "date": 1671645233702,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n b = np.array([8, 3]).reshape(-1, 1)\n \n \n \n-x0 = np.array([2, 1, 0, 0]).reshape(-1, 1)\n+x0 = np.array([2, 1, 1, 1]).reshape(-1, 1)\n x_traces = LP.barrier(c, A, b, x0)\n \n # print('')\n # for k,x in enumerate(x_traces):\n"
+                },
+                {
+                    "date": 1671645285009,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,9 +8,9 @@\n b = np.array([8, 3]).reshape(-1, 1)\n \n \n \n-x0 = np.array([2, 1, 1, 1]).reshape(-1, 1)\n+x0 = np.array([2, 1, 4, 2]).reshape(-1, 1)\n x_traces = LP.barrier(c, A, b, x0)\n \n # print('')\n # for k,x in enumerate(x_traces):\n"
+                },
+                {
+                    "date": 1671672373273,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,11 +11,11 @@\n \n x0 = np.array([2, 1, 4, 2]).reshape(-1, 1)\n x_traces = LP.barrier(c, A, b, x0)\n \n-# print('')\n-# for k,x in enumerate(x_traces):\n-# \tprint('iteration %d: %s' % (k, x))\n+print('')\n+for k,x in enumerate(x_traces):\n+\tprint('iteration %d: %s' % (k, x))\n \n print(c)\n print(x_traces[-1])\n print('optimal value:', c.T@x_traces[-1])\n"
+                }
+            ],
+            "date": 1671641663765,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport LP\nimport matplotlib.pyplot as plt\n\n## parameters of the standard form LP \nc = np.array([-3,-1,0,0])\nA = np.array([[1, 2, 1, 0], [1, -1, 0, 1]])\nb = np.array([8, 3])\n\nx0 = np.array([2, 1, 2, 2])\nx_traces = LP.barrier(c, A, b, x0)\n\nprint('')\nfor k,x in enumerate(x_traces):\n\tprint('iteration %d: %s' % (k, x))\nprint('optimal value:', c@x_traces[-1])\n\n### visualization\nx12 = [x[0:2] for x in x_traces]\nfig = plt.figure()\nplt.plot([0,3, 14/3, 0,0], [0,0, 5/3, 4, 0], color='blue', linewidth=3)\nline, = plt.plot(*zip(*x12), color='red', linewidth=3,  label='barrier method')\nplt.scatter(*zip(*x12), color='red', marker='o', s=50)\nplt.xlabel('x1')\nplt.ylabel('x2')\nplt.legend(handles=[line], fontsize=20)\nplt.tight_layout()\nfig.savefig('../figures/p2.pdf')\n\n\n"
+        }
+    ]
+}

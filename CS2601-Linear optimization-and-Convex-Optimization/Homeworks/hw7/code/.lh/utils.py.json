@@ -1,0 +1,18 @@
+{
+    "sourceFile": "utils.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1669215950939,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1669215950939,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport matplotlib.pyplot as plt\nimport matplotlib.patches as mp\n\nplt.rcParams['font.sans-serif']=['Microsoft YaHei']\n\ndef plot_traces_2d(f_2d, x_traces, filename):\n\tfig = plt.figure(figsize=(3.5,2.5))\n\n\tplt.plot(*zip(*x_traces), '-o', color='red')\n\n\tx1, x2 = zip(*x_traces)\n\tx1 = np.arange(min(x1)-.2, max(x1)+.2, 0.01)\n\tx2 = np.arange(min(x2)-.2, max(x2)+.2, 0.01)\n\tx1, x2 = np.meshgrid(x1,x2)\n\tplt.contour(x1, x2, f_2d(x1, x2), 20, colors='blue')\n\tplt.xlabel('x1')\n\tplt.ylabel('x2')\n\tplt.tight_layout(pad=.1)\n\n\tfig.savefig(filename)\n\n\ndef plot(f, x_traces, filename, logscale=True):\n\tfig = plt.figure(figsize=(3.5,2.5))\n\tf_traces = [f(x) for x in x_traces]\n\t\n\tif logscale:\n\t\tplt.semilogy(f_traces, 'blue')\n\telse:\n\t\tplt.plot(f_traces, 'blue')\n\tplt.xlabel('iteration (k)')\n\tplt.rc('text', usetex=True)\n\tplt.rc('font', family='serif')\n\tplt.ylabel('gap $f(x_k) - f(x^*)$')\n\tplt.tight_layout(pad=.1)\n\n\tfig.savefig(filename)\n"
+        }
+    ]
+}

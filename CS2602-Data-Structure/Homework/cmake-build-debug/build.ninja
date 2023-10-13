@@ -1,0 +1,790 @@
+## This file contains all the build statements describing the
+# compilation DAG.
+
+# =============================================================================
+# Write statements declared in CMakeLists.txt:
+# 
+# Which is the root file.
+# =============================================================================
+
+# =============================================================================
+# Project: Homework
+# Configurations: Debug
+# =============================================================================
+
+#############################################
+# Minimal version of Ninja required by this file
+
+ninja_required_version = 1.5
+
+
+#############################################
+# Set configuration variable for custom commands.
+
+CONFIGURATION = Debug
+# =============================================================================
+# Include auxiliary files.
+
+
+#############################################
+# Include rules file.
+
+include CMakeFiles/rules.ninja
+
+# =============================================================================
+
+#############################################
+# Logical path to working directory; prefix for absolute paths.
+
+cmake_ninja_workdir = /Users/husky/大二上/数据结构/Homework/cmake-build-debug/
+# =============================================================================
+# Object build statements for EXECUTABLE target Homework
+
+
+#############################################
+# Order-only phony target for Homework
+
+build cmake_object_order_depends_target_Homework: phony || CMakeFiles/Homework.dir
+
+build CMakeFiles/Homework.dir/main.cpp.o: CXX_COMPILER__Homework_Debug /Users/husky/大二上/数据结构/Homework/main.cpp || cmake_object_order_depends_target_Homework
+  DEP_FILE = CMakeFiles/Homework.dir/main.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/Homework.dir
+  OBJECT_FILE_DIR = CMakeFiles/Homework.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Homework
+
+
+#############################################
+# Link the executable Homework
+
+build Homework: CXX_EXECUTABLE_LINKER__Homework_Debug CMakeFiles/Homework.dir/main.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/Homework.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Homework
+  TARGET_PDB = Homework.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target det
+
+
+#############################################
+# Order-only phony target for det
+
+build cmake_object_order_depends_target_det: phony || CMakeFiles/det.dir
+
+build CMakeFiles/det.dir/hw1/行列式求值.cpp.o: CXX_COMPILER__det_Debug /Users/husky/大二上/数据结构/Homework/hw1/行列式求值.cpp || cmake_object_order_depends_target_det
+  DEP_FILE = CMakeFiles/det.dir/hw1/行列式求值.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/det.dir
+  OBJECT_FILE_DIR = CMakeFiles/det.dir/hw1
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target det
+
+
+#############################################
+# Link the executable det
+
+build det: CXX_EXECUTABLE_LINKER__det_Debug CMakeFiles/det.dir/hw1/行列式求值.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/det.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = det
+  TARGET_PDB = det.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target main
+
+
+#############################################
+# Order-only phony target for main
+
+build cmake_object_order_depends_target_main: phony || CMakeFiles/main.dir
+
+build CMakeFiles/main.dir/main.cpp.o: CXX_COMPILER__main_Debug /Users/husky/大二上/数据结构/Homework/main.cpp || cmake_object_order_depends_target_main
+  DEP_FILE = CMakeFiles/main.dir/main.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/main.dir
+  OBJECT_FILE_DIR = CMakeFiles/main.dir
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target main
+
+
+#############################################
+# Link the executable main
+
+build main: CXX_EXECUTABLE_LINKER__main_Debug CMakeFiles/main.dir/main.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/main.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = main
+  TARGET_PDB = main.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target string
+
+
+#############################################
+# Order-only phony target for string
+
+build cmake_object_order_depends_target_string: phony || CMakeFiles/string.dir
+
+build CMakeFiles/string.dir/hw2/字符串相加.cpp.o: CXX_COMPILER__string_Debug /Users/husky/大二上/数据结构/Homework/hw2/字符串相加.cpp || cmake_object_order_depends_target_string
+  DEP_FILE = CMakeFiles/string.dir/hw2/字符串相加.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/string.dir
+  OBJECT_FILE_DIR = CMakeFiles/string.dir/hw2
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target string
+
+
+#############################################
+# Link the executable string
+
+build string: CXX_EXECUTABLE_LINKER__string_Debug CMakeFiles/string.dir/hw2/字符串相加.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/string.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = string
+  TARGET_PDB = string.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target linklist
+
+
+#############################################
+# Order-only phony target for linklist
+
+build cmake_object_order_depends_target_linklist: phony || CMakeFiles/linklist.dir
+
+build CMakeFiles/linklist.dir/hw2/小恶魔的循环链表.cpp.o: CXX_COMPILER__linklist_Debug /Users/husky/大二上/数据结构/Homework/hw2/小恶魔的循环链表.cpp || cmake_object_order_depends_target_linklist
+  DEP_FILE = CMakeFiles/linklist.dir/hw2/小恶魔的循环链表.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/linklist.dir
+  OBJECT_FILE_DIR = CMakeFiles/linklist.dir/hw2
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target linklist
+
+
+#############################################
+# Link the executable linklist
+
+build linklist: CXX_EXECUTABLE_LINKER__linklist_Debug CMakeFiles/linklist.dir/hw2/小恶魔的循环链表.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/linklist.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = linklist
+  TARGET_PDB = linklist.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target ring
+
+
+#############################################
+# Order-only phony target for ring
+
+build cmake_object_order_depends_target_ring: phony || CMakeFiles/ring.dir
+
+build CMakeFiles/ring.dir/hw2/二哥的约瑟夫.cpp.o: CXX_COMPILER__ring_Debug /Users/husky/大二上/数据结构/Homework/hw2/二哥的约瑟夫.cpp || cmake_object_order_depends_target_ring
+  DEP_FILE = CMakeFiles/ring.dir/hw2/二哥的约瑟夫.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/ring.dir
+  OBJECT_FILE_DIR = CMakeFiles/ring.dir/hw2
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target ring
+
+
+#############################################
+# Link the executable ring
+
+build ring: CXX_EXECUTABLE_LINKER__ring_Debug CMakeFiles/ring.dir/hw2/二哥的约瑟夫.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/ring.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = ring
+  TARGET_PDB = ring.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target rear
+
+
+#############################################
+# Order-only phony target for rear
+
+build cmake_object_order_depends_target_rear: phony || CMakeFiles/rear.dir
+
+build CMakeFiles/rear.dir/hw3/后缀表达式.cpp.o: CXX_COMPILER__rear_Debug /Users/husky/大二上/数据结构/Homework/hw3/后缀表达式.cpp || cmake_object_order_depends_target_rear
+  DEP_FILE = CMakeFiles/rear.dir/hw3/后缀表达式.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/rear.dir
+  OBJECT_FILE_DIR = CMakeFiles/rear.dir/hw3
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target rear
+
+
+#############################################
+# Link the executable rear
+
+build rear: CXX_EXECUTABLE_LINKER__rear_Debug CMakeFiles/rear.dir/hw3/后缀表达式.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/rear.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = rear
+  TARGET_PDB = rear.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target loopQueue
+
+
+#############################################
+# Order-only phony target for loopQueue
+
+build cmake_object_order_depends_target_loopQueue: phony || CMakeFiles/loopQueue.dir
+
+build CMakeFiles/loopQueue.dir/hw3/循环队列.cpp.o: CXX_COMPILER__loopQueue_Debug /Users/husky/大二上/数据结构/Homework/hw3/循环队列.cpp || cmake_object_order_depends_target_loopQueue
+  DEP_FILE = CMakeFiles/loopQueue.dir/hw3/循环队列.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/loopQueue.dir
+  OBJECT_FILE_DIR = CMakeFiles/loopQueue.dir/hw3
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target loopQueue
+
+
+#############################################
+# Link the executable loopQueue
+
+build loopQueue: CXX_EXECUTABLE_LINKER__loopQueue_Debug CMakeFiles/loopQueue.dir/hw3/循环队列.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/loopQueue.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = loopQueue
+  TARGET_PDB = loopQueue.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target stack
+
+
+#############################################
+# Order-only phony target for stack
+
+build cmake_object_order_depends_target_stack: phony || CMakeFiles/stack.dir
+
+build CMakeFiles/stack.dir/hw3/出栈序列.cpp.o: CXX_COMPILER__stack_Debug /Users/husky/大二上/数据结构/Homework/hw3/出栈序列.cpp || cmake_object_order_depends_target_stack
+  DEP_FILE = CMakeFiles/stack.dir/hw3/出栈序列.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/stack.dir
+  OBJECT_FILE_DIR = CMakeFiles/stack.dir/hw3
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target stack
+
+
+#############################################
+# Link the executable stack
+
+build stack: CXX_EXECUTABLE_LINKER__stack_Debug CMakeFiles/stack.dir/hw3/出栈序列.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/stack.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = stack
+  TARGET_PDB = stack.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target stackwb
+
+
+#############################################
+# Order-only phony target for stackwb
+
+build cmake_object_order_depends_target_stackwb: phony || CMakeFiles/stackwb.dir
+
+build CMakeFiles/stackwb.dir/hw3/出栈序列网上.cpp.o: CXX_COMPILER__stackwb_Debug /Users/husky/大二上/数据结构/Homework/hw3/出栈序列网上.cpp || cmake_object_order_depends_target_stackwb
+  DEP_FILE = CMakeFiles/stackwb.dir/hw3/出栈序列网上.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/stackwb.dir
+  OBJECT_FILE_DIR = CMakeFiles/stackwb.dir/hw3
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target stackwb
+
+
+#############################################
+# Link the executable stackwb
+
+build stackwb: CXX_EXECUTABLE_LINKER__stackwb_Debug CMakeFiles/stackwb.dir/hw3/出栈序列网上.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/stackwb.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = stackwb
+  TARGET_PDB = stackwb.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target NOSTDLibrary
+
+
+#############################################
+# Order-only phony target for NOSTDLibrary
+
+build cmake_object_order_depends_target_NOSTDLibrary: phony || CMakeFiles/NOSTDLibrary.dir
+
+build CMakeFiles/NOSTDLibrary.dir/hw3/出栈序列NOSTDLibrary.cpp.o: CXX_COMPILER__NOSTDLibrary_Debug /Users/husky/大二上/数据结构/Homework/hw3/出栈序列NOSTDLibrary.cpp || cmake_object_order_depends_target_NOSTDLibrary
+  DEP_FILE = CMakeFiles/NOSTDLibrary.dir/hw3/出栈序列NOSTDLibrary.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/NOSTDLibrary.dir
+  OBJECT_FILE_DIR = CMakeFiles/NOSTDLibrary.dir/hw3
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target NOSTDLibrary
+
+
+#############################################
+# Link the executable NOSTDLibrary
+
+build NOSTDLibrary: CXX_EXECUTABLE_LINKER__NOSTDLibrary_Debug CMakeFiles/NOSTDLibrary.dir/hw3/出栈序列NOSTDLibrary.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/NOSTDLibrary.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = NOSTDLibrary
+  TARGET_PDB = NOSTDLibrary.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target stones
+
+
+#############################################
+# Order-only phony target for stones
+
+build cmake_object_order_depends_target_stones: phony || CMakeFiles/stones.dir
+
+build CMakeFiles/stones.dir/hw4/stones.cpp.o: CXX_COMPILER__stones_Debug /Users/husky/大二上/数据结构/Homework/hw4/stones.cpp || cmake_object_order_depends_target_stones
+  DEP_FILE = CMakeFiles/stones.dir/hw4/stones.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/stones.dir
+  OBJECT_FILE_DIR = CMakeFiles/stones.dir/hw4
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target stones
+
+
+#############################################
+# Link the executable stones
+
+build stones: CXX_EXECUTABLE_LINKER__stones_Debug CMakeFiles/stones.dir/hw4/stones.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/stones.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = stones
+  TARGET_PDB = stones.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target huffman
+
+
+#############################################
+# Order-only phony target for huffman
+
+build cmake_object_order_depends_target_huffman: phony || CMakeFiles/huffman.dir
+
+build CMakeFiles/huffman.dir/hw4/Stones_huffman.cpp.o: CXX_COMPILER__huffman_Debug /Users/husky/大二上/数据结构/Homework/hw4/Stones_huffman.cpp || cmake_object_order_depends_target_huffman
+  DEP_FILE = CMakeFiles/huffman.dir/hw4/Stones_huffman.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/huffman.dir
+  OBJECT_FILE_DIR = CMakeFiles/huffman.dir/hw4
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target huffman
+
+
+#############################################
+# Link the executable huffman
+
+build huffman: CXX_EXECUTABLE_LINKER__huffman_Debug CMakeFiles/huffman.dir/hw4/Stones_huffman.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/huffman.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = huffman
+  TARGET_PDB = huffman.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target pre
+
+
+#############################################
+# Order-only phony target for pre
+
+build cmake_object_order_depends_target_pre: phony || CMakeFiles/pre.dir
+
+build CMakeFiles/pre.dir/hw4/二叉树还原.cpp.o: CXX_COMPILER__pre_Debug /Users/husky/大二上/数据结构/Homework/hw4/二叉树还原.cpp || cmake_object_order_depends_target_pre
+  DEP_FILE = CMakeFiles/pre.dir/hw4/二叉树还原.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/pre.dir
+  OBJECT_FILE_DIR = CMakeFiles/pre.dir/hw4
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target pre
+
+
+#############################################
+# Link the executable pre
+
+build pre: CXX_EXECUTABLE_LINKER__pre_Debug CMakeFiles/pre.dir/hw4/二叉树还原.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/pre.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = pre
+  TARGET_PDB = pre.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target maxFraction
+
+
+#############################################
+# Order-only phony target for maxFraction
+
+build cmake_object_order_depends_target_maxFraction: phony || CMakeFiles/maxFraction.dir
+
+build CMakeFiles/maxFraction.dir/hw4/maxFraction.cpp.o: CXX_COMPILER__maxFraction_Debug /Users/husky/大二上/数据结构/Homework/hw4/maxFraction.cpp || cmake_object_order_depends_target_maxFraction
+  DEP_FILE = CMakeFiles/maxFraction.dir/hw4/maxFraction.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/maxFraction.dir
+  OBJECT_FILE_DIR = CMakeFiles/maxFraction.dir/hw4
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target maxFraction
+
+
+#############################################
+# Link the executable maxFraction
+
+build maxFraction: CXX_EXECUTABLE_LINKER__maxFraction_Debug CMakeFiles/maxFraction.dir/hw4/maxFraction.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/maxFraction.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = maxFraction
+  TARGET_PDB = maxFraction.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target maxFraction_FareySequences
+
+
+#############################################
+# Order-only phony target for maxFraction_FareySequences
+
+build cmake_object_order_depends_target_maxFraction_FareySequences: phony || CMakeFiles/maxFraction_FareySequences.dir
+
+build CMakeFiles/maxFraction_FareySequences.dir/hw4/maxFraction_FareySequences.cpp.o: CXX_COMPILER__maxFraction_FareySequences_Debug /Users/husky/大二上/数据结构/Homework/hw4/maxFraction_FareySequences.cpp || cmake_object_order_depends_target_maxFraction_FareySequences
+  DEP_FILE = CMakeFiles/maxFraction_FareySequences.dir/hw4/maxFraction_FareySequences.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/maxFraction_FareySequences.dir
+  OBJECT_FILE_DIR = CMakeFiles/maxFraction_FareySequences.dir/hw4
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target maxFraction_FareySequences
+
+
+#############################################
+# Link the executable maxFraction_FareySequences
+
+build maxFraction_FareySequences: CXX_EXECUTABLE_LINKER__maxFraction_FareySequences_Debug CMakeFiles/maxFraction_FareySequences.dir/hw4/maxFraction_FareySequences.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/maxFraction_FareySequences.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = maxFraction_FareySequences
+  TARGET_PDB = maxFraction_FareySequences.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target HuffmanTree
+
+
+#############################################
+# Order-only phony target for HuffmanTree
+
+build cmake_object_order_depends_target_HuffmanTree: phony || CMakeFiles/HuffmanTree.dir
+
+build CMakeFiles/HuffmanTree.dir/hw5/HuffmanTree.cpp.o: CXX_COMPILER__HuffmanTree_Debug /Users/husky/大二上/数据结构/Homework/hw5/HuffmanTree.cpp || cmake_object_order_depends_target_HuffmanTree
+  DEP_FILE = CMakeFiles/HuffmanTree.dir/hw5/HuffmanTree.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/HuffmanTree.dir
+  OBJECT_FILE_DIR = CMakeFiles/HuffmanTree.dir/hw5
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target HuffmanTree
+
+
+#############################################
+# Link the executable HuffmanTree
+
+build HuffmanTree: CXX_EXECUTABLE_LINKER__HuffmanTree_Debug CMakeFiles/HuffmanTree.dir/hw5/HuffmanTree.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/HuffmanTree.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = HuffmanTree
+  TARGET_PDB = HuffmanTree.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target staticSearchList
+
+
+#############################################
+# Order-only phony target for staticSearchList
+
+build cmake_object_order_depends_target_staticSearchList: phony || CMakeFiles/staticSearchList.dir
+
+build CMakeFiles/staticSearchList.dir/hw5/staticSearchList.cpp.o: CXX_COMPILER__staticSearchList_Debug /Users/husky/大二上/数据结构/Homework/hw5/staticSearchList.cpp || cmake_object_order_depends_target_staticSearchList
+  DEP_FILE = CMakeFiles/staticSearchList.dir/hw5/staticSearchList.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/staticSearchList.dir
+  OBJECT_FILE_DIR = CMakeFiles/staticSearchList.dir/hw5
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target staticSearchList
+
+
+#############################################
+# Link the executable staticSearchList
+
+build staticSearchList: CXX_EXECUTABLE_LINKER__staticSearchList_Debug CMakeFiles/staticSearchList.dir/hw5/staticSearchList.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/staticSearchList.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = staticSearchList
+  TARGET_PDB = staticSearchList.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target stringHash
+
+
+#############################################
+# Order-only phony target for stringHash
+
+build cmake_object_order_depends_target_stringHash: phony || CMakeFiles/stringHash.dir
+
+build CMakeFiles/stringHash.dir/hw5/stringHash.cpp.o: CXX_COMPILER__stringHash_Debug /Users/husky/大二上/数据结构/Homework/hw5/stringHash.cpp || cmake_object_order_depends_target_stringHash
+  DEP_FILE = CMakeFiles/stringHash.dir/hw5/stringHash.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/stringHash.dir
+  OBJECT_FILE_DIR = CMakeFiles/stringHash.dir/hw5
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target stringHash
+
+
+#############################################
+# Link the executable stringHash
+
+build stringHash: CXX_EXECUTABLE_LINKER__stringHash_Debug CMakeFiles/stringHash.dir/hw5/stringHash.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/stringHash.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = stringHash
+  TARGET_PDB = stringHash.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target sort
+
+
+#############################################
+# Order-only phony target for sort
+
+build cmake_object_order_depends_target_sort: phony || CMakeFiles/sort.dir
+
+build CMakeFiles/sort.dir/hw6/排序不等式.cpp.o: CXX_COMPILER__sort_Debug /Users/husky/大二上/数据结构/Homework/hw6/排序不等式.cpp || cmake_object_order_depends_target_sort
+  DEP_FILE = CMakeFiles/sort.dir/hw6/排序不等式.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/sort.dir
+  OBJECT_FILE_DIR = CMakeFiles/sort.dir/hw6
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target sort
+
+
+#############################################
+# Link the executable sort
+
+build sort: CXX_EXECUTABLE_LINKER__sort_Debug CMakeFiles/sort.dir/hw6/排序不等式.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/sort.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = sort
+  TARGET_PDB = sort.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target Ruko
+
+
+#############################################
+# Order-only phony target for Ruko
+
+build cmake_object_order_depends_target_Ruko: phony || CMakeFiles/Ruko.dir
+
+build CMakeFiles/Ruko.dir/hw6/Ruko_Sort.cpp.o: CXX_COMPILER__Ruko_Debug /Users/husky/大二上/数据结构/Homework/hw6/Ruko$ Sort.cpp || cmake_object_order_depends_target_Ruko
+  DEP_FILE = CMakeFiles/Ruko.dir/hw6/Ruko_Sort.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/Ruko.dir
+  OBJECT_FILE_DIR = CMakeFiles/Ruko.dir/hw6
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target Ruko
+
+
+#############################################
+# Link the executable Ruko
+
+build Ruko: CXX_EXECUTABLE_LINKER__Ruko_Debug CMakeFiles/Ruko.dir/hw6/Ruko_Sort.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/Ruko.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = Ruko
+  TARGET_PDB = Ruko.dbg
+
+# =============================================================================
+# Object build statements for EXECUTABLE target mcdonalds
+
+
+#############################################
+# Order-only phony target for mcdonalds
+
+build cmake_object_order_depends_target_mcdonalds: phony || CMakeFiles/mcdonalds.dir
+
+build CMakeFiles/mcdonalds.dir/hw6/mcdonalds.cpp.o: CXX_COMPILER__mcdonalds_Debug /Users/husky/大二上/数据结构/Homework/hw6/mcdonalds.cpp || cmake_object_order_depends_target_mcdonalds
+  DEP_FILE = CMakeFiles/mcdonalds.dir/hw6/mcdonalds.cpp.o.d
+  FLAGS = -g -arch arm64 -std=gnu++14
+  OBJECT_DIR = CMakeFiles/mcdonalds.dir
+  OBJECT_FILE_DIR = CMakeFiles/mcdonalds.dir/hw6
+
+
+# =============================================================================
+# Link build statements for EXECUTABLE target mcdonalds
+
+
+#############################################
+# Link the executable mcdonalds
+
+build mcdonalds: CXX_EXECUTABLE_LINKER__mcdonalds_Debug CMakeFiles/mcdonalds.dir/hw6/mcdonalds.cpp.o
+  FLAGS = -g -arch arm64
+  OBJECT_DIR = CMakeFiles/mcdonalds.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = mcdonalds
+  TARGET_PDB = mcdonalds.dbg
+
+
+#############################################
+# Utility command for edit_cache
+
+build CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/husky/大二上/数据结构/Homework/cmake-build-debug && "/Users/husky/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/bin/cmake" -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+
+build edit_cache: phony CMakeFiles/edit_cache.util
+
+
+#############################################
+# Utility command for rebuild_cache
+
+build CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /Users/husky/大二上/数据结构/Homework/cmake-build-debug && "/Users/husky/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/bin/cmake" --regenerate-during-build -S/Users/husky/大二上/数据结构/Homework -B/Users/husky/大二上/数据结构/Homework/cmake-build-debug
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+
+build rebuild_cache: phony CMakeFiles/rebuild_cache.util
+
+# =============================================================================
+# Target aliases.
+
+# =============================================================================
+# Folder targets.
+
+# =============================================================================
+
+#############################################
+# Folder: /Users/husky/大二上/数据结构/Homework/cmake-build-debug
+
+build all: phony Homework det main string linklist ring rear loopQueue stack stackwb NOSTDLibrary stones huffman pre maxFraction maxFraction_FareySequences HuffmanTree staticSearchList stringHash sort Ruko mcdonalds
+
+# =============================================================================
+# Built-in targets
+
+
+#############################################
+# Re-run CMake if any of its inputs changed.
+
+build build.ninja: RERUN_CMAKE | ../CMakeLists.txt /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCInformation.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCXXInformation.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeGenericSystem.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-C.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-CXX.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/Clang.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/GNU.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-C.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-CXX.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-C.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-CXX.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin-Initialize.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake
+  pool = console
+
+
+#############################################
+# A missing CMake input file is not an error.
+
+build ../CMakeLists.txt /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCInformation.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCXXInformation.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeCommonLanguageInclude.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeGenericSystem.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeInitializeConfigs.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeLanguageInformation.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInformation.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/CMakeSystemSpecificInitialize.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-C.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/AppleClang-CXX.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/CMakeCommonCompilerMacros.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/Clang.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Compiler/GNU.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-C.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-AppleClang-CXX.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-C.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang-CXX.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Apple-Clang.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin-Initialize.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/Darwin.cmake /Users/husky/Library/Application$ Support/JetBrains/Toolbox/apps/CLion/ch-0/222.4345.21/CLion.app/Contents/bin/cmake/mac/share/cmake-3.23/Modules/Platform/UnixPaths.cmake CMakeCache.txt CMakeFiles/3.23.2/CMakeCCompiler.cmake CMakeFiles/3.23.2/CMakeCXXCompiler.cmake CMakeFiles/3.23.2/CMakeSystem.cmake: phony
+
+
+#############################################
+# Clean all the built files.
+
+build clean: CLEAN
+
+
+#############################################
+# Print all primary targets available.
+
+build help: HELP
+
+
+#############################################
+# Make the all target the default.
+
+default all

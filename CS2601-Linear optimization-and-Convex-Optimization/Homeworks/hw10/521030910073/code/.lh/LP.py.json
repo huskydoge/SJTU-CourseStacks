@@ -1,0 +1,18 @@
+{
+    "sourceFile": "LP.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1671762819062,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1671762819062,
+            "name": "Commit-0",
+            "content": "import newton as nt\nimport numpy as np\n\ndef centering_step(c, A, b, x0, t):\n\t\"\"\"\n\tc, A, b: parameters in LP\n\n\t\tmin   c^T x\n\t\ts.t.  Ax = b\n\t\t      x >= 0\n\n\tx0: feasible initial point for constrained Newton's method\n\tt:  penalty parameter in barrier method\n\n\tThis function returns the central point x^*(t) \n\t\"\"\"\n\t#   START OF YOUR CODE\n\t\t\n\tdef f(x):\n\t\tfor x_ in x:\n\t\t\tif(x_ <= 0):\n\t\t\t\treturn np.PINF\n\t\treturn c.T@x + 1 / t * (- sum(np.log(x)))\n\n\tdef fp(x):\n\t\tres = 0\n\t\tfor j in range(0, len(x)):\n\t\t\tg = np.zeros(len(x))\n\t\t\tg[j] = 1\n\t\t\tres += (-1 / t) * (1 / x[j]) * g\n\t\treturn c  + res\n\n\tdef fpp(x):\n\t\tres = 0\n\t\tfor j in range(0, len(x)):\n\t\t\tg1 = np.zeros(len(x))\n\t\t\tg2 = np.zeros(len(x))\n\t\t\tg1[j] = -1\n\t\t\tg2[j] = -1\n\t\t\tg1 = g1.reshape(-1, 1)\n\t\t\tg2 = g2.reshape(1, -1)\n\t\n\t\t\tres += 1.0 / (x[j] * x[j]) * g1@g2\n\t\treturn res\n\n\tx_star = nt.newton_eq(f, fp, fpp, x0, A, b)[-1]\n\treturn x_star\n\t#\tEND OF YOUR CODE\n\n\ndef barrier(c, A, b, x0, tol=1e-8, t0=1, rho=10):\n\t\"\"\"\n\tc, A, b: parameters in LP\n\t\n\t\tmin   c^T x\n\t\ts.t.  Ax = b\n\t\t      x >= 0\n\t\t     \n\tx0:  feasible initial point for the barrier method\n\ttol: tolerance parameter for the suboptimality gap. The algorithm stops when\n\n\t         f(x) - f^* <= tol\n\n\tt0:  initial penalty parameter in barrier method\n\trho: factor by which the penalty parameter is increased in each centering step\n\n\tThis function should return a list of the iterates\n\t\"\"\"\t\n\tt = t0\n\tx = np.array(x0)\n\tx_traces = [np.array(x0)]\n\n\t#   START OF YOUR CODE\n\tn = len(x)\n\twhile((n / t) > tol):\n\t\tx = centering_step(c, A, b, x, t)\n\t\tx_traces.append(x)\n\t\tt = rho * t\n\tpass\n\n\t#\tEND OF YOUR CODE\n\n\treturn x_traces"
+        }
+    ]
+}

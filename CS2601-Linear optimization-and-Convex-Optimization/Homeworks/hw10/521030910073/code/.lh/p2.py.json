@@ -1,0 +1,18 @@
+{
+    "sourceFile": "p2.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1671762962610,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1671762962610,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport LP\n\n## parameters of the standard form dual LP \nc = np.array([-8,-3, 0, 0])\nA = np.array([[1, 1, -1, 0], [2, -1, 0, -1]])\nb = np.array([3, 1])\n\nmu0 = np.array([4,1,2,6], dtype=float)\n\nmu_traces = LP.barrier(-c, A, b, mu0)\n\nprint('')\nfor k,mu in enumerate(mu_traces):\n\tprint('iteration %d: %s' % (k, mu))\nprint('dual optimal value:', c@mu_traces[-1])\n"
+        }
+    ]
+}

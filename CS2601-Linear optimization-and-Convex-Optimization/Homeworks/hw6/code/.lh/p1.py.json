@@ -1,0 +1,166 @@
+{
+    "sourceFile": "p1.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 37,
+            "patches": [
+                {
+                    "date": 1668258359903,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1668258374788,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -23,7 +23,7 @@\n x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize)\n \n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n \n-print(*x_traces)\n-utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n-utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n\\ No newline at end of file\n+print(zip(*x_traces))\n+# utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n+# utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668258398288,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,8 @@\n \n x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize)\n \n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n-\n-print(zip(*x_traces))\n+x1, x2 = zip(*x_traces)\n+print(x1,x2)\n # utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n # utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668258421258,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,8 +22,6 @@\n \n x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize)\n \n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n-x1, x2 = zip(*x_traces)\n-print(x1,x2)\n # utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n # utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668258450698,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,9 +19,9 @@\n \n stepsize = 10\n \n \n-x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize)\n+x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 10)\n \n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n-# utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n\\ No newline at end of file\n-# utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n+utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n+utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668258478679,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -18,9 +18,9 @@\n x0 = np.array([1.0, 1.0])\n \n stepsize = 10\n \n-\n+print(fp(x0))\n x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 10)\n \n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n"
+                },
+                {
+                    "date": 1668258508508,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,9 +16,9 @@\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n x0 = np.array([1.0, 1.0])\n \n-stepsize = 10\n+stepsize = 0.22\n \n print(fp(x0))\n x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 10)\n \n"
+                },
+                {
+                    "date": 1668258526999,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,8 +4,9 @@\n \n \n gamma = 10\n Q = np.diag([gamma, 1])\n+print(Q)\n \n def f(x):\n \treturn 0.5 * x.T@Q@x\n \n"
+                },
+                {
+                    "date": 1668258532382,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -4,10 +4,10 @@\n \n \n gamma = 10\n Q = np.diag([gamma, 1])\n-print(Q)\n \n+\n def f(x):\n \treturn 0.5 * x.T@Q@x\n \n def fp(x):\n"
+                },
+                {
+                    "date": 1668258564817,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n def f_2d(x1, x2):\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n-x0 = np.array([1.0, 1.0])\n+x0 = np.array([10, 10])\n \n stepsize = 0.22\n \n print(fp(x0))\n"
+                },
+                {
+                    "date": 1668258570485,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -15,9 +15,9 @@\n \n def f_2d(x1, x2):\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n-x0 = np.array([10, 10])\n+x0 = np.array([1.0, 1.0])\n \n stepsize = 0.22\n \n print(fp(x0))\n"
+                },
+                {
+                    "date": 1668259473343,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n \n stepsize = 0.22\n \n print(fp(x0))\n-x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 10)\n+x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 100)\n \n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668259526737,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n \n stepsize = 0.22\n \n print(fp(x0))\n-x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 100)\n+x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 20)\n \n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668259603373,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -20,9 +20,9 @@\n \n stepsize = 0.22\n \n print(fp(x0))\n-x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 20)\n+x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 2)\n \n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668259823225,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -17,9 +17,9 @@\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n x0 = np.array([1.0, 1.0])\n \n-stepsize = 0.22\n+stepsize = 0.1\n \n print(fp(x0))\n x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 2)\n \n"
+                },
+                {
+                    "date": 1668260121058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -19,10 +19,10 @@\n x0 = np.array([1.0, 1.0])\n \n stepsize = 0.1\n \n-print(fp(x0))\n-x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 2)\n+x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 10)\n \n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n\\ No newline at end of file\n-utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n+utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n+\n"
+                },
+                {
+                    "date": 1668260147688,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -2,12 +2,14 @@\n import gd\n import utils\n \n \n-gamma = 10\n Q = np.diag([gamma, 1])\n \n+gamma = 10\n+stepsize = 0.1\n \n+\n def f(x):\n \treturn 0.5 * x.T@Q@x\n \n def fp(x):\n@@ -17,11 +19,10 @@\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n x0 = np.array([1.0, 1.0])\n \n-stepsize = 0.1\n-\n x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 10)\n \n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n+\n"
+                },
+                {
+                    "date": 1668260161019,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,12 @@\n import numpy as np\n import gd\n import utils\n \n-\n+gamma = 10\n Q = np.diag([gamma, 1])\n \n-gamma = 10\n+\n stepsize = 0.1\n \n \n def f(x):\n"
+                },
+                {
+                    "date": 1668260178814,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,11 +5,8 @@\n gamma = 10\n Q = np.diag([gamma, 1])\n \n \n-stepsize = 0.1\n-\n-\n def f(x):\n \treturn 0.5 * x.T@Q@x\n \n def fp(x):\n@@ -19,8 +16,9 @@\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n x0 = np.array([1.0, 1.0])\n \n+stepsize = 0.1\n x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 10)\n \n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n"
+                },
+                {
+                    "date": 1668260235836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,13 +14,13 @@\n \n def f_2d(x1, x2):\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n-x0 = np.array([1.0, 1.0])\n+def solve(stepsize = 0.1):\n+\tx0 = np.array([1.0, 1.0])\n \n stepsize = 0.1\n x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 10)\n-\n print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n \n"
+                },
+                {
+                    "date": 1668260261500,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,13 +14,12 @@\n \n def f_2d(x1, x2):\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n-def solve(stepsize = 0.1):\n+def solve(stepsize = 0.1, maxiter = 10):\n \tx0 = np.array([1.0, 1.0])\n \n-stepsize = 0.1\n-x_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = 10)\n-print(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n-utils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n-utils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n+\tx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n+\tprint(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n+\tutils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n+\tutils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n \n"
+                },
+                {
+                    "date": 1668260278298,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -16,10 +16,10 @@\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n def solve(stepsize = 0.1, maxiter = 10):\n \tx0 = np.array([1.0, 1.0])\n-\n \tx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n \tprint(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n \tutils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n \tutils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n \n+\n"
+                },
+                {
+                    "date": 1668260299140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,4 +22,5 @@\n \tutils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n \tutils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n \n \n+Trial_list = [0.22, 0.1, 0.01, 0.001]\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668260325592,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,5 +22,7 @@\n \tutils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n \tutils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n \n \n-Trial_list = [0.22, 0.1, 0.01, 0.001]\n\\ No newline at end of file\n+Trial_list = [0.22, 0.1, 0.01, 0.001]\n+for stepsize in Trial_list:\n+\tsolve(stepsize=stepsize)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668260457217,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,9 +14,9 @@\n \n def f_2d(x1, x2):\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n-def solve(stepsize = 0.1, maxiter = 10):\n+def solve(stepsize = 0.1, maxiter = 100000):\n \tx0 = np.array([1.0, 1.0])\n \tx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n \tprint(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n \tutils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n@@ -24,5 +24,7 @@\n \n \n Trial_list = [0.22, 0.1, 0.01, 0.001]\n for stepsize in Trial_list:\n+\tif stepsize == 0.22:\n+\t\tsolve(stepsize=stepsize, maxiter= 10)\n \tsolve(stepsize=stepsize)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668260470824,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -26,5 +26,6 @@\n Trial_list = [0.22, 0.1, 0.01, 0.001]\n for stepsize in Trial_list:\n \tif stepsize == 0.22:\n \t\tsolve(stepsize=stepsize, maxiter= 10)\n-\tsolve(stepsize=stepsize)\n\\ No newline at end of file\n+\telse:\n+\t\tsolve(stepsize=stepsize)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668261726586,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -22,10 +22,11 @@\n \tutils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n \tutils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n \n \n-Trial_list = [0.22, 0.1, 0.01, 0.001]\n-for stepsize in Trial_list:\n-\tif stepsize == 0.22:\n-\t\tsolve(stepsize=stepsize, maxiter= 10)\n-\telse:\n-\t\tsolve(stepsize=stepsize)\n\\ No newline at end of file\n+# (b.)\n+# Trial_list = [0.22, 0.1, 0.01, 0.001]\n+# for stepsize in Trial_list:\n+# \tif stepsize == 0.22:\n+# \t\tsolve(stepsize=stepsize, maxiter= 10)\n+# \telse:\n+# \t\tsolve(stepsize=stepsize)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668261751886,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -28,5 +28,7 @@\n # for stepsize in Trial_list:\n # \tif stepsize == 0.22:\n # \t\tsolve(stepsize=stepsize, maxiter= 10)\n # \telse:\n-# \t\tsolve(stepsize=stepsize)\n\\ No newline at end of file\n+# \t\tsolve(stepsize=stepsize)\n+\n+# (c.)\n"
+                },
+                {
+                    "date": 1668261763306,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,4 +31,5 @@\n # \telse:\n # \t\tsolve(stepsize=stepsize)\n \n # (c.)\n+gamma_list = [1,0.1,0.01,0.001]\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668261772754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,5 +31,7 @@\n # \telse:\n # \t\tsolve(stepsize=stepsize)\n \n # (c.)\n-gamma_list = [1,0.1,0.01,0.001]\n\\ No newline at end of file\n+gamma_list = [1,0.1,0.01,0.001]\n+for gamma in gamma_list:\n+\t\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668261802953,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -31,7 +31,8 @@\n # \telse:\n # \t\tsolve(stepsize=stepsize)\n \n # (c.)\n+\n gamma_list = [1,0.1,0.01,0.001]\n for gamma in gamma_list:\n\\ No newline at end of file\n-\t\n+\tQ = Q = np.diag([gamma, 1])\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668261836945,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,5 +34,7 @@\n # (c.)\n \n gamma_list = [1,0.1,0.01,0.001]\n for gamma in gamma_list:\n-\tQ = Q = np.diag([gamma, 1])\n\\ No newline at end of file\n+\tQ = Q = np.diag([gamma, 1])\n+\tx0 = np.array([1.0, 1.0])\n+\tx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668261844844,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,6 +35,5 @@\n \n gamma_list = [1,0.1,0.01,0.001]\n for gamma in gamma_list:\n \tQ = Q = np.diag([gamma, 1])\n-\tx0 = np.array([1.0, 1.0])\n \tx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668261851629,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -3,10 +3,10 @@\n import utils\n \n gamma = 10\n Q = np.diag([gamma, 1])\n+x0 = np.array([1.0, 1.0])\n \n-\n def f(x):\n \treturn 0.5 * x.T@Q@x\n \n def fp(x):\n@@ -15,9 +15,8 @@\n def f_2d(x1, x2):\n \treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n \n def solve(stepsize = 0.1, maxiter = 100000):\n-\tx0 = np.array([1.0, 1.0])\n \tx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n \tprint(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n \tutils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\n \tutils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')\n"
+                },
+                {
+                    "date": 1668261858264,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -33,6 +33,6 @@\n # (c.)\n \n gamma_list = [1,0.1,0.01,0.001]\n for gamma in gamma_list:\n-\tQ = Q = np.diag([gamma, 1])\n+\tQ = np.diag([gamma, 1])\n \tx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668261868624,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,5 +34,5 @@\n \n gamma_list = [1,0.1,0.01,0.001]\n for gamma in gamma_list:\n \tQ = np.diag([gamma, 1])\n-\tx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize,maxiter = maxiter)\n\\ No newline at end of file\n+\tx_traces = gd.gd_const_ss(fp, x0, stepsize=1)\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668261892825,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -34,5 +34,6 @@\n \n gamma_list = [1,0.1,0.01,0.001]\n for gamma in gamma_list:\n \tQ = np.diag([gamma, 1])\n-\tx_traces = gd.gd_const_ss(fp, x0, stepsize=1)\n\\ No newline at end of file\n+\tx_traces = gd.gd_const_ss(fp, x0, stepsize=1)\n+\tprint(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1668261899140,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -35,5 +35,5 @@\n gamma_list = [1,0.1,0.01,0.001]\n for gamma in gamma_list:\n \tQ = np.diag([gamma, 1])\n \tx_traces = gd.gd_const_ss(fp, x0, stepsize=1)\n-\tprint(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n\\ No newline at end of file\n+\tprint(f'gamma={gamma}, stepsize={1}, number of iterations={len(x_traces)-1}')\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1668258359903,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport gd\nimport utils\n\n\ngamma = 10\nQ = np.diag([gamma, 1])\n\ndef f(x):\n\treturn 0.5 * x.T@Q@x\n\ndef fp(x):\n\treturn Q@x \n\ndef f_2d(x1, x2):\n\treturn 0.5 * gamma * x1**2 + 0.5 * x2**2\n\nx0 = np.array([1.0, 1.0])\n\nstepsize = 10\n\n\nx_traces = gd.gd_const_ss(fp, x0, stepsize=stepsize)\n\nprint(f'gamma={gamma}, stepsize={stepsize}, number of iterations={len(x_traces)-1}')\n\nprint(*x_traces)\nutils.plot_traces_2d(f_2d, x_traces, f'./figures/gd_traces_gamma{gamma}_ss{stepsize}.png')\nutils.plot(f, x_traces, f'./figures/gd_f_gamma{gamma}_ss{stepsize}.png')"
+        }
+    ]
+}

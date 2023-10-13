@@ -1,0 +1,18 @@
+{
+    "sourceFile": "p1.py",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1671762696353,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1671762696353,
+            "name": "Commit-0",
+            "content": "import numpy as np\nimport LP\nimport matplotlib.pyplot as plt\n\n## parameters of the standard form LP \nc = np.array([-3,-1,0,0])\nA = np.array([[1, 2, 1, 0], [1, -1, 0, 1]])\nb = np.array([8, 3])\n\n\n\nx0 = np.array([2, 1, 4, 2])\nx_traces = LP.barrier(c, A, b, x0)\n\nprint('')\nfor k,x in enumerate(x_traces):\n\tprint('iteration %d: %s' % (k, x))\n\nprint(c)\nprint(x_traces[-1])\nprint('optimal value:', c@x_traces[-1])\n\n### visualization\nx12 = [x[0:2] for x in x_traces]\nfig = plt.figure()\nplt.plot([0,3, 14/3, 0,0], [0,0, 5/3, 4, 0], color='blue', linewidth=3)\nline, = plt.plot(*zip(*x12), color='red', linewidth=3,  label='barrier method')\nplt.scatter(*zip(*x12), color='red', marker='o', s=50)\nplt.xlabel('x1')\nplt.ylabel('x2')\nplt.legend(handles=[line], fontsize=20)\nplt.tight_layout()\nfig.savefig('./figures/p2.pdf')\n\n\n"
+        }
+    ]
+}
