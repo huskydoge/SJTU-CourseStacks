@@ -1,0 +1,26 @@
+1. 如何打开 '.ipynb' 文件?
+Ans: 下载VSCode即可打开，官网：https://code.visualstudio.com/ 
+     注意，此时仅查看文件，无法运行代码，运行请看第二个问题。
+
+2. 如何运行 '.ipynb' 文件?
+Ans：
+    1. 安装anaconda，教程：(注意环境配置的时候，需要选择添加到环境变量，这样在terminal中才能使用conda命令)
+        windows: https://blog.csdn.net/fan18317517352/article/details/123035625
+        linux: https://zhuanlan.zhihu.com/p/349345180
+        mac: https://blog.csdn.net/tjls2008/article/details/106796055
+
+    2. 打开terminal（linux/mac）or Anaconda Prompt（windows）
+
+    3. 输入以下指令：（'#'后为注释部分，无需输入， '<>'中为需要自己填写的部分。）
+        ```shell
+        cd <你的文件夹路径>
+        conda create -n cv python=3.8 # 创建python虚拟环境，名字为cv，python版本为3.8
+        conda activate cv # 激活虚拟环境
+        conda install jupyter notebook # 安装jupyter notebook
+        pip install --upgrade pip # 升级pip
+        pip install opencv-python # 安装opencv
+        pip install numpy # 安装numpy
+        jupyter notebook # 运行jupyter notebook，会自动打开默认浏览器
+        ```
+    4. 在打开的网页中找到你的'.ipynb'文件，点击打开即可。
+
